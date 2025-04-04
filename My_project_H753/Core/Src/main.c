@@ -104,10 +104,12 @@ void MPU_Config(void)
 }
 uint8_t light;
 float tempure;
+float Power;
 uint8_t Light_WriteBuffer[256] = { 0 };  // 写入缓冲区
 uint8_t Read_light_Buffer[256];
 uint8_t light_index;
 uint8_t start_flag = 0;   //开始学习标志
+uint8_t Real_time_Data[5]= {0};  //实时数据
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if (htim->Instance == TIM1)  // 确保是 TIM1 触发的
@@ -128,10 +130,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         else{
           Light_WriteBuffer[0]= light_index;
           Light_WriteBuffer[light_index]=light;
+          Real_time_Data[0] =light;
+          Real_time_Data[1] = (uint8_t)tempure;
+					Real_time_Data[2] = (uint8_t) ((tempure-Real_time_Data[1])*100);
+					Real_time_Data[3] = (uint8_t)(Power);
+          Real_time_Data[4] = (uint8_t)((Power-Real_time_Data[3])*100);
           // HAL_UART_Transmit(&huart1, &Light_WriteBuffer[light_index], 1, 1000);
           //HAL_UART_Transmit(&huart1, "test", sizeof("test"), 1000);
           // sendStringData(&huart1,"test");
-          sendBinaryData(&huart1,&Light_WriteBuffer[light_index],2);
+          sendBinaryData(&huart1,Real_time_Data,5);
         }
       }  
     }
@@ -306,7 +313,7 @@ int main(void)
     LCD_DisplayNumber(70,90,Light_WriteBuffer[0],3);
     LCD_DisplayNumber(100,90,Light_WriteBuffer[30],3);
 
-    float Power = Read_Power()*3.08f;   //电源电压
+    Power = Read_Power()*3.08f;   //电源电压
     LCD_DisplayString(0,110,"Power:");
     LCD_DisplayDecimals(70,110,Power,1,2);
 
