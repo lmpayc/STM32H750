@@ -87,6 +87,7 @@
     "usart.h": "c",
     "key.h": "c",
     "adc.h": "c",
-    "main.h": "c"
+    "main.h": "c",
+    "lcd_image.h": "c"
   }
 }
