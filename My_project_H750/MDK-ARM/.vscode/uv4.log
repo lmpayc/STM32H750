@@ -1,0 +1,26 @@
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\MDK_v5\Keil_v5\ARM\ARMCC\Bin'
+Build target 'STM32H750Prg'
+compiling lv_port_indev.c...
+..\lvgl\examples\porting\lv_port_indev.c(185): warning:  #177-D: function "touchpad_init"  was declared but never referenced
+  static void touchpad_init(void)
+..\lvgl\examples\porting\lv_port_indev.c(191): warning:  #177-D: function "touchpad_read"  was declared but never referenced
+  static void touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
+..\lvgl\examples\porting\lv_port_indev.c(232): warning:  #177-D: function "mouse_init"  was declared but never referenced
+  static void mouse_init(void)
+..\lvgl\examples\porting\lv_port_indev.c(238): warning:  #177-D: function "mouse_read"  was declared but never referenced
+  static void mouse_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
+..\lvgl\examples\porting\lv_port_indev.c(274): warning:  #177-D: function "keypad_init"  was declared but never referenced
+  static void keypad_init(void)
+..\lvgl\examples\porting\lv_port_indev.c(280): warning:  #177-D: function "keypad_read"  was declared but never referenced
+  static void keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
+..\lvgl\examples\porting\lv_port_indev.c(333): warning:  #177-D: function "encoder_init"  was declared but never referenced
+  static void encoder_init(void)
+..\lvgl\examples\porting\lv_port_indev.c(339): warning:  #177-D: function "encoder_read"  was declared but never referenced
+  static void encoder_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
+..\lvgl\examples\porting\lv_port_indev.c(347): warning:  #177-D: function "encoder_handler"  was declared but never referenced
+  static void encoder_handler(void)
+..\lvgl\examples\porting\lv_port_indev.c: 9 warnings, 0 errors
+linking...
+Program Size: Code=211570 RO-data=24734 RW-data=900 ZI-data=102012  
+"STM32H750Prg\STM32H750Prg.axf" - 0 Error(s), 9 Warning(s).
+Build Time Elapsed:  00:00:09

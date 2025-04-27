@@ -1,0 +1,13 @@
+stm32h750prg\lv_lru.o: ..\lvgl\src\misc\lv_lru.c
+stm32h750prg\lv_lru.o: ..\lvgl\src\misc\lv_lru.h
+stm32h750prg\lv_lru.o: ..\lvgl\src\misc\../lv_conf_internal.h
+stm32h750prg\lv_lru.o: D:\MDK_v5\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32h750prg\lv_lru.o: ..\lvgl\src\misc\../lv_conf_kconfig.h
+stm32h750prg\lv_lru.o: ..\lvgl\examples\porting\../../lv_conf.h
+stm32h750prg\lv_lru.o: ..\lvgl\src\misc\lv_types.h
+stm32h750prg\lv_lru.o: D:\MDK_v5\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+stm32h750prg\lv_lru.o: ..\lvgl\src\misc\lv_math.h
+stm32h750prg\lv_lru.o: ..\lvgl\src\misc\lv_mem.h
+stm32h750prg\lv_lru.o: D:\MDK_v5\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm32h750prg\lv_lru.o: ..\lvgl\src\misc\lv_assert.h
+stm32h750prg\lv_lru.o: ..\lvgl\src\misc\lv_log.h
