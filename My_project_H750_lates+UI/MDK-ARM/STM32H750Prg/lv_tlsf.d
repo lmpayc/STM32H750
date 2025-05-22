@@ -1,0 +1,13 @@
+stm32h750prg\lv_tlsf.o: ..\lvgl\src\misc\lv_tlsf.c
+stm32h750prg\lv_tlsf.o: ..\lvgl\src\misc\../lv_conf_internal.h
+stm32h750prg\lv_tlsf.o: D:\MDK_v5\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32h750prg\lv_tlsf.o: ..\lvgl\src\misc\../lv_conf_kconfig.h
+stm32h750prg\lv_tlsf.o: ../lvgl/examples/porting/../../lv_conf.h
+stm32h750prg\lv_tlsf.o: D:\MDK_v5\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+stm32h750prg\lv_tlsf.o: ..\lvgl\src\misc\lv_tlsf.h
+stm32h750prg\lv_tlsf.o: D:\MDK_v5\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+stm32h750prg\lv_tlsf.o: ..\lvgl\src\misc\lv_mem.h
+stm32h750prg\lv_tlsf.o: D:\MDK_v5\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm32h750prg\lv_tlsf.o: ..\lvgl\src\misc\lv_types.h
+stm32h750prg\lv_tlsf.o: ..\lvgl\src\misc\lv_log.h
+stm32h750prg\lv_tlsf.o: ..\lvgl\src\misc\lv_assert.h
