@@ -136,7 +136,7 @@ stm32h750prg\ui.o: ../Core/Inc/stm32h7xx_hal_conf.h
 stm32h750prg\ui.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h
 stm32h750prg\ui.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h
 stm32h750prg\ui.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h
-stm32h750prg\ui.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h
+stm32h750prg\ui.o: ../Core/Inc/stm32h743xx.h
 stm32h750prg\ui.o: ../Drivers/CMSIS/Include/core_cm7.h
 stm32h750prg\ui.o: ../Drivers/CMSIS/Include/cmsis_version.h
 stm32h750prg\ui.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
@@ -189,4 +189,15 @@ stm32h750prg\ui.o: ../Core/Inc/usart.h
 stm32h750prg\ui.o: D:\MDK_v5\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 stm32h750prg\ui.o: ../Drivers/Hare/Inc/lcd_fonts.h
 stm32h750prg\ui.o: ../Drivers/Hare/Inc/lcd_image.h
-stm32h750prg\ui.o: ..\lvgl\my\generated\gui_guider.h
+stm32h750prg\ui.o: D:\MDK_v5\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+stm32h750prg\ui.o: ../Core/Inc/tim.h
+stm32h750prg\ui.o: ../Core/Inc/adc.h
+stm32h750prg\ui.o: ../lvgl/my/generated/gui_guider.h
+stm32h750prg\ui.o: ../lvgl/my/custom/custom.h
+stm32h750prg\ui.o: ../Core/Inc/gpio.h
+stm32h750prg\ui.o: ..\NFC\nfc.h
+stm32h750prg\ui.o: ..\NFC\pn532.h
+stm32h750prg\ui.o: ..\NFC\pn532_stm32f1.h
+stm32h750prg\ui.o: ../FatFs/ff.h
+stm32h750prg\ui.o: ../FatFs/integer.h
+stm32h750prg\ui.o: ../FatFs/ffconf.h

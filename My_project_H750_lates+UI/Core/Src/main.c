@@ -48,8 +48,7 @@
 #include "lv_port_indev.h"
 #include "sd.h"
 #include "mgc3130.h" 
-
-
+#include "nfc.h"
 
 /* USER CODE END Includes */
 
@@ -62,7 +61,6 @@
 /* USER CODE BEGIN PD */
 #define	NumOf_Blocks	64
 #define FRAME_HEADER 0xAA 
-#define USERNAME_LEN 3
 #define INDEX_SECTOR 0
 #define INDEX_FLAG 0xAA55
 #define SECTOR_SIZE 512
@@ -81,6 +79,9 @@
 /* USER CODE BEGIN PV */
 //串口相关
 uint8_t uart1_buf_recv[BUFFER_SIZE];
+uint8_t uart2_buf_recv[256];
+uint8_t uart3_buf_recv[256];
+
 UartQueue uart1_queue;
 
 //gensture相关  
@@ -105,8 +106,13 @@ extern lv_obj_t * sensor_label;
 extern lv_obj_t * SD_label;
 extern lv_obj_t * label_time;
 extern uint8_t button_cnt; 
-lv_ui  guider_ui;// 声明 界面对象
+lv_ui  main_ui;// 声明 界面对象
+lv_ui  setting_ui; //设置界面对象
+lv_ui  debug_ui; //调试界面对象
 lv_group_t *group;   // 组对象
+lv_group_t *setting_group;   // 组对象
+lv_indev_t *gesture_indev; // 手势输入设备
+
 
 /* USER CODE END PV */
 
@@ -155,7 +161,7 @@ float tempure;
 float Power;
 uint8_t read_power_flag = 0;
 uint8_t Power_Percent = 0; //电量百分比 
-uint8_t adc_flag =0;
+
 uint8_t username[3] = { 'L', 'P', 'C' };    //当前用户名
 uint8_t Temp_WriteBuffer[512];  // 临时SD卡写入缓冲区
 uint16_t temp_data_index;
@@ -168,15 +174,21 @@ uint8_t last_wifi_connect_flag; //上次wifi连接标志
 
 uint8_t start_flag = 0;   //开始学习标志
 uint8_t last_start_flag = 0;   //上次学习标志
+bool pause_time_flag = false; //暂停学习标志
 uint8_t Real_time_Data[10]= {0};  //实时数据
 
+bool led_switch_flag = 0;
+bool led_auto_flag = 0;
+bool led_change_flag = 0; 
+uint8_t light_ref;  //led参考光照值
+uint8_t voice_command[12]= {0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C}; //语音命令
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if(htim->Instance == TIM2){   //1min周期
-      if(start_flag){
-        start_time.study_time+=1;
-      }
+      // if(start_flag&&!pause_time_flag){
+      //   start_time.study_time+=1;
+      // }
         read_power_flag = 1;
     }
 
@@ -198,10 +210,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
       if(update_time_cnt==10){
           sendStringData(&huart1, (char*)"ctime?"); //每隔10s更新当前时间  
           update_time_cnt = 0;  
-          adc_flag = 1;   //10s更新一次adc
+          // static uint8_t tempindex = 0;
+          // HAL_UART_Transmit(&huart3, &voice_command[tempindex], 1, 1); //发送语音命令
+          // tempindex++;
+          // if(tempindex >= 12){
+          //   tempindex = 0; // 重置索引
+          // }
           return;     //更新时钟时,不更新实时数据
       }
-
 
       if(start_flag&&timer1_pause){     //开始学习状态下才更新传感器状态
         if(tim1_cnt==30){   //每隔存到sd卡
@@ -223,7 +239,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         sendBinaryData(&huart1,Real_time_Data,8);
         tim1_cnt++; 
       }
-
 
 			if(timer1_pause&&wifi_connect_flag&&!start_flag){
         sendBinaryData(&huart1,Real_time_Data,8);
@@ -281,8 +296,10 @@ void sendBinaryData(UART_HandleTypeDef *huart, uint8_t *data, uint16_t len) {
 
 void start_study(TimeData start_time){
   start_flag = 1;
+
   if (last_start_flag == 0 && start_flag == 1) {
-      sendStringData(&huart1, (char*)"stime?"); //发送时间请求  
+      sendStringData(&huart1, (char*)"stime?"); //发送时间请求
+      pause_time_flag = false; // 重置暂停时间标志  
   }
   if(time_received_flag == 1){  //接收到时间
     Create_Study_Session_File(start_time, (char*)username);
@@ -293,7 +310,9 @@ void start_study(TimeData start_time){
 }
 void stop_study(TimeData start_time){
   start_flag = 0;
+  
   if (last_start_flag == 1 && start_flag == 0) {
+    pause_time_flag = true; // 设置暂停时间标志
     Close_Study_Session_File(start_time,temp_data_index); //保存并关闭
     // 如果学习时间小于5分钟，则删除文件
     if (start_time.study_time < 5) {
@@ -306,8 +325,7 @@ void stop_study(TimeData start_time){
     start_time.study_time=0;   //重置学习时长
     memset(current_filename, 0, sizeof(current_filename)); //清空文件名
     memset(Temp_WriteBuffer, 0xFF, sizeof(Temp_WriteBuffer));
-    //HAL_Delay(100);
-    
+
   }
 }
 
@@ -375,15 +393,16 @@ int main(void)
   MX_DCMI_Init();
   MX_TIM2_Init();
   MX_I2C1_Init();
+  MX_I2C2_Init();
+  MX_USART3_UART_Init();
+  MX_TIM12_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_PWM_Start(&htim12,TIM_CHANNEL_1); //开启PWM对应的通道
+
   HAL_GPIO_WritePin(ESP8266_RST_GPIO_Port, ESP8266_RST_Pin, GPIO_PIN_SET);  //重启esp8266
   HAL_Delay(200);
 
-  // HAL_GPIO_WritePin(GPIOB, Gensture_Vcc_Pin, GPIO_PIN_SET);  //打开手势传感器供电
-  // HAL_Delay(50);
-  // MX_I2C1_Init();  //初始化I2C1
-  // HAL_GPIO_WritePin(GPIOB, Gensture_Vcc_Pin, GPIO_PIN_SET);  //打开手势传感器供电
-  // HAL_Delay(50);
+
 
 	SPI_LCD_Init();   
   SD_Status = BSP_SD_Init(SD_Instance);	
@@ -393,26 +412,26 @@ int main(void)
   MX_USART1_UART_Init();   //重启串口1
   HAL_UARTEx_ReceiveToIdle_IT(&huart1, uart1_buf_recv, sizeof(uart1_buf_recv));
 
-
-
   lv_init();
 	lv_port_disp_init();
   lv_port_indev_init();    // 初始化输入设备
 
-	setup_ui(&guider_ui);           // 初始化 UI    lv_obj_set_style_bg_color(ui->screen_bar_1, lv_color_hex(0x76FF03), LV_PART_INDICATOR|LV_STATE_DEFAULT);
-	events_init(&guider_ui);       // 初始化 事件
-  custom_init(&guider_ui);      // 初始化 自定义事件
+	setup_ui(&main_ui);           // 初始化 UI   
+	events_init(&main_ui);       // 初始化 事件
+  setup_setting_ui(&setting_ui);
+  setup_debug_ui(&debug_ui);
+  custom_init(&main_ui);      // 初始化 自定义事件
   ui_init();
 
 
-  //HAL_GPIO_WritePin(GPIOB, Gensture_Vcc_Pin, GPIO_PIN_RESET);  //打开手势传感器供电
+ 
   MGC3130_Init(&mgc3130_dev);  // 初始化MGC3130设备
   MGC3130_EnableGestures(&mgc3130_dev);
-  HAL_Delay(100);
-  if(MGC3130_EnableTouchDetection(&mgc3130_dev) !=0){      // 使能触摸检测
-    LED1_Toggle;
-  }
   HAL_Delay(50);
+  MGC3130_EnableTouchDetection(&mgc3130_dev);      // 使能触摸检测
+  HAL_Delay(50);
+  // MGC3130_EnableAirWheel(&mgc3130_dev);  // 使能AirWheel
+  // HAL_Delay(50);
 
 
 
@@ -430,54 +449,47 @@ int main(void)
 
   Power = Read_Power()*3.08f;   //电源电压
   Power_Percent = (Power - 7.4f) / (8.4f - 7.4f) * 100.0f;
-  Power_show(guider_ui.screen_power_bar, Power_Percent);  //电量显示
+  Power_show(main_ui.main_power_bar, Power_Percent);  //电量显示 //电量显示
   tempure = atk_ntc_get_temp();
+  
+
+
+  nfc_init();  //初始化nfc
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
-  {
+  { 
     if(read_power_flag){
 		  Power = Read_Power()*3.08f;   //电源电压
       Power_Percent = (Power - 7.4f) / (8.4f - 7.4f) * 100.0f;
-      Power_show(guider_ui.screen_power_bar, Power_Percent);  //电量显示
+      Power_show(main_ui.main_power_bar, Power_Percent);  //电量显示
       read_power_flag = 0;
     }
     if(button_cnt %2 == 1){
-      noise = adc_get_nosie();
-      if(adc_flag){
-        tempure = atk_ntc_get_temp();
-        adc_flag = 0;
-      }
-      
       start_study(start_time);
     }
     else{
       stop_study(start_time); 
     }
-    light =  Atk_Light_Get_Val();
-
-    // HAL_UART_Transmit(&huart2, "test huart2", sizeof("test huart2"), 100);
 
     snprintf(buf, sizeof(buf), "light:%03d,tempure:%2.2f,Power:%2.2f,noise:%2d", light, tempure,Power,noise);
 		lv_label_set_text(sensor_label, buf);
       
-	
     UART_Process_Data();  //处理串口数据
 
     MGC3130_ReceiveSensorData(&mgc3130_dev);  //接收传感器数据
     handle_gesture_input(&mgc3130_dev);  //处理手势输入转化为GUI事件
-    sprintf(genstuere_buf, "gesture:%d,touch:%d,position:%d", (mgc3130_dev.info.gestureInfo&0xFF), (mgc3130_dev.info.touchInfo& 0xFFFF), mgc3130_dev.position);
-    // lv_label_set_text(info_label, genstuere_buf);  //更新手势数据
-    if(mgc3130_dev.info.gestureInfo != 0 || mgc3130_dev.info.touchInfo != 0){
-      lv_label_set_text(SD_label, genstuere_buf);  //更新手势数据
+    sprintf(genstuere_buf, "gesture:%d,touch:%d,position:%d,air:%d", (mgc3130_dev.info.gestureInfo&0xFF), (mgc3130_dev.info.touchInfo& 0xFFFF), mgc3130_dev.position, mgc3130_dev.info.airWheelInfo);
+    if(mgc3130_dev.info.gestureInfo != 0 || mgc3130_dev.info.touchInfo != 0|| mgc3130_dev.info.airWheelInfo != 0|| mgc3130_dev.position!= 0){
+      lv_label_set_text(info_label, genstuere_buf);  //更新手势数据
     }  
   
 
     if(last_wifi_connect_flag!=wifi_connect_flag){
-      Wifi_show(&guider_ui, wifi_connect_flag);  //更新wifi状态
+      Wifi_show(&main_ui, wifi_connect_flag);  //更新wifi状态
     }
     last_wifi_connect_flag =  wifi_connect_flag;
     last_start_flag = start_flag;  

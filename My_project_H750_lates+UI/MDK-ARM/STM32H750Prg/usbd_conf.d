@@ -1,6 +1,6 @@
 stm32h750prg\usbd_conf.o: ../USB_DEVICE/Target/usbd_conf.c
 stm32h750prg\usbd_conf.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h
-stm32h750prg\usbd_conf.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h
+stm32h750prg\usbd_conf.o: ../Core/Inc/stm32h743xx.h
 stm32h750prg\usbd_conf.o: ../Drivers/CMSIS/Include/core_cm7.h
 stm32h750prg\usbd_conf.o: D:\MDK_v5\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32h750prg\usbd_conf.o: ../Drivers/CMSIS/Include/cmsis_version.h

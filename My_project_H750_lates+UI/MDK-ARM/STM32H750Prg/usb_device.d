@@ -1,7 +1,7 @@
 stm32h750prg\usb_device.o: ../USB_DEVICE/App/usb_device.c
 stm32h750prg\usb_device.o: ../USB_DEVICE/App/usb_device.h
 stm32h750prg\usb_device.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h
-stm32h750prg\usb_device.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h
+stm32h750prg\usb_device.o: ../Core/Inc/stm32h743xx.h
 stm32h750prg\usb_device.o: ../Drivers/CMSIS/Include/core_cm7.h
 stm32h750prg\usb_device.o: D:\MDK_v5\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32h750prg\usb_device.o: ../Drivers/CMSIS/Include/cmsis_version.h

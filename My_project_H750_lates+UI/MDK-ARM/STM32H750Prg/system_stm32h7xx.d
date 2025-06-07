@@ -1,6 +1,6 @@
 stm32h750prg\system_stm32h7xx.o: ../Core/Src/system_stm32h7xx.c
 stm32h750prg\system_stm32h7xx.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h
-stm32h750prg\system_stm32h7xx.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h
+stm32h750prg\system_stm32h7xx.o: ../Core/Inc/stm32h743xx.h
 stm32h750prg\system_stm32h7xx.o: ../Drivers/CMSIS/Include/core_cm7.h
 stm32h750prg\system_stm32h7xx.o: D:\MDK_v5\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32h750prg\system_stm32h7xx.o: ../Drivers/CMSIS/Include/cmsis_version.h

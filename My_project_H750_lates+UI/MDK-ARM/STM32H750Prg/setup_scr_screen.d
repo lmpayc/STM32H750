@@ -133,7 +133,7 @@ stm32h750prg\setup_scr_screen.o: D:\MDK_v5\Keil_v5\ARM\ARMCC\Bin\..\include\stdi
 stm32h750prg\setup_scr_screen.o: ..\lvgl\my\generated\gui_guider.h
 stm32h750prg\setup_scr_screen.o: ..\lvgl\my\generated\events_init.h
 stm32h750prg\setup_scr_screen.o: ..\lvgl\my\generated\widgets_init.h
-stm32h750prg\setup_scr_screen.o: ..\lvgl\my\custom\custom.h
+stm32h750prg\setup_scr_screen.o: ../lvgl/my/custom/custom.h
 stm32h750prg\setup_scr_screen.o: ../Core/Inc/gpio.h
 stm32h750prg\setup_scr_screen.o: ../Core/Inc/main.h
 stm32h750prg\setup_scr_screen.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h
@@ -141,7 +141,7 @@ stm32h750prg\setup_scr_screen.o: ../Core/Inc/stm32h7xx_hal_conf.h
 stm32h750prg\setup_scr_screen.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h
 stm32h750prg\setup_scr_screen.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h
 stm32h750prg\setup_scr_screen.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h
-stm32h750prg\setup_scr_screen.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h
+stm32h750prg\setup_scr_screen.o: ../Core/Inc/stm32h743xx.h
 stm32h750prg\setup_scr_screen.o: ../Drivers/CMSIS/Include/core_cm7.h
 stm32h750prg\setup_scr_screen.o: ../Drivers/CMSIS/Include/cmsis_version.h
 stm32h750prg\setup_scr_screen.o: ../Drivers/CMSIS/Include/cmsis_compiler.h

@@ -37,6 +37,8 @@ extern UART_HandleTypeDef huart1;
 
 extern UART_HandleTypeDef huart2;
 
+extern UART_HandleTypeDef huart3;
+
 /* USER CODE BEGIN Private defines */
 #define PACKAGE_HEADER 0xAB
 #define PACKAGE_FOOTER 0x55
@@ -67,6 +69,7 @@ typedef struct {
 
 void MX_USART1_UART_Init(void);
 void MX_USART2_UART_Init(void);
+void MX_USART3_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 void UART_Queue_Init(void);

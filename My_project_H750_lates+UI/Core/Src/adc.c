@@ -265,7 +265,7 @@ float Read_Power(void)
         HAL_ADC_PollForConversion(&hadc3, 10);  // 等待转换完成
         temp_val += HAL_ADC_GetValue(&hadc3);  // 读取 ADC 值;
         HAL_ADC_Stop(&hadc3);
-        HAL_Delay(5);
+        HAL_Delay(1);
 
     }
     temp_val /= 10;
@@ -279,7 +279,7 @@ float Read_Power(void)
 uint32_t Read_Light_Sensor(void)
 {
     ADC_ChannelConfTypeDef sConfig = {0};
-    sConfig.Channel = ADC_CHANNEL_5;  // PB1 对应 ADC1_IN5
+    sConfig.Channel =  ADC_CHANNEL_4;      //ADC_CHANNEL_5;  // PB1 对应 ADC1_IN5
     sConfig.Rank = ADC_REGULAR_RANK_1;
     sConfig.SamplingTime = ADC_SAMPLETIME_387CYCLES_5; 
     sConfig.SingleDiff = ADC_SINGLE_ENDED;
@@ -316,7 +316,7 @@ uint32_t Adc_Get_Light_average(uint8_t times)
     for (t = 0; t < times; t++)     /* 获取times次数据 */
     {
         temp_val += Read_Light_Sensor();
-        HAL_Delay(5);
+        HAL_Delay(1);
     }
 
     return temp_val / times;        /* 返回平均值 */
@@ -345,7 +345,7 @@ const float Ka = 273.15f;
 uint32_t Read_tempure_sensor(void)
 {
     ADC_ChannelConfTypeDef sConfig = {0};
-    sConfig.Channel = ADC_CHANNEL_4;  // PC4 对应 ADC1_IN4
+    sConfig.Channel = ADC_CHANNEL_5;//ADC_CHANNEL_4;  // PC4 对应 ADC1_IN4
     sConfig.Rank = ADC_REGULAR_RANK_1;
     sConfig.SamplingTime = ADC_SAMPLETIME_387CYCLES_5;
     sConfig.SingleDiff = ADC_SINGLE_ENDED;
@@ -374,7 +374,7 @@ uint32_t Adc_Get_Tempure_average(uint8_t times)
     for (t = 0; t < times; t++)     /* 获取times次数据 */
     {
         temp_val += Read_tempure_sensor();
-        HAL_Delay(5);
+        HAL_Delay(1);
     }
 
     return temp_val / times;        /* 返回平均值 */
@@ -429,7 +429,7 @@ uint32_t Adc_Get_Noise_average(uint8_t times){
     for (t = 0; t < times; t++)     /* 获取times次数据 */
     {
         temp_val += Read_Noise_Sensor();
-        HAL_Delay(5);
+        HAL_Delay(1);
     }
 
     return temp_val / times;        /* 返回平均值 */
