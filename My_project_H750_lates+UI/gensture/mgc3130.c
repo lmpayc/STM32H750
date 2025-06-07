@@ -165,12 +165,35 @@ int8_t MGC3130_EnableApproachDetection(MGC3130_t *dev)
 }
 
 
+int8_t MGC3130_EnableAirWheel(MGC3130_t *dev)
+{
+    uint8_t pBuf[] = {
+        0x90, 0x00, 0x00, 0x00,   // Command ID: 0x0090
+        0x20, 0x00, 0x00, 0x00,   // AirWheel Enable Mask
+        0x20, 0x00, 0x00, 0x00    // AirWheel Valid Mask
+    };
 
+    uint8_t recvBuf[16];
+    int8_t ret = -1;
+
+    if (MGC3130_SetRuntimeParameter(dev, pBuf, sizeof(pBuf)) != 0) {
+        if (MGC3130_ReadData(dev, recvBuf, sizeof(recvBuf)) != 0) {
+            if (recvBuf[4] == 0xA2) {
+                uint16_t errorCode = (recvBuf[7] << 8) | recvBuf[6];
+                if (errorCode == 0) {
+                    ret = 0;
+                }
+            }
+        }
+    }
+
+    return ret;
+}
 
 void MGC3130_ReceiveSensorData(MGC3130_t *dev)
 {
     uint8_t pbuf[24];
-    static uint16_t rest_cnt = 0;
+//    static uint16_t rest_cnt = 0;
     uint8_t temp_size = 0;
 
     dev->position = false;
@@ -214,41 +237,10 @@ void MGC3130_ReceiveSensorData(MGC3130_t *dev)
 
         //lv_label_set_text_fmt(info_label, "pbuf[3]:%#x,pbuf[4]:%#x,touch:%d", pbuf[3],pbuf[4],dev->info.touchInfo); // 更新 UI 显示
         
-        lv_label_set_text_fmt(info_label,"zPosition:%d,position:%d",dev->info.zPosition,dev->position); // 更新 UI 显示
-
-        // if(pbuf[3]==0&&pbuf[4]==0){
-        //     rest_cnt++;
-        //     if(rest_cnt>20){
-
-        //         MGC3130_Init(dev); // 重新初始化
-        //         MGC3130_EnableGestures(dev); // 重新使能手势
-        //         HAL_Delay(50);  
-        //         MGC3130_EnableTouchDetection(dev); // 重新使能触摸检测
-        //         HAL_Delay(50);
-        //         rest_cnt = 0;
-        //         return;
-        //     }
-        // }
-        
-        // if(dev->info.gestureInfo==GESTURE_FLICK_R){
-        //     lv_label_set_text(info_label, "Flick Right to Left");
-        //   }
-        //   else if(dev->info.gestureInfo==GESTURE_FLICK_L){
-        //     lv_label_set_text(info_label, "Flick Left to Right");
-        //   }
-        //   else if(dev->info.gestureInfo==GESTURE_FLICK_U){
-        //     lv_label_set_text(info_label, "Flick Down to Up");
-        //   }
-        //   else if(dev->info.gestureInfo==GESTURE_FLICK_D){
-        //     lv_label_set_text(info_label, "Flick Up to Down");
-        //   }
-        
-
-        //lv_label_set_text(info_label, "MGC3130 data received!"); // 更新 UI 显示
+        //lv_label_set_text_fmt(info_label,"zPosition:%d,position:%d",dev->info.zPosition,dev->position); // 更新 UI 显示
 
     } else {
-		lv_label_set_text(info_label, "ReceiveSensorData null!!");
-        // HAL_Delay(500);
+		//lv_label_set_text(info_label, "ReceiveSensorData null!!");
     }
     
     

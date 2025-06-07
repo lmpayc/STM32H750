@@ -80,7 +80,7 @@ GPIO_PinState MGC3130_ReadTs(MGC3130_t *dev);
 int8_t MGC3130_EnableGestures(MGC3130_t *dev);
 int8_t MGC3130_EnableTouchDetection(MGC3130_t *dev);
 int8_t MGC3130_EnableApproachDetection(MGC3130_t *dev);
-
+int8_t MGC3130_EnableAirWheel(MGC3130_t *dev);
 
 void MGC3130_ReceiveSensorData(MGC3130_t *dev);
 

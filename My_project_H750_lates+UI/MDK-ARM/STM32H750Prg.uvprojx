@@ -212,7 +212,7 @@
             <Ra2Chk>0</Ra2Chk>
             <Ra3Chk>0</Ra3Chk>
             <Im1Chk>1</Im1Chk>
-            <Im2Chk>0</Im2Chk>
+            <Im2Chk>1</Im2Chk>
             <OnChipMemories>
               <Ocm1>
                 <Type>0</Type>
@@ -338,9 +338,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_HAL_DRIVER,xSTM32H750xx,USE_PWR_LDO_SUPPLY,STM32H743xx</Define>
+              <Define>USE_HAL_DRIVER,xSTM32H750xx,USE_PWR_LDO_SUPPLY,STM32H743xx,LV_LVGL_H_INCLUDE_SIMPLE</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../USB_DEVICE/App;../USB_DEVICE/Target;../Drivers/Hare/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../FatFs;../lvgl;../lvgl/src;../lvgl/examples/porting;../lvgl/demos;../lvgl/my;../FatFs/mysd;../gensture;..\lvgl\my\custom;..\lvgl\my\generated;..\lvgl\my\generated\guider_customer_fonts</IncludePath>
+              <IncludePath>../Core/Inc;../USB_DEVICE/App;../USB_DEVICE/Target;../Drivers/Hare/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../FatFs;..\NFC;../lvgl;../lvgl/src;../lvgl/examples/porting;../lvgl/demos;../lvgl/my;../FatFs/mysd;../gensture;../lvgl/my/custom;../lvgl/my/generated;../lvgl/my/generated/guider_customer_fonts</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1461,6 +1461,26 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>NFC</GroupName>
+          <Files>
+            <File>
+              <FileName>pn532.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\NFC\pn532.c</FilePath>
+            </File>
+            <File>
+              <FileName>pn532_stm32f1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\NFC\pn532_stm32f1.c</FilePath>
+            </File>
+            <File>
+              <FileName>nfc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\NFC\nfc.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>lvgl</GroupName>
           <Files>
             <File>
@@ -2311,61 +2331,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>lvgl/demos</GroupName>
-          <Files>
-            <File>
-              <FileName>lv_demo_benchmark.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\lv_demo_benchmark.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_alpha16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_alpha16.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_argb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_argb.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_chroma_keyed.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_chroma_keyed.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_indexed16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_indexed16.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_rgb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_rgb.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_rgb565a8.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_rgb565a8.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_12_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\lv_font_bechmark_montserrat_12_compr_az.c.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_16_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\lv_font_bechmark_montserrat_16_compr_az.c.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_28_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\lv_font_bechmark_montserrat_28_compr_az.c.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>FatFs</GroupName>
           <Files>
             <File>
@@ -2419,9 +2384,19 @@
               <FilePath>..\lvgl\my\generated\gui_guider.c</FilePath>
             </File>
             <File>
-              <FileName>setup_scr_screen.c</FileName>
+              <FileName>setup_scr_debug.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\setup_scr_screen.c</FilePath>
+              <FilePath>..\lvgl\my\generated\setup_scr_debug.c</FilePath>
+            </File>
+            <File>
+              <FileName>setup_scr_main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\setup_scr_main.c</FilePath>
+            </File>
+            <File>
+              <FileName>setup_scr_setting.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\setup_scr_setting.c</FilePath>
             </File>
             <File>
               <FileName>widgets_init.c</FileName>
@@ -2429,29 +2404,119 @@
               <FilePath>..\lvgl\my\generated\widgets_init.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_Alatsi_Regular_15.c</FileName>
+              <FileName>_learning_time_alpha_45x45.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_Alatsi_Regular_15.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_learning_time_alpha_45x45.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_Alatsi_Regular_25.c</FileName>
+              <FileName>_learning_time_alpha_60x60.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_Alatsi_Regular_25.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_learning_time_alpha_60x60.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_montserratMedium_12.c</FileName>
+              <FileName>_pause_alpha_10x10.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_montserratMedium_12.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_pause_alpha_10x10.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_montserratMedium_14.c</FileName>
+              <FileName>_pause_alpha_25x25.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_montserratMedium_14.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_pause_alpha_25x25.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_montserratMedium_16.c</FileName>
+              <FileName>_setting_alpha_15x15.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_montserratMedium_16.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_setting_alpha_15x15.c</FilePath>
+            </File>
+            <File>
+              <FileName>_setting_alpha_25x25.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_setting_alpha_25x25.c</FilePath>
+            </File>
+            <File>
+              <FileName>_setting_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_setting_alpha_30x30.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_not_learning_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_not_learning_alpha_30x30.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_not_learning_alpha_45x45.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_not_learning_alpha_45x45.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_not_learning_alpha_60x59.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_not_learning_alpha_60x59.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_right_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_right_alpha_30x30.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_right_alpha_45x45.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_right_alpha_45x45.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_right_alpha_60x60.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_right_alpha_60x60.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_wrong_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_wrong_alpha_30x30.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_wrong_alpha_45x45.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_wrong_alpha_45x45.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_wrong_alpha_60x60.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_wrong_alpha_60x60.c</FilePath>
+            </File>
+            <File>
+              <FileName>_start_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_start_alpha_30x30.c</FilePath>
+            </File>
+            <File>
+              <FileName>_start_alpha_45x45.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_start_alpha_45x45.c</FilePath>
+            </File>
+            <File>
+              <FileName>_temperature_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_temperature_alpha_30x30.c</FilePath>
+            </File>
+            <File>
+              <FileName>_temperature_alpha_45x45.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_temperature_alpha_45x45.c</FilePath>
+            </File>
+            <File>
+              <FileName>_temperature_alpha_50x50.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_temperature_alpha_50x50.c</FilePath>
+            </File>
+            <File>
+              <FileName>_temperature_alpha_80x80.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_temperature_alpha_80x80.c</FilePath>
+            </File>
+            <File>
+              <FileName>_volume_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_volume_alpha_30x30.c</FilePath>
             </File>
             <File>
               <FileName>_WIFI_alpha_13x13.c</FileName>
@@ -2459,14 +2524,74 @@
               <FilePath>..\lvgl\my\generated\images\_WIFI_alpha_13x13.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_SourceHanSerifSC_Regular_14.c</FileName>
+              <FileName>_WIFI_alpha_15x15.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_14.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_WIFI_alpha_15x15.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_SourceHanSerifSC_Regular_16.c</FileName>
+              <FileName>_WIFI_alpha_25x25.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_16.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_WIFI_alpha_25x25.c</FilePath>
+            </File>
+            <File>
+              <FileName>_WIFI_none_alpha_25x25.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_WIFI_none_alpha_25x25.c</FilePath>
+            </File>
+            <File>
+              <FileName>_buble_dark_alpha_25x50.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_buble_dark_alpha_25x50.c</FilePath>
+            </File>
+            <File>
+              <FileName>_buble_dark_alpha_40x80.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_buble_dark_alpha_40x80.c</FilePath>
+            </File>
+            <File>
+              <FileName>_buble_light_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_buble_light_alpha_30x30.c</FilePath>
+            </File>
+            <File>
+              <FileName>_buble_light_alpha_37x50.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_buble_light_alpha_37x50.c</FilePath>
+            </File>
+            <File>
+              <FileName>_buble_light_alpha_61x80.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_buble_light_alpha_61x80.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_montserratMedium_16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_montserratMedium_16.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_montserratMedium_80.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_montserratMedium_80.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_SourceHanSerifSC_Regular_10.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_10.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_SourceHanSerifSC_Regular_30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_30.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_SourceHanSerifSC_Regular_40.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_40.c</FilePath>
+            </File>
+            <File>
+              <FileName>_learning_time_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_learning_time_alpha_30x30.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3236,6 +3361,26 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>NFC</GroupName>
+          <Files>
+            <File>
+              <FileName>pn532.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\NFC\pn532.c</FilePath>
+            </File>
+            <File>
+              <FileName>pn532_stm32f1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\NFC\pn532_stm32f1.c</FilePath>
+            </File>
+            <File>
+              <FileName>nfc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\NFC\nfc.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>lvgl</GroupName>
           <Files>
             <File>
@@ -4086,61 +4231,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>lvgl/demos</GroupName>
-          <Files>
-            <File>
-              <FileName>lv_demo_benchmark.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\lv_demo_benchmark.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_alpha16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_alpha16.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_argb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_argb.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_chroma_keyed.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_chroma_keyed.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_indexed16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_indexed16.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_rgb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_rgb.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_rgb565a8.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_rgb565a8.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_12_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\lv_font_bechmark_montserrat_12_compr_az.c.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_16_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\lv_font_bechmark_montserrat_16_compr_az.c.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_28_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\lv_font_bechmark_montserrat_28_compr_az.c.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>FatFs</GroupName>
           <Files>
             <File>
@@ -4194,9 +4284,19 @@
               <FilePath>..\lvgl\my\generated\gui_guider.c</FilePath>
             </File>
             <File>
-              <FileName>setup_scr_screen.c</FileName>
+              <FileName>setup_scr_debug.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\setup_scr_screen.c</FilePath>
+              <FilePath>..\lvgl\my\generated\setup_scr_debug.c</FilePath>
+            </File>
+            <File>
+              <FileName>setup_scr_main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\setup_scr_main.c</FilePath>
+            </File>
+            <File>
+              <FileName>setup_scr_setting.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\setup_scr_setting.c</FilePath>
             </File>
             <File>
               <FileName>widgets_init.c</FileName>
@@ -4204,29 +4304,119 @@
               <FilePath>..\lvgl\my\generated\widgets_init.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_Alatsi_Regular_15.c</FileName>
+              <FileName>_learning_time_alpha_45x45.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_Alatsi_Regular_15.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_learning_time_alpha_45x45.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_Alatsi_Regular_25.c</FileName>
+              <FileName>_learning_time_alpha_60x60.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_Alatsi_Regular_25.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_learning_time_alpha_60x60.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_montserratMedium_12.c</FileName>
+              <FileName>_pause_alpha_10x10.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_montserratMedium_12.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_pause_alpha_10x10.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_montserratMedium_14.c</FileName>
+              <FileName>_pause_alpha_25x25.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_montserratMedium_14.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_pause_alpha_25x25.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_montserratMedium_16.c</FileName>
+              <FileName>_setting_alpha_15x15.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_montserratMedium_16.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_setting_alpha_15x15.c</FilePath>
+            </File>
+            <File>
+              <FileName>_setting_alpha_25x25.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_setting_alpha_25x25.c</FilePath>
+            </File>
+            <File>
+              <FileName>_setting_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_setting_alpha_30x30.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_not_learning_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_not_learning_alpha_30x30.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_not_learning_alpha_45x45.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_not_learning_alpha_45x45.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_not_learning_alpha_60x59.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_not_learning_alpha_60x59.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_right_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_right_alpha_30x30.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_right_alpha_45x45.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_right_alpha_45x45.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_right_alpha_60x60.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_right_alpha_60x60.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_wrong_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_wrong_alpha_30x30.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_wrong_alpha_45x45.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_wrong_alpha_45x45.c</FilePath>
+            </File>
+            <File>
+              <FileName>_sitting_wrong_alpha_60x60.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_sitting_wrong_alpha_60x60.c</FilePath>
+            </File>
+            <File>
+              <FileName>_start_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_start_alpha_30x30.c</FilePath>
+            </File>
+            <File>
+              <FileName>_start_alpha_45x45.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_start_alpha_45x45.c</FilePath>
+            </File>
+            <File>
+              <FileName>_temperature_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_temperature_alpha_30x30.c</FilePath>
+            </File>
+            <File>
+              <FileName>_temperature_alpha_45x45.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_temperature_alpha_45x45.c</FilePath>
+            </File>
+            <File>
+              <FileName>_temperature_alpha_50x50.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_temperature_alpha_50x50.c</FilePath>
+            </File>
+            <File>
+              <FileName>_temperature_alpha_80x80.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_temperature_alpha_80x80.c</FilePath>
+            </File>
+            <File>
+              <FileName>_volume_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_volume_alpha_30x30.c</FilePath>
             </File>
             <File>
               <FileName>_WIFI_alpha_13x13.c</FileName>
@@ -4234,14 +4424,74 @@
               <FilePath>..\lvgl\my\generated\images\_WIFI_alpha_13x13.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_SourceHanSerifSC_Regular_14.c</FileName>
+              <FileName>_WIFI_alpha_15x15.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_14.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_WIFI_alpha_15x15.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_SourceHanSerifSC_Regular_16.c</FileName>
+              <FileName>_WIFI_alpha_25x25.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_16.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_WIFI_alpha_25x25.c</FilePath>
+            </File>
+            <File>
+              <FileName>_WIFI_none_alpha_25x25.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_WIFI_none_alpha_25x25.c</FilePath>
+            </File>
+            <File>
+              <FileName>_buble_dark_alpha_25x50.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_buble_dark_alpha_25x50.c</FilePath>
+            </File>
+            <File>
+              <FileName>_buble_dark_alpha_40x80.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_buble_dark_alpha_40x80.c</FilePath>
+            </File>
+            <File>
+              <FileName>_buble_light_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_buble_light_alpha_30x30.c</FilePath>
+            </File>
+            <File>
+              <FileName>_buble_light_alpha_37x50.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_buble_light_alpha_37x50.c</FilePath>
+            </File>
+            <File>
+              <FileName>_buble_light_alpha_61x80.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_buble_light_alpha_61x80.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_montserratMedium_16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_montserratMedium_16.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_montserratMedium_80.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_montserratMedium_80.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_SourceHanSerifSC_Regular_10.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_10.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_SourceHanSerifSC_Regular_30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_30.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_SourceHanSerifSC_Regular_40.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_40.c</FilePath>
+            </File>
+            <File>
+              <FileName>_learning_time_alpha_30x30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_learning_time_alpha_30x30.c</FilePath>
             </File>
           </Files>
         </Group>

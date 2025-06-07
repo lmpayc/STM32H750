@@ -18,14 +18,58 @@ extern "C" {
 typedef struct
 {
   
-	lv_obj_t *screen;
-	bool screen_del;
-	lv_obj_t *screen_home_cnt;
-	lv_obj_t *screen_start_btn;
-	lv_obj_t *screen_start_btn_label;
-	lv_obj_t *screen_power_cont;
-	lv_obj_t *screen_power_bar;
-	lv_obj_t *screen_wifi_img;
+	lv_obj_t *main;
+	bool main_del;
+	lv_obj_t *main_home_cnt;
+	lv_obj_t *main_power_cont;
+	lv_obj_t *main_power_bar;
+	lv_obj_t *main_wifi_none_img;
+	lv_obj_t *main_wifi_img;
+	lv_obj_t *main_Time_label;
+	lv_obj_t *main_pop_cnt;
+	lv_obj_t *main_split_line;
+	lv_obj_t *main_sitting_pos_wrong_img;
+	lv_obj_t *main_sitting_pos_right_img;
+	lv_obj_t *main_sitting_pos_rest_img;
+	lv_obj_t *main_learning_time_img;
+	lv_obj_t *main_pause_img;
+	lv_obj_t *main_temperature_img;
+	lv_obj_t *main_light_down_img;
+	lv_obj_t *main_light_on_img;
+	lv_obj_t *main_setting;
+	lv_obj_t *main_date;
+	lv_obj_t *main_start;
+	lv_obj_t *main_sitting_wrong_label;
+	lv_obj_t *main_large_sitting_wrong_img;
+	lv_obj_t *main_sitting_right_label;
+	lv_obj_t *main_large_sitting_right_img;
+	lv_obj_t *main_sitting_rest_label;
+	lv_obj_t *main_large_sitting_rest_image;
+	lv_obj_t *main_learning_time_data;
+	lv_obj_t *main_large_time_img;
+	lv_obj_t *main_large_pause_img;
+	lv_obj_t *main_temperature_data;
+	lv_obj_t *main_large_temperature_img;
+	lv_obj_t *main_light_data;
+	lv_obj_t *main_large_light_on_img;
+	lv_obj_t *main_large_light_off_img;
+	lv_obj_t *setting;
+	bool setting_del;
+	lv_obj_t *setting_cont_1;
+	lv_obj_t *setting_setting_image;
+	lv_obj_t *setting_setting_label;
+	lv_obj_t *setting_light_slider;
+	lv_obj_t *setting_light_img;
+	lv_obj_t *setting_light_label;
+	lv_obj_t *setting_light_auto_switch;
+	lv_obj_t *setting_light_data;
+	lv_obj_t *setting_volume_img;
+	lv_obj_t *setting_volume_lable;
+	lv_obj_t *setting_volume_slider;
+	lv_obj_t *setting_volume_data;
+	lv_obj_t *debug;
+	bool debug_del;
+	lv_obj_t *debug_cont_1;
 }lv_ui;
 
 typedef void (*ui_setup_scr_t)(lv_ui * ui);
@@ -49,12 +93,38 @@ void init_keyboard(lv_ui *ui);
 extern lv_ui guider_ui;
 
 
-void setup_scr_screen(lv_ui *ui);
-LV_IMG_DECLARE(_WIFI_alpha_13x13);
+void setup_scr_main(lv_ui *ui);
+void setup_scr_setting(lv_ui *ui);
+void setup_scr_debug(lv_ui *ui);
+LV_IMG_DECLARE(_WIFI_none_alpha_25x25);
+LV_IMG_DECLARE(_WIFI_alpha_25x25);
+LV_IMG_DECLARE(_sitting_wrong_alpha_45x45);
+LV_IMG_DECLARE(_sitting_right_alpha_45x45);
+LV_IMG_DECLARE(_sitting_not_learning_alpha_45x45);
+LV_IMG_DECLARE(_learning_time_alpha_45x45);
+LV_IMG_DECLARE(_pause_alpha_10x10);
+LV_IMG_DECLARE(_temperature_alpha_45x45);
+LV_IMG_DECLARE(_buble_dark_alpha_25x50);
+LV_IMG_DECLARE(_buble_light_alpha_37x50);
+LV_IMG_DECLARE(_setting_alpha_25x25);
+LV_IMG_DECLARE(_start_alpha_45x45);
+LV_IMG_DECLARE(_sitting_wrong_alpha_60x60);
+LV_IMG_DECLARE(_sitting_right_alpha_60x60);
+LV_IMG_DECLARE(_sitting_not_learning_alpha_60x59);
+LV_IMG_DECLARE(_learning_time_alpha_60x60);
+LV_IMG_DECLARE(_pause_alpha_25x25);
+LV_IMG_DECLARE(_temperature_alpha_80x80);
+LV_IMG_DECLARE(_buble_light_alpha_61x80);
+LV_IMG_DECLARE(_buble_dark_alpha_40x80);
+LV_IMG_DECLARE(_setting_alpha_30x30);
+LV_IMG_DECLARE(_buble_light_alpha_30x30);
+LV_IMG_DECLARE(_volume_alpha_30x30);
 
-LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_14)
+LV_FONT_DECLARE(lv_font_montserratMedium_80)
 LV_FONT_DECLARE(lv_font_montserratMedium_16)
-LV_FONT_DECLARE(lv_font_montserratMedium_12)
+LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_10)
+LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_30)
+LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_40)
 
 
 #ifdef __cplusplus

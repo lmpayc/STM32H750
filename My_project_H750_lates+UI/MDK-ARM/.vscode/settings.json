@@ -108,7 +108,14 @@
     "sd.h": "c",
     "custom.h": "c",
     "gui_guider.h": "c",
-    "lv_font.h": "c"
+    "lv_font.h": "c",
+    "rtc.h": "c",
+    "ff.h": "c",
+    "memorymap.h": "c",
+    "nfc.h": "c",
+    "lcd_model.h": "c",
+    "stdint.h": "c",
+    "pn532_stm32f1.h": "c"
   },
   "files.encoding": "gbk",
   "files.candidateGuessEncodings": [

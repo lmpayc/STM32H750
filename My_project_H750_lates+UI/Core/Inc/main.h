@@ -39,7 +39,7 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-#define MAX_USERS 3
+
 #define  REAED_BUFFER_SIZE 5120
 
 
@@ -92,8 +92,8 @@ void Error_Handler(void);
 #define Water_AO_GPIO_Port GPIOB
 #define ESP8266_RST_Pin GPIO_PIN_2
 #define ESP8266_RST_GPIO_Port GPIOB
-#define Gensture_Vcc_Pin GPIO_PIN_8
-#define Gensture_Vcc_GPIO_Port GPIOB
+#define NFC_RESET_Pin GPIO_PIN_5
+#define NFC_RESET_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 #define LED_Pin GPIO_PIN_13

@@ -13,7 +13,7 @@ stm32h750prg\sd_diskio.o: ../Core/Inc/stm32h7xx_hal_conf.h
 stm32h750prg\sd_diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h
 stm32h750prg\sd_diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h
 stm32h750prg\sd_diskio.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h
-stm32h750prg\sd_diskio.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h
+stm32h750prg\sd_diskio.o: ../Core/Inc/stm32h743xx.h
 stm32h750prg\sd_diskio.o: ../Drivers/CMSIS/Include/core_cm7.h
 stm32h750prg\sd_diskio.o: ../Drivers/CMSIS/Include/cmsis_version.h
 stm32h750prg\sd_diskio.o: ../Drivers/CMSIS/Include/cmsis_compiler.h

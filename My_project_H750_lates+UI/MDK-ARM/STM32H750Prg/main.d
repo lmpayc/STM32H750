@@ -5,7 +5,7 @@ stm32h750prg\main.o: ../Core/Inc/stm32h7xx_hal_conf.h
 stm32h750prg\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h
 stm32h750prg\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h
 stm32h750prg\main.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h
-stm32h750prg\main.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h
+stm32h750prg\main.o: ../Core/Inc/stm32h743xx.h
 stm32h750prg\main.o: ../Drivers/CMSIS/Include/core_cm7.h
 stm32h750prg\main.o: D:\MDK_v5\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32h750prg\main.o: ../Drivers/CMSIS/Include/cmsis_version.h
@@ -218,8 +218,11 @@ stm32h750prg\main.o: ../lvgl/demos/benchmark/lv_demo_benchmark.h
 stm32h750prg\main.o: ../lvgl/demos/benchmark/../lv_demos.h
 stm32h750prg\main.o: ../lvgl/my/ui.h
 stm32h750prg\main.o: ../gensture/mgc3130.h
-stm32h750prg\main.o: ..\lvgl\my\generated\gui_guider.h
-stm32h750prg\main.o: ..\lvgl\my\generated\events_init.h
-stm32h750prg\main.o: ..\lvgl\my\custom\custom.h
+stm32h750prg\main.o: ../lvgl/my/generated/gui_guider.h
+stm32h750prg\main.o: ../lvgl/my/generated/events_init.h
+stm32h750prg\main.o: ../lvgl/my/custom/custom.h
 stm32h750prg\main.o: ../lvgl/examples/porting/lv_port_indev.h
 stm32h750prg\main.o: ../FatFs/mysd/sd.h
+stm32h750prg\main.o: ..\NFC\nfc.h
+stm32h750prg\main.o: ..\NFC\pn532.h
+stm32h750prg\main.o: ..\NFC\pn532_stm32f1.h

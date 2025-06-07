@@ -27,6 +27,8 @@
 
 extern uint8_t uart1_buf_recv[BUFFER_SIZE];
 extern UartQueue uart1_queue;
+extern uint8_t uart2_buf_recv[256];
+extern uint8_t uart3_buf_recv[256];
 
 extern TimeData start_time;
 extern TimeData current_time;
@@ -46,6 +48,7 @@ uint16_t Packed_Len  = 0;
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
+UART_HandleTypeDef huart3;
 DMA_HandleTypeDef hdma_usart1_rx;
 DMA_HandleTypeDef hdma_usart1_tx;
 
@@ -135,8 +138,54 @@ void MX_USART2_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART2_Init 2 */
-
+  HAL_UARTEx_ReceiveToIdle_IT(&huart2, uart2_buf_recv, sizeof(uart2_buf_recv));
   /* USER CODE END USART2_Init 2 */
+
+}
+/* USART3 init function */
+
+void MX_USART3_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART3_Init 0 */
+
+  /* USER CODE END USART3_Init 0 */
+
+  /* USER CODE BEGIN USART3_Init 1 */
+
+  /* USER CODE END USART3_Init 1 */
+  huart3.Instance = USART3;
+  huart3.Init.BaudRate = 115200;
+  huart3.Init.WordLength = UART_WORDLENGTH_8B;
+  huart3.Init.StopBits = UART_STOPBITS_1;
+  huart3.Init.Parity = UART_PARITY_NONE;
+  huart3.Init.Mode = UART_MODE_TX_RX;
+  huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart3.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart3.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart3.Init.ClockPrescaler = UART_PRESCALER_DIV1;
+  huart3.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_SetTxFifoThreshold(&huart3, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_SetRxFifoThreshold(&huart3, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_DisableFifoMode(&huart3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART3_Init 2 */
+  HAL_UARTEx_ReceiveToIdle_IT(&huart3, uart3_buf_recv, sizeof(uart3_buf_recv));
+
+
+  /* USER CODE END USART3_Init 2 */
 
 }
 
@@ -256,6 +305,43 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
 
   /* USER CODE END USART2_MspInit 1 */
   }
+  else if(uartHandle->Instance==USART3)
+  {
+  /* USER CODE BEGIN USART3_MspInit 0 */
+
+  /* USER CODE END USART3_MspInit 0 */
+
+  /** Initializes the peripherals clock
+  */
+    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART3;
+    PeriphClkInitStruct.Usart234578ClockSelection = RCC_USART234578CLKSOURCE_D2PCLK1;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+    {
+      Error_Handler();
+    }
+
+    /* USART3 clock enable */
+    __HAL_RCC_USART3_CLK_ENABLE();
+
+    __HAL_RCC_GPIOD_CLK_ENABLE();
+    /**USART3 GPIO Configuration
+    PD8     ------> USART3_TX
+    PD9     ------> USART3_RX
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_9;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF7_USART3;
+    HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+    /* USART3 interrupt Init */
+    HAL_NVIC_SetPriority(USART3_IRQn, 1, 0);
+    HAL_NVIC_EnableIRQ(USART3_IRQn);
+  /* USER CODE BEGIN USART3_MspInit 1 */
+
+  /* USER CODE END USART3_MspInit 1 */
+  }
 }
 
 void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
@@ -304,6 +390,26 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
   /* USER CODE BEGIN USART2_MspDeInit 1 */
 
   /* USER CODE END USART2_MspDeInit 1 */
+  }
+  else if(uartHandle->Instance==USART3)
+  {
+  /* USER CODE BEGIN USART3_MspDeInit 0 */
+
+  /* USER CODE END USART3_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_USART3_CLK_DISABLE();
+
+    /**USART3 GPIO Configuration
+    PD8     ------> USART3_TX
+    PD9     ------> USART3_RX
+    */
+    HAL_GPIO_DeInit(GPIOD, GPIO_PIN_8|GPIO_PIN_9);
+
+    /* USART3 interrupt Deinit */
+    HAL_NVIC_DisableIRQ(USART3_IRQn);
+  /* USER CODE BEGIN USART3_MspDeInit 1 */
+
+  /* USER CODE END USART3_MspDeInit 1 */
   }
 }
 
@@ -402,6 +508,18 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
         // 重新启动接收
         HAL_UARTEx_ReceiveToIdle_IT(huart, uart1_buf_recv, sizeof(uart1_buf_recv));
     }
+
+    if (huart->Instance == USART2) // 确保是 USART2
+    {
+      HAL_UART_Transmit(&huart2, uart2_buf_recv, Size, 1000); // 将接收到的数据回传
+      HAL_UARTEx_ReceiveToIdle_IT(huart, uart2_buf_recv, sizeof(uart2_buf_recv));
+    }
+
+    if (huart->Instance == USART3) // 确保是 USART2
+    {
+      HAL_UART_Transmit(&huart3, uart3_buf_recv, Size, 1000); // 将接收到的数据回传
+      HAL_UARTEx_ReceiveToIdle_IT(huart, uart3_buf_recv, sizeof(uart3_buf_recv));
+    }
 }
 
 
@@ -435,8 +553,8 @@ void UART_Process_Data(void)
             sscanf((char*)temp_buffer + 5, "%2hhu%2hhu%2hhu%2hhu:%2hhu",
                 &current_time.year, &current_time.month, &current_time.day,
                 &current_time.hour, &current_time.minute);
-            char time_str[8];
-            snprintf(time_str, sizeof(time_str), "%02d:%02d", current_time.hour, current_time.minute);
+            char time_str[20];
+            snprintf(time_str, sizeof(time_str), "%02d:%02d",current_time.hour, current_time.minute);
             lv_label_set_text(label_time, time_str);
             wifi_connect_flag = 1; // WIFI连接标志
         }

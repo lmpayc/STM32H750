@@ -6,6 +6,13 @@
 #include "lvgl.h"
 #include "mgc3130.h"
 
+typedef struct study_last_time_t {
+    uint8_t study_time_hour; //学习时间小时
+    uint8_t study_time_minute; //学习时间分钟
+    uint8_t study_time_second; //学习时间秒
+    uint8_t pause_time; //暂停时间
+}study_last_time_t;
+
 /**
  * @brief 初始化并创建屏幕上的 UI 元素
  *
@@ -13,7 +20,12 @@
  * 用于创建按钮、标签及其事件回调等。
  */
 void ui_init(void);
-
+void led_timer_cb(lv_timer_t * timer);
+void updatetim_timer_cb(lv_timer_t * timer);
+void control_led(bool led_switch_flag, bool led_auto_flag, uint8_t light_ref, uint8_t light_feedback, bool change_flag);
 void handle_gesture_input(const MGC3130_t *dev);
+void adc_timer_cb(lv_timer_t * timer);
+void nfc_timer_cb(lv_timer_t * timer);
+void process_air_wheel(lv_obj_t *focused_obj, uint32_t airWheelInfo);
 
 #endif // UI_H
