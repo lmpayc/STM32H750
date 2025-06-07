@@ -334,8 +334,12 @@ uint8_t Atk_Light_Get_Val(void)
     temp_val /= 655;
 
     if (temp_val > 100) temp_val = 100;
+    temp_val  = 100 - temp_val;  /* 反转，0最亮，100最暗 */
 
-    return  (uint8_t) (100-temp_val);
+    static float filtered_val = 0;
+    filtered_val = 0.1f * temp_val + 0.9f * filtered_val;
+
+    return  (uint8_t) (filtered_val+0.5f);
 }
 
 const float Ra = 10000.0f;                  /* 25℃下的标称阻值10K */

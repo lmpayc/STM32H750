@@ -101,6 +101,7 @@ uint8_t time_received_flag = 0;
 
 
 //lvgl相关对象
+uint32_t last_tick = 0;
 extern lv_obj_t * info_label;
 extern lv_obj_t * sensor_label; 
 extern lv_obj_t * SD_label;
@@ -179,9 +180,10 @@ uint8_t Real_time_Data[10]= {0};  //实时数据
 
 bool led_switch_flag = 0;
 bool led_auto_flag = 0;
-bool led_change_flag = 0; 
-uint8_t light_ref;  //led参考光照值
+
+uint8_t light_ref=30;  //led参考光照值
 uint8_t voice_command[12]= {0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C}; //语音命令
+bool volume_switch_flag = 0; //音量开关标志
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
@@ -246,7 +248,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	
     }
 }
-
 
 void sendStringData(UART_HandleTypeDef *huart, const char *str) {
   uint8_t buffer[256];  
@@ -462,39 +463,46 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   { 
-    if(read_power_flag){
-		  Power = Read_Power()*3.08f;   //电源电压
-      Power_Percent = (Power - 7.4f) / (8.4f - 7.4f) * 100.0f;
-      Power_show(main_ui.main_power_bar, Power_Percent);  //电量显示
-      read_power_flag = 0;
-    }
-    if(button_cnt %2 == 1){
-      start_study(start_time);
-    }
-    else{
-      stop_study(start_time); 
-    }
+    uint32_t now = lv_tick_get();
+    if (lv_tick_elaps(last_tick) >= 5)  // 每 5ms 执行一次 loop
+    {
+      last_tick = now;
 
-    snprintf(buf, sizeof(buf), "light:%03d,tempure:%2.2f,Power:%2.2f,noise:%2d", light, tempure,Power,noise);
-		lv_label_set_text(sensor_label, buf);
-      
-    UART_Process_Data();  //处理串口数据
+      if(read_power_flag){
+        Power = Read_Power()*3.08f;   //电源电压
+        Power_Percent = (Power - 7.4f) / (8.4f - 7.4f) * 100.0f;
+        Power_show(main_ui.main_power_bar, Power_Percent);  //电量显示
+        read_power_flag = 0;
+      }
+      if(button_cnt %2 == 1){
+        start_study(start_time);
+      }
+      else{
+        stop_study(start_time); 
+      }
 
-    MGC3130_ReceiveSensorData(&mgc3130_dev);  //接收传感器数据
-    handle_gesture_input(&mgc3130_dev);  //处理手势输入转化为GUI事件
-    sprintf(genstuere_buf, "gesture:%d,touch:%d,position:%d,air:%d", (mgc3130_dev.info.gestureInfo&0xFF), (mgc3130_dev.info.touchInfo& 0xFFFF), mgc3130_dev.position, mgc3130_dev.info.airWheelInfo);
-    if(mgc3130_dev.info.gestureInfo != 0 || mgc3130_dev.info.touchInfo != 0|| mgc3130_dev.info.airWheelInfo != 0|| mgc3130_dev.position!= 0){
-      lv_label_set_text(info_label, genstuere_buf);  //更新手势数据
-    }  
-  
+      snprintf(buf, sizeof(buf), "Power:%2.2f,noise:%2d",Power,noise);
+      lv_label_set_text(sensor_label, buf);
+        
+      UART_Process_Data();  //处理串口数据
 
-    if(last_wifi_connect_flag!=wifi_connect_flag){
-      Wifi_show(&main_ui, wifi_connect_flag);  //更新wifi状态
+      MGC3130_ReceiveSensorData(&mgc3130_dev);  //接收传感器数据
+      handle_gesture_input(&mgc3130_dev);  //处理手势输入转化为GUI事件
+      sprintf(genstuere_buf, "gesture:%d,touch:%d,position:%d,air:%d", (mgc3130_dev.info.gestureInfo&0xFF), (mgc3130_dev.info.touchInfo& 0xFFFF), mgc3130_dev.position, mgc3130_dev.info.airWheelInfo);
+      if(mgc3130_dev.info.gestureInfo != 0 || mgc3130_dev.info.touchInfo != 0|| mgc3130_dev.info.airWheelInfo != 0|| mgc3130_dev.position!= 0){
+        lv_label_set_text(info_label, genstuere_buf);  //更新手势数据
+      }  
+    
+
+      if(last_wifi_connect_flag!=wifi_connect_flag){
+        Wifi_show(&main_ui, wifi_connect_flag);  //更新wifi状态
+      }
+      last_wifi_connect_flag =  wifi_connect_flag;
+      last_start_flag = start_flag;  
+      lv_task_handler();
+
     }
-    last_wifi_connect_flag =  wifi_connect_flag;
-    last_start_flag = start_flag;  
-		lv_task_handler();
-    HAL_Delay(5);
+    //HAL_Delay(5);
 		 
     /* USER CODE END WHILE */
 

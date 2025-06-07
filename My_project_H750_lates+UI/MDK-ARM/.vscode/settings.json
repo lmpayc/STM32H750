@@ -115,7 +115,14 @@
     "nfc.h": "c",
     "lcd_model.h": "c",
     "stdint.h": "c",
-    "pn532_stm32f1.h": "c"
+    "pn532_stm32f1.h": "c",
+    "stdlib.h": "c",
+    "system_error": "c",
+    "array": "c",
+    "functional": "c",
+    "tuple": "c",
+    "type_traits": "c",
+    "utility": "c"
   },
   "files.encoding": "gbk",
   "files.candidateGuessEncodings": [

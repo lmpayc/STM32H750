@@ -1,7 +1,7 @@
 Dependencies for Project 'STM32H750Prg', Target 'STM32H750Prg': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
 F (startup_stm32h750xx.s)(0x6835944A)(--cpu Cortex-M7.fp.dp -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include--pd "__UVISION_VERSION SETA 538" --pd "_RTE_ SETA 1" --pd "STM32H750xx SETA 1" --pd "_RTE_ SETA 1"--list ..\startup_stm32h750xx.lst --xref -o stm32h750prg\startup_stm32h750xx.o --depend stm32h750prg\startup_stm32h750xx.d)
-F (../Core/Src/main.c)(0x68412A79)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\main.o --omf_browse stm32h750prg\main.crf --depend stm32h750prg\main.d)
+F (../Core/Src/main.c)(0x6844012E)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\main.o --omf_browse stm32h750prg\main.crf --depend stm32h750prg\main.d)
 I (../Core/Inc/main.h)(0x683C5636)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x67DABD7F)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x67FBA628)
@@ -215,9 +215,9 @@ I (../Drivers/Hare/Inc/lcd_model.h)(0x67DACF00)
 I (../lvgl/demos/lv_demos.h)(0x6800E58E)
 I (../lvgl/demos/benchmark/lv_demo_benchmark.h)(0x6800BF5C)
 I (../lvgl/demos/benchmark/../lv_demos.h)(0x6800E58E)
-I (../lvgl/my/ui.h)(0x6841B905)
+I (../lvgl/my/ui.h)(0x68440150)
 I (../gensture/mgc3130.h)(0x68370AE4)
-I (../lvgl/my/generated/gui_guider.h)(0x6839CF98)
+I (../lvgl/my/generated/gui_guider.h)(0x6843DA5F)
 I (../lvgl/my/generated/events_init.h)(0x6838790C)
 I (../lvgl/my/custom/custom.h)(0x6839CDE7)
 I (../lvgl/examples/porting/lv_port_indev.h)(0x68079EFD)
@@ -411,7 +411,7 @@ I (../Core/Inc/usart.h)(0x68355AF9)
 I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (../Drivers/Hare/Inc/lcd_fonts.h)(0x67DAA7F5)
 I (../Drivers/Hare/Inc/lcd_image.h)(0x67DAA7F5)
-F (../Core/Src/adc.c)(0x6835B804)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\adc.o --omf_browse stm32h750prg\adc.crf --depend stm32h750prg\adc.d)
+F (../Core/Src/adc.c)(0x6843F1A4)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\adc.o --omf_browse stm32h750prg\adc.crf --depend stm32h750prg\adc.d)
 I (../Core/Inc/adc.h)(0x67FBC4ED)
 I (../Core/Inc/main.h)(0x683C5636)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x67DABD7F)
@@ -2269,7 +2269,7 @@ I (../Core/Inc/spi.h)(0x6800EF5A)
 I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (../Drivers/Hare/Inc/lcd_fonts.h)(0x67DAA7F5)
 I (../Drivers/Hare/Inc/lcd_image.h)(0x67DAA7F5)
-I (../lvgl/my/ui.h)(0x6841B905)
+I (../lvgl/my/ui.h)(0x68440150)
 I (../gensture/mgc3130.h)(0x68370AE4)
 I (../Core/Inc/i2c.h)(0x68355AF8)
 I (../FatFs/mysd/sd.h)(0x68230804)
@@ -2281,7 +2281,7 @@ I (../FatFs/diskio.h)(0x67DAA7F5)
 I (../FatFs/sd_diskio.h)(0x67DAA7F5)
 I (../Core/Inc/sdmmc.h)(0x6835948F)
 I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5E8E3CC2)
-F (../Core/Src/stm32h7xx_it.c)(0x68359448)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\stm32h7xx_it.o --omf_browse stm32h750prg\stm32h7xx_it.crf --depend stm32h750prg\stm32h7xx_it.d)
+F (../Core/Src/stm32h7xx_it.c)(0x6843FB29)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\stm32h7xx_it.o --omf_browse stm32h750prg\stm32h7xx_it.crf --depend stm32h750prg\stm32h7xx_it.d)
 I (../Core/Inc/main.h)(0x683C5636)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x67DABD7F)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x67FBA628)
@@ -6746,7 +6746,7 @@ I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (../Drivers/Hare/Inc/lcd_fonts.h)(0x67DAA7F5)
 I (../Drivers/Hare/Inc/lcd_image.h)(0x67DAA7F5)
 I (../Core/Inc/i2c.h)(0x68355AF8)
-F (..\NFC\nfc.c)(0x683C750F)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\nfc.o --omf_browse stm32h750prg\nfc.crf --depend stm32h750prg\nfc.d)
+F (..\NFC\nfc.c)(0x6841D361)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\nfc.o --omf_browse stm32h750prg\nfc.crf --depend stm32h750prg\nfc.d)
 I (..\NFC\nfc.h)(0x683C6AE4)
 I (..\NFC\pn532.h)(0x680B10BC)
 I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
@@ -6937,7 +6937,7 @@ I (../Core/Inc/spi.h)(0x6800EF5A)
 I (../Core/Inc/usart.h)(0x68355AF9)
 I (../Drivers/Hare/Inc/lcd_fonts.h)(0x67DAA7F5)
 I (../Drivers/Hare/Inc/lcd_image.h)(0x67DAA7F5)
-I (../lvgl/my/ui.h)(0x6841B905)
+I (../lvgl/my/ui.h)(0x68440150)
 I (../gensture/mgc3130.h)(0x68370AE4)
 I (../Core/Inc/i2c.h)(0x68355AF8)
 F (..\lvgl\src\core\lv_disp.c)(0x6800BF5D)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\lv_disp.o --omf_browse stm32h750prg\lv_disp.crf --depend stm32h750prg\lv_disp.d)
@@ -18035,7 +18035,7 @@ I (../Core/Inc/usart.h)(0x68355AF9)
 I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (../Drivers/Hare/Inc/lcd_fonts.h)(0x67DAA7F5)
 I (../Drivers/Hare/Inc/lcd_image.h)(0x67DAA7F5)
-F (..\lvgl\my\ui.c)(0x6841C845)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\ui.o --omf_browse stm32h750prg\ui.crf --depend stm32h750prg\ui.d)
+F (..\lvgl\my\ui.c)(0x684405DD)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\ui.o --omf_browse stm32h750prg\ui.crf --depend stm32h750prg\ui.d)
 I (../lvgl/lvgl.h)(0x68372D68)
 I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
 I (../lvgl/src/misc/../lv_conf_internal.h)(0x6800BF5D)
@@ -18165,7 +18165,7 @@ I (../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
-I (..\lvgl\my\ui.h)(0x6841B905)
+I (..\lvgl\my\ui.h)(0x68440150)
 I (../gensture/mgc3130.h)(0x68370AE4)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x67DABD7F)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x67FBA628)
@@ -18226,7 +18226,7 @@ I (../Drivers/Hare/Inc/lcd_image.h)(0x67DAA7F5)
 I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5E8E3CC2)
 I (../Core/Inc/tim.h)(0x68358B5B)
 I (../Core/Inc/adc.h)(0x67FBC4ED)
-I (../lvgl/my/generated/gui_guider.h)(0x6839CF98)
+I (../lvgl/my/generated/gui_guider.h)(0x6843DA5F)
 I (../lvgl/my/custom/custom.h)(0x6839CDE7)
 I (../Core/Inc/gpio.h)(0x67DAD6CA)
 I (..\NFC\nfc.h)(0x683C6AE4)
@@ -18235,7 +18235,7 @@ I (..\NFC\pn532_stm32f1.h)(0x680B1CE4)
 I (../FatFs/ff.h)(0x67DAA7F5)
 I (../FatFs/integer.h)(0x67DAA7F5)
 I (../FatFs/ffconf.h)(0x680E34AD)
-F (..\lvgl\my\custom\custom.c)(0x6841BF7B)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\custom.o --omf_browse stm32h750prg\custom.crf --depend stm32h750prg\custom.d)
+F (..\lvgl\my\custom\custom.c)(0x6844067D)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\custom.o --omf_browse stm32h750prg\custom.crf --depend stm32h750prg\custom.d)
 I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (../lvgl/lvgl.h)(0x68372D68)
 I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
@@ -18422,10 +18422,10 @@ I (../Core/Inc/spi.h)(0x6800EF5A)
 I (../Core/Inc/usart.h)(0x68355AF9)
 I (../Drivers/Hare/Inc/lcd_fonts.h)(0x67DAA7F5)
 I (../Drivers/Hare/Inc/lcd_image.h)(0x67DAA7F5)
-I (../lvgl/my/generated/gui_guider.h)(0x6839CF98)
+I (../lvgl/my/generated/gui_guider.h)(0x6843DA5F)
 F (..\lvgl\my\generated\events_init.c)(0x6838790C)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\events_init.o --omf_browse stm32h750prg\events_init.crf --depend stm32h750prg\events_init.d)
 I (..\lvgl\my\generated\events_init.h)(0x6838790C)
-I (..\lvgl\my\generated\gui_guider.h)(0x6839CF98)
+I (..\lvgl\my\generated\gui_guider.h)(0x6843DA5F)
 I (../lvgl/lvgl.h)(0x68372D68)
 I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
 I (../lvgl/src/misc/../lv_conf_internal.h)(0x6800BF5D)
@@ -18556,7 +18556,7 @@ I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
 I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
-F (..\lvgl\my\generated\gui_guider.c)(0x6839CF99)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\gui_guider.o --omf_browse stm32h750prg\gui_guider.crf --depend stm32h750prg\gui_guider.d)
+F (..\lvgl\my\generated\gui_guider.c)(0x6843D72B)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\gui_guider.o --omf_browse stm32h750prg\gui_guider.crf --depend stm32h750prg\gui_guider.d)
 I (../lvgl/lvgl.h)(0x68372D68)
 I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
 I (../lvgl/src/misc/../lv_conf_internal.h)(0x6800BF5D)
@@ -18687,8 +18687,8 @@ I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
 I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
-I (..\lvgl\my\generated\gui_guider.h)(0x6839CF98)
-I (..\lvgl\my\generated\widgets_init.h)(0x6839CF99)
+I (..\lvgl\my\generated\gui_guider.h)(0x6843DA5F)
+I (..\lvgl\my\generated\widgets_init.h)(0x6843D72B)
 F (..\lvgl\my\generated\setup_scr_debug.c)(0x6838666B)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\setup_scr_debug.o --omf_browse stm32h750prg\setup_scr_debug.crf --depend stm32h750prg\setup_scr_debug.d)
 I (../lvgl/lvgl.h)(0x68372D68)
 I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
@@ -18820,9 +18820,9 @@ I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
 I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
-I (..\lvgl\my\generated\gui_guider.h)(0x6839CF98)
+I (..\lvgl\my\generated\gui_guider.h)(0x6843DA5F)
 I (..\lvgl\my\generated\events_init.h)(0x6838790C)
-I (..\lvgl\my\generated\widgets_init.h)(0x6839CF99)
+I (..\lvgl\my\generated\widgets_init.h)(0x6843D72B)
 I (../lvgl/my/custom/custom.h)(0x6839CDE7)
 I (../Core/Inc/gpio.h)(0x67DAD6CA)
 I (../Core/Inc/main.h)(0x683C5636)
@@ -19010,9 +19010,9 @@ I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
 I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
-I (..\lvgl\my\generated\gui_guider.h)(0x6839CF98)
+I (..\lvgl\my\generated\gui_guider.h)(0x6843DA5F)
 I (..\lvgl\my\generated\events_init.h)(0x6838790C)
-I (..\lvgl\my\generated\widgets_init.h)(0x6839CF99)
+I (..\lvgl\my\generated\widgets_init.h)(0x6843D72B)
 I (../lvgl/my/custom/custom.h)(0x6839CDE7)
 I (../Core/Inc/gpio.h)(0x67DAD6CA)
 I (../Core/Inc/main.h)(0x683C5636)
@@ -19069,7 +19069,7 @@ I (../Core/Inc/spi.h)(0x6800EF5A)
 I (../Core/Inc/usart.h)(0x68355AF9)
 I (../Drivers/Hare/Inc/lcd_fonts.h)(0x67DAA7F5)
 I (../Drivers/Hare/Inc/lcd_image.h)(0x67DAA7F5)
-F (..\lvgl\my\generated\setup_scr_setting.c)(0x6841B854)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\setup_scr_setting.o --omf_browse stm32h750prg\setup_scr_setting.crf --depend stm32h750prg\setup_scr_setting.d)
+F (..\lvgl\my\generated\setup_scr_setting.c)(0x6843D205)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\setup_scr_setting.o --omf_browse stm32h750prg\setup_scr_setting.crf --depend stm32h750prg\setup_scr_setting.d)
 I (../lvgl/lvgl.h)(0x68372D68)
 I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
 I (../lvgl/src/misc/../lv_conf_internal.h)(0x6800BF5D)
@@ -19200,9 +19200,9 @@ I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
 I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
-I (..\lvgl\my\generated\gui_guider.h)(0x6839CF98)
+I (..\lvgl\my\generated\gui_guider.h)(0x6843DA5F)
 I (..\lvgl\my\generated\events_init.h)(0x6838790C)
-I (..\lvgl\my\generated\widgets_init.h)(0x6839CF99)
+I (..\lvgl\my\generated\widgets_init.h)(0x6843D72B)
 I (../lvgl/my/custom/custom.h)(0x6839CDE7)
 I (../Core/Inc/gpio.h)(0x67DAD6CA)
 I (../Core/Inc/main.h)(0x683C5636)
@@ -19259,7 +19259,7 @@ I (../Core/Inc/spi.h)(0x6800EF5A)
 I (../Core/Inc/usart.h)(0x68355AF9)
 I (../Drivers/Hare/Inc/lcd_fonts.h)(0x67DAA7F5)
 I (../Drivers/Hare/Inc/lcd_image.h)(0x67DAA7F5)
-F (..\lvgl\my\generated\widgets_init.c)(0x6839CF99)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\widgets_init.o --omf_browse stm32h750prg\widgets_init.crf --depend stm32h750prg\widgets_init.d)
+F (..\lvgl\my\generated\widgets_init.c)(0x6843D72B)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\widgets_init.o --omf_browse stm32h750prg\widgets_init.crf --depend stm32h750prg\widgets_init.d)
 I (../lvgl/lvgl.h)(0x68372D68)
 I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
 I (../lvgl/src/misc/../lv_conf_internal.h)(0x6800BF5D)
@@ -19389,8 +19389,8 @@ I (../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
-I (..\lvgl\my\generated\gui_guider.h)(0x6839CF98)
-I (..\lvgl\my\generated\widgets_init.h)(0x6839CF99)
+I (..\lvgl\my\generated\gui_guider.h)(0x6843DA5F)
+I (..\lvgl\my\generated\widgets_init.h)(0x6843D72B)
 I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5E8E3CC2)
 F (..\lvgl\my\generated\images\_learning_time_alpha_45x45.c)(0x68386669)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\_learning_time_alpha_45x45.o --omf_browse stm32h750prg\_learning_time_alpha_45x45.crf --depend stm32h750prg\_learning_time_alpha_45x45.d)
 I (../lvgl/lvgl.h)(0x68372D68)
@@ -19912,7 +19912,7 @@ I (../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
-F (..\lvgl\my\generated\images\_setting_alpha_15x15.c)(0x6835D346)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\_setting_alpha_15x15.o --omf_browse stm32h750prg\_setting_alpha_15x15.crf --depend stm32h750prg\_setting_alpha_15x15.d)
+F (..\lvgl\my\generated\images\_setting_alpha_25x25.c)(0x6841D84A)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\_setting_alpha_25x25.o --omf_browse stm32h750prg\_setting_alpha_25x25.crf --depend stm32h750prg\_setting_alpha_25x25.d)
 I (../lvgl/lvgl.h)(0x68372D68)
 I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
 I (../lvgl/src/misc/../lv_conf_internal.h)(0x6800BF5D)
@@ -20042,137 +20042,7 @@ I (../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
-F (..\lvgl\my\generated\images\_setting_alpha_25x25.c)(0x68386669)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\_setting_alpha_25x25.o --omf_browse stm32h750prg\_setting_alpha_25x25.crf --depend stm32h750prg\_setting_alpha_25x25.d)
-I (../lvgl/lvgl.h)(0x68372D68)
-I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
-I (../lvgl/src/misc/../lv_conf_internal.h)(0x6800BF5D)
-I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
-I (../lvgl/src/misc/../lv_conf_kconfig.h)(0x6800BF5D)
-I (../lvgl/examples/porting/../../lv_conf.h)(0x680B98B5)
-I (../lvgl/src/misc/lv_types.h)(0x6800BF5D)
-I (../lvgl/src/misc/lv_timer.h)(0x6800BF5D)
-I (../lvgl/src/misc/../hal/lv_hal_tick.h)(0x6800BF5D)
-I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
-I (../lvgl/src/misc/lv_math.h)(0x6800BF5D)
-I (../lvgl/src/misc/lv_mem.h)(0x6800BF5D)
-I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5E8E3CC2)
-I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
-I (../lvgl/src/misc/lv_async.h)(0x6800BF5D)
-I (../lvgl/src/misc/lv_anim_timeline.h)(0x6800BF5D)
-I (../lvgl/src/misc/lv_anim.h)(0x6800BF5D)
-I (../lvgl/src/misc/lv_printf.h)(0x6800BF5D)
-I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x5E8E3CC2)
-I (../lvgl/src/hal/lv_hal.h)(0x6800BF5D)
-I (../lvgl/src/hal/lv_hal_disp.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/lv_style.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/../font/lv_font.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/../font/lv_symbol_def.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/../font/../misc/lv_area.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/lv_color.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/lv_assert.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/lv_txt.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/lv_bidi.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/lv_style_gen.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_img_decoder.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_img_buf.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/lv_fs.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_img_cache.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_rect.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/sw/lv_draw_sw_gradient.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/sw/lv_draw_sw_dither.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/sw/../../core/lv_obj_pos.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_label.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_img.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_line.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_triangle.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_arc.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_mask.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_transform.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_layer.h)(0x6800BF5D)
-I (../lvgl/src/hal/../misc/lv_ll.h)(0x6800BF5D)
-I (../lvgl/src/hal/lv_hal_indev.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_obj.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_obj_tree.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_obj_scroll.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_obj_style.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_obj_style_gen.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_obj_draw.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_obj_class.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_event.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_group.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_indev.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_refr.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_disp.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_theme.h)(0x6800BF5D)
-I (../lvgl/src/font/lv_font_loader.h)(0x6800BF5D)
-I (../lvgl/src/font/lv_font_fmt_txt.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_arc.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_btn.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_img.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_label.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_line.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_table.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_checkbox.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_bar.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_slider.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_btnmatrix.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_dropdown.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_roller.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_textarea.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_canvas.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_switch.h)(0x6800BF5D)
-I (../lvgl/src/lv_api_map.h)(0x6800BF5D)
-I (../lvgl/src/../lvgl.h)(0x68372D68)
-I (../lvgl/src/extra/lv_extra.h)(0x6800BF5D)
-I (../lvgl/src/extra/layouts/lv_layouts.h)(0x6800BF5D)
-I (../lvgl/src/extra/layouts/flex/lv_flex.h)(0x6800BF5D)
-I (../lvgl/src/extra/layouts/grid/lv_grid.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/lv_libs.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/bmp/lv_bmp.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/fsdrv/lv_fsdrv.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/png/lv_png.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/gif/lv_gif.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/gif/../../../lvgl.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/qrcode/lv_qrcode.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/sjpg/lv_sjpg.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/freetype/lv_freetype.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/rlottie/lv_rlottie.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/ffmpeg/lv_ffmpeg.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/tiny_ttf/lv_tiny_ttf.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/lv_others.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/snapshot/lv_snapshot.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/monkey/lv_monkey.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/gridnav/lv_gridnav.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/fragment/lv_fragment.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/imgfont/lv_imgfont.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/msg/lv_msg.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/ime/lv_ime_pinyin.h)(0x6800BF5D)
-I (../lvgl/src/extra/themes/lv_themes.h)(0x6800BF5D)
-I (../lvgl/src/extra/themes/default/lv_theme_default.h)(0x6800BF5D)
-I (../lvgl/src/extra/themes/mono/lv_theme_mono.h)(0x6800BF5D)
-I (../lvgl/src/extra/themes/basic/lv_theme_basic.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/lv_widgets.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/animimg/lv_animimg.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/calendar/lv_calendar.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/calendar/lv_calendar_header_arrow.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/calendar/lv_calendar_header_dropdown.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/chart/lv_chart.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/keyboard/lv_keyboard.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/list/lv_list.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/menu/lv_menu.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/msgbox/lv_msgbox.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/meter/lv_meter.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/spinbox/lv_spinbox.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/spinner/lv_spinner.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/tabview/lv_tabview.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/tileview/lv_tileview.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/win/lv_win.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
-F (..\lvgl\my\generated\images\_setting_alpha_30x30.c)(0x6836DB1B)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\_setting_alpha_30x30.o --omf_browse stm32h750prg\_setting_alpha_30x30.crf --depend stm32h750prg\_setting_alpha_30x30.d)
+F (..\lvgl\my\generated\images\_setting_alpha_40x40.c)(0x6841D84A)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\_setting_alpha_40x40.o --omf_browse stm32h750prg\_setting_alpha_40x40.crf --depend stm32h750prg\_setting_alpha_40x40.d)
 I (../lvgl/lvgl.h)(0x68372D68)
 I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
 I (../lvgl/src/misc/../lv_conf_internal.h)(0x6800BF5D)
@@ -22252,136 +22122,6 @@ I (../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
-F (..\lvgl\my\generated\images\_volume_alpha_30x30.c)(0x68386669)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\_volume_alpha_30x30.o --omf_browse stm32h750prg\_volume_alpha_30x30.crf --depend stm32h750prg\_volume_alpha_30x30.d)
-I (../lvgl/lvgl.h)(0x68372D68)
-I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
-I (../lvgl/src/misc/../lv_conf_internal.h)(0x6800BF5D)
-I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
-I (../lvgl/src/misc/../lv_conf_kconfig.h)(0x6800BF5D)
-I (../lvgl/examples/porting/../../lv_conf.h)(0x680B98B5)
-I (../lvgl/src/misc/lv_types.h)(0x6800BF5D)
-I (../lvgl/src/misc/lv_timer.h)(0x6800BF5D)
-I (../lvgl/src/misc/../hal/lv_hal_tick.h)(0x6800BF5D)
-I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
-I (../lvgl/src/misc/lv_math.h)(0x6800BF5D)
-I (../lvgl/src/misc/lv_mem.h)(0x6800BF5D)
-I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5E8E3CC2)
-I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
-I (../lvgl/src/misc/lv_async.h)(0x6800BF5D)
-I (../lvgl/src/misc/lv_anim_timeline.h)(0x6800BF5D)
-I (../lvgl/src/misc/lv_anim.h)(0x6800BF5D)
-I (../lvgl/src/misc/lv_printf.h)(0x6800BF5D)
-I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x5E8E3CC2)
-I (../lvgl/src/hal/lv_hal.h)(0x6800BF5D)
-I (../lvgl/src/hal/lv_hal_disp.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/lv_style.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/../font/lv_font.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/../font/lv_symbol_def.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/../font/../misc/lv_area.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/lv_color.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/lv_assert.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/lv_txt.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/lv_bidi.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/lv_style_gen.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_img_decoder.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_img_buf.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/../misc/lv_fs.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_img_cache.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_rect.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/sw/lv_draw_sw_gradient.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/sw/lv_draw_sw_dither.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/sw/../../core/lv_obj_pos.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_label.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_img.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_line.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_triangle.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_arc.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_mask.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_transform.h)(0x6800BF5D)
-I (../lvgl/src/hal/../draw/lv_draw_layer.h)(0x6800BF5D)
-I (../lvgl/src/hal/../misc/lv_ll.h)(0x6800BF5D)
-I (../lvgl/src/hal/lv_hal_indev.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_obj.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_obj_tree.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_obj_scroll.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_obj_style.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_obj_style_gen.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_obj_draw.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_obj_class.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_event.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_group.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_indev.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_refr.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_disp.h)(0x6800BF5D)
-I (../lvgl/src/core/lv_theme.h)(0x6800BF5D)
-I (../lvgl/src/font/lv_font_loader.h)(0x6800BF5D)
-I (../lvgl/src/font/lv_font_fmt_txt.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_arc.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_btn.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_img.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_label.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_line.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_table.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_checkbox.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_bar.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_slider.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_btnmatrix.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_dropdown.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_roller.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_textarea.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_canvas.h)(0x6800BF5D)
-I (../lvgl/src/widgets/lv_switch.h)(0x6800BF5D)
-I (../lvgl/src/lv_api_map.h)(0x6800BF5D)
-I (../lvgl/src/../lvgl.h)(0x68372D68)
-I (../lvgl/src/extra/lv_extra.h)(0x6800BF5D)
-I (../lvgl/src/extra/layouts/lv_layouts.h)(0x6800BF5D)
-I (../lvgl/src/extra/layouts/flex/lv_flex.h)(0x6800BF5D)
-I (../lvgl/src/extra/layouts/grid/lv_grid.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/lv_libs.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/bmp/lv_bmp.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/fsdrv/lv_fsdrv.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/png/lv_png.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/gif/lv_gif.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/gif/../../../lvgl.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/qrcode/lv_qrcode.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/sjpg/lv_sjpg.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/freetype/lv_freetype.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/rlottie/lv_rlottie.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/ffmpeg/lv_ffmpeg.h)(0x6800BF5D)
-I (../lvgl/src/extra/libs/tiny_ttf/lv_tiny_ttf.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/lv_others.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/snapshot/lv_snapshot.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/monkey/lv_monkey.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/gridnav/lv_gridnav.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/fragment/lv_fragment.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/imgfont/lv_imgfont.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/msg/lv_msg.h)(0x6800BF5D)
-I (../lvgl/src/extra/others/ime/lv_ime_pinyin.h)(0x6800BF5D)
-I (../lvgl/src/extra/themes/lv_themes.h)(0x6800BF5D)
-I (../lvgl/src/extra/themes/default/lv_theme_default.h)(0x6800BF5D)
-I (../lvgl/src/extra/themes/mono/lv_theme_mono.h)(0x6800BF5D)
-I (../lvgl/src/extra/themes/basic/lv_theme_basic.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/lv_widgets.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/animimg/lv_animimg.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/calendar/lv_calendar.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/calendar/lv_calendar_header_arrow.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/calendar/lv_calendar_header_dropdown.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/chart/lv_chart.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/keyboard/lv_keyboard.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/list/lv_list.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/menu/lv_menu.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/msgbox/lv_msgbox.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/meter/lv_meter.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/spinbox/lv_spinbox.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/spinner/lv_spinner.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/tabview/lv_tabview.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/tileview/lv_tileview.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/win/lv_win.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
-I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
 F (..\lvgl\my\generated\images\_WIFI_alpha_13x13.c)(0x6825F925)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\_wifi_alpha_13x13.o --omf_browse stm32h750prg\_wifi_alpha_13x13.crf --depend stm32h750prg\_wifi_alpha_13x13.d)
 I (../lvgl/lvgl.h)(0x68372D68)
 I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
@@ -23162,7 +22902,7 @@ I (../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
-F (..\lvgl\my\generated\images\_buble_light_alpha_30x30.c)(0x683877C9)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\_buble_light_alpha_30x30.o --omf_browse stm32h750prg\_buble_light_alpha_30x30.crf --depend stm32h750prg\_buble_light_alpha_30x30.d)
+F (..\lvgl\my\generated\images\_buble_light_alpha_35x35.c)(0x6841D84A)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\_buble_light_alpha_35x35.o --omf_browse stm32h750prg\_buble_light_alpha_35x35.crf --depend stm32h750prg\_buble_light_alpha_35x35.d)
 I (../lvgl/lvgl.h)(0x68372D68)
 I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
 I (../lvgl/src/misc/../lv_conf_internal.h)(0x6800BF5D)
@@ -23423,6 +23163,136 @@ I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
 F (..\lvgl\my\generated\images\_buble_light_alpha_61x80.c)(0x683877C9)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\_buble_light_alpha_61x80.o --omf_browse stm32h750prg\_buble_light_alpha_61x80.crf --depend stm32h750prg\_buble_light_alpha_61x80.d)
+I (../lvgl/lvgl.h)(0x68372D68)
+I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
+I (../lvgl/src/misc/../lv_conf_internal.h)(0x6800BF5D)
+I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
+I (../lvgl/src/misc/../lv_conf_kconfig.h)(0x6800BF5D)
+I (../lvgl/examples/porting/../../lv_conf.h)(0x680B98B5)
+I (../lvgl/src/misc/lv_types.h)(0x6800BF5D)
+I (../lvgl/src/misc/lv_timer.h)(0x6800BF5D)
+I (../lvgl/src/misc/../hal/lv_hal_tick.h)(0x6800BF5D)
+I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
+I (../lvgl/src/misc/lv_math.h)(0x6800BF5D)
+I (../lvgl/src/misc/lv_mem.h)(0x6800BF5D)
+I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5E8E3CC2)
+I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
+I (../lvgl/src/misc/lv_async.h)(0x6800BF5D)
+I (../lvgl/src/misc/lv_anim_timeline.h)(0x6800BF5D)
+I (../lvgl/src/misc/lv_anim.h)(0x6800BF5D)
+I (../lvgl/src/misc/lv_printf.h)(0x6800BF5D)
+I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x5E8E3CC2)
+I (../lvgl/src/hal/lv_hal.h)(0x6800BF5D)
+I (../lvgl/src/hal/lv_hal_disp.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/lv_draw.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/../misc/lv_style.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/../misc/../font/lv_font.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/../misc/../font/lv_symbol_def.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/../misc/../font/../misc/lv_area.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/../misc/lv_color.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/../misc/lv_assert.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/../misc/lv_txt.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/../misc/lv_bidi.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/../misc/lv_style_gen.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/lv_img_decoder.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/lv_img_buf.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/../misc/lv_fs.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/lv_img_cache.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/lv_draw_rect.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/sw/lv_draw_sw_gradient.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/sw/lv_draw_sw_dither.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/sw/../../core/lv_obj_pos.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/lv_draw_label.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/lv_draw_img.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/lv_draw_line.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/lv_draw_triangle.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/lv_draw_arc.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/lv_draw_mask.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/lv_draw_transform.h)(0x6800BF5D)
+I (../lvgl/src/hal/../draw/lv_draw_layer.h)(0x6800BF5D)
+I (../lvgl/src/hal/../misc/lv_ll.h)(0x6800BF5D)
+I (../lvgl/src/hal/lv_hal_indev.h)(0x6800BF5D)
+I (../lvgl/src/core/lv_obj.h)(0x6800BF5D)
+I (../lvgl/src/core/lv_obj_tree.h)(0x6800BF5D)
+I (../lvgl/src/core/lv_obj_scroll.h)(0x6800BF5D)
+I (../lvgl/src/core/lv_obj_style.h)(0x6800BF5D)
+I (../lvgl/src/core/lv_obj_style_gen.h)(0x6800BF5D)
+I (../lvgl/src/core/lv_obj_draw.h)(0x6800BF5D)
+I (../lvgl/src/core/lv_obj_class.h)(0x6800BF5D)
+I (../lvgl/src/core/lv_event.h)(0x6800BF5D)
+I (../lvgl/src/core/lv_group.h)(0x6800BF5D)
+I (../lvgl/src/core/lv_indev.h)(0x6800BF5D)
+I (../lvgl/src/core/lv_refr.h)(0x6800BF5D)
+I (../lvgl/src/core/lv_disp.h)(0x6800BF5D)
+I (../lvgl/src/core/lv_theme.h)(0x6800BF5D)
+I (../lvgl/src/font/lv_font_loader.h)(0x6800BF5D)
+I (../lvgl/src/font/lv_font_fmt_txt.h)(0x6800BF5D)
+I (../lvgl/src/widgets/lv_arc.h)(0x6800BF5D)
+I (../lvgl/src/widgets/lv_btn.h)(0x6800BF5D)
+I (../lvgl/src/widgets/lv_img.h)(0x6800BF5D)
+I (../lvgl/src/widgets/lv_label.h)(0x6800BF5D)
+I (../lvgl/src/widgets/lv_line.h)(0x6800BF5D)
+I (../lvgl/src/widgets/lv_table.h)(0x6800BF5D)
+I (../lvgl/src/widgets/lv_checkbox.h)(0x6800BF5D)
+I (../lvgl/src/widgets/lv_bar.h)(0x6800BF5D)
+I (../lvgl/src/widgets/lv_slider.h)(0x6800BF5D)
+I (../lvgl/src/widgets/lv_btnmatrix.h)(0x6800BF5D)
+I (../lvgl/src/widgets/lv_dropdown.h)(0x6800BF5D)
+I (../lvgl/src/widgets/lv_roller.h)(0x6800BF5D)
+I (../lvgl/src/widgets/lv_textarea.h)(0x6800BF5D)
+I (../lvgl/src/widgets/lv_canvas.h)(0x6800BF5D)
+I (../lvgl/src/widgets/lv_switch.h)(0x6800BF5D)
+I (../lvgl/src/lv_api_map.h)(0x6800BF5D)
+I (../lvgl/src/../lvgl.h)(0x68372D68)
+I (../lvgl/src/extra/lv_extra.h)(0x6800BF5D)
+I (../lvgl/src/extra/layouts/lv_layouts.h)(0x6800BF5D)
+I (../lvgl/src/extra/layouts/flex/lv_flex.h)(0x6800BF5D)
+I (../lvgl/src/extra/layouts/grid/lv_grid.h)(0x6800BF5D)
+I (../lvgl/src/extra/libs/lv_libs.h)(0x6800BF5D)
+I (../lvgl/src/extra/libs/bmp/lv_bmp.h)(0x6800BF5D)
+I (../lvgl/src/extra/libs/fsdrv/lv_fsdrv.h)(0x6800BF5D)
+I (../lvgl/src/extra/libs/png/lv_png.h)(0x6800BF5D)
+I (../lvgl/src/extra/libs/gif/lv_gif.h)(0x6800BF5D)
+I (../lvgl/src/extra/libs/gif/../../../lvgl.h)(0x6800BF5D)
+I (../lvgl/src/extra/libs/qrcode/lv_qrcode.h)(0x6800BF5D)
+I (../lvgl/src/extra/libs/sjpg/lv_sjpg.h)(0x6800BF5D)
+I (../lvgl/src/extra/libs/freetype/lv_freetype.h)(0x6800BF5D)
+I (../lvgl/src/extra/libs/rlottie/lv_rlottie.h)(0x6800BF5D)
+I (../lvgl/src/extra/libs/ffmpeg/lv_ffmpeg.h)(0x6800BF5D)
+I (../lvgl/src/extra/libs/tiny_ttf/lv_tiny_ttf.h)(0x6800BF5D)
+I (../lvgl/src/extra/others/lv_others.h)(0x6800BF5D)
+I (../lvgl/src/extra/others/snapshot/lv_snapshot.h)(0x6800BF5D)
+I (../lvgl/src/extra/others/monkey/lv_monkey.h)(0x6800BF5D)
+I (../lvgl/src/extra/others/gridnav/lv_gridnav.h)(0x6800BF5D)
+I (../lvgl/src/extra/others/fragment/lv_fragment.h)(0x6800BF5D)
+I (../lvgl/src/extra/others/imgfont/lv_imgfont.h)(0x6800BF5D)
+I (../lvgl/src/extra/others/msg/lv_msg.h)(0x6800BF5D)
+I (../lvgl/src/extra/others/ime/lv_ime_pinyin.h)(0x6800BF5D)
+I (../lvgl/src/extra/themes/lv_themes.h)(0x6800BF5D)
+I (../lvgl/src/extra/themes/default/lv_theme_default.h)(0x6800BF5D)
+I (../lvgl/src/extra/themes/mono/lv_theme_mono.h)(0x6800BF5D)
+I (../lvgl/src/extra/themes/basic/lv_theme_basic.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/lv_widgets.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/animimg/lv_animimg.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/calendar/lv_calendar.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/calendar/lv_calendar_header_arrow.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/calendar/lv_calendar_header_dropdown.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/chart/lv_chart.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/keyboard/lv_keyboard.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/list/lv_list.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/menu/lv_menu.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/msgbox/lv_msgbox.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/meter/lv_meter.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/spinbox/lv_spinbox.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/spinner/lv_spinner.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/tabview/lv_tabview.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/tileview/lv_tileview.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/win/lv_win.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
+I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
+F (..\lvgl\my\generated\images\_volume_alpha_35x35.c)(0x6841D84A)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\_volume_alpha_35x35.o --omf_browse stm32h750prg\_volume_alpha_35x35.crf --depend stm32h750prg\_volume_alpha_35x35.d)
 I (../lvgl/lvgl.h)(0x68372D68)
 I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
 I (../lvgl/src/misc/../lv_conf_internal.h)(0x6800BF5D)
@@ -24202,7 +24072,7 @@ I (../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/led/lv_led.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x6800BF5D)
 I (../lvgl/src/extra/widgets/span/lv_span.h)(0x6800BF5D)
-F (..\lvgl\my\generated\images\_learning_time_alpha_30x30.c)(0x6835E50C)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\_learning_time_alpha_30x30.o --omf_browse stm32h750prg\_learning_time_alpha_30x30.crf --depend stm32h750prg\_learning_time_alpha_30x30.d)
+F (..\lvgl\my\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_15.c)(0x6843CD9D)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/Hare/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../FatFs -I ..\NFC -I ../lvgl -I ../lvgl/src -I ../lvgl/examples/porting -I ../lvgl/demos -I ../lvgl/my -I ../FatFs/mysd -I ../gensture -I ../lvgl/my/custom -I ../lvgl/my/generated -I ../lvgl/my/generated/guider_customer_fonts-I.\RTE\_STM32H750Prg-ID:\MDK_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H750xx -D_RTE_ -DUSE_HAL_DRIVER -DxSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DSTM32H743xx -DLV_LVGL_H_INCLUDE_SIMPLE-o stm32h750prg\lv_font_sourcehanserifsc_regular_15.o --omf_browse stm32h750prg\lv_font_sourcehanserifsc_regular_15.crf --depend stm32h750prg\lv_font_sourcehanserifsc_regular_15.d)
 I (../lvgl/lvgl.h)(0x68372D68)
 I (../lvgl/src/misc/lv_log.h)(0x6800BF5D)
 I (../lvgl/src/misc/../lv_conf_internal.h)(0x6800BF5D)
@@ -24713,4 +24583,4 @@ I (../Core/Inc/usart.h)(0x68355AF9)
 I (D:\MDK_v5\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (../Drivers/Hare/Inc/lcd_fonts.h)(0x67DAA7F5)
 I (../Drivers/Hare/Inc/lcd_image.h)(0x67DAA7F5)
-I (../lvgl/my/ui.h)(0x6841B905)
+I (../lvgl/my/ui.h)(0x68440150)

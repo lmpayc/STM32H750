@@ -37,7 +37,7 @@ extern bool led_switch_flag;  //led开关标志
 extern bool led_auto_flag;    //led自动控制标志
 extern uint8_t light_ref;  //led参考光照值
 extern uint8_t light; //光照反馈值
-extern bool led_change_flag;  //led变化标志
+float filtered_output = 0;
 
 extern float tempure;  //温度值
 extern uint8_t noise;  //噪音值
@@ -46,6 +46,13 @@ extern MGC3130_t mgc3130_dev;
 static uint32_t prevAirWheelInfo = 0;
 int32_t led_value;
 int32_t volum_value;
+// PID 参数（根据实际情况调整）
+float kp = 0.5f;
+float ki = 0.01f;
+float kd = 0.1f;
+float prev_error = 0;
+float prev_prev_error = 0;
+float pid_output = 0;
 
 /**
  * 初始化并创建 UI
@@ -53,8 +60,7 @@ int32_t volum_value;
 void ui_init(void)
 {
     // 页面对象，当前活动屏幕
-    lv_obj_t * scr = debug_ui.debug;//lv_obj_create(NULL);
-   
+    lv_obj_t * scr = debug_ui.debug;//lv_obj_create(NULL); 
     // 时间显示
     label_time = lv_label_create(scr);
     char time_str[20];
@@ -63,11 +69,9 @@ void ui_init(void)
     lv_obj_set_style_text_font(label_time, &lv_font_montserrat_30, 0);
     lv_obj_align(label_time, LV_ALIGN_CENTER, 0, -10);
 
-
     uart1_label = lv_label_create(scr);
     lv_obj_align(uart1_label, LV_ALIGN_TOP_LEFT, 0, 160);
     lv_label_set_text(uart1_label, "uart1:");
-
 
     info_label = lv_label_create(scr);
     lv_obj_align(info_label, LV_ALIGN_TOP_LEFT, 0, 20);
@@ -96,15 +100,17 @@ void ui_init(void)
     lv_timer_t *updatetime_timer = lv_timer_create(updatetim_timer_cb, 1000, NULL);   //更新定时器
     lv_timer_t *adc_timer = lv_timer_create(adc_timer_cb, 5000, NULL);   //ADC采样定时器
     lv_timer_t *nfc_timer = lv_timer_create(nfc_timer_cb, 500, NULL);   //nfc读取
+    lv_timer_t *airwheel_timer = lv_timer_create(airwheel_timer_cb, 100, NULL);   //airwheel定时器
 
     // 设置初始触发偏移：延迟 200ms 和 300ms
+    led_timer->last_run = lv_tick_get() + 10;
     updatetime_timer->last_run = lv_tick_get() + 200;
     adc_timer->last_run = lv_tick_get() + 300;
     nfc_timer->last_run = lv_tick_get() + 100;
 
 }
 void led_timer_cb(lv_timer_t * timer){
-    control_led(led_switch_flag, led_auto_flag, light_ref,light, led_change_flag);
+    control_led(led_switch_flag, led_auto_flag, light_ref,light);
     light =  Atk_Light_Get_Val();  //100ms获取一次光照值
 }
 void updatetim_timer_cb(lv_timer_t * timer){
@@ -158,25 +164,35 @@ void adc_timer_cb(lv_timer_t * timer){
     noise = adc_get_nosie();
     tempure = atk_ntc_get_temp();
 }
-
 void nfc_timer_cb(lv_timer_t * timer){
     nfc_dtect();  //nfc检测用户
 }
-
-
-void control_led(bool led_switch_flag,bool led_auto_flag,uint8_t light_ref,uint8_t light_feedback,bool led_change_flag){
+void airwheel_timer_cb(lv_timer_t * timer){
     lv_obj_t *focused = lv_group_get_focused(current_group);
-    process_air_wheel(focused, mgc3130_dev.info.airWheelInfo);
+    process_air_wheel(focused, mgc3130_dev.info.airWheelInfo);  //处理airwheel
+}
+
+
+void control_led(bool led_switch_flag,bool led_auto_flag,uint8_t light_ref,uint8_t light_feedback){
     if(led_switch_flag){
+
         if(led_auto_flag){   //pid控制led亮度
-        }
-        else{   //手动控制,控制灯变亮或变暗
+            led_pid_update(light_ref, light_feedback);
+            lv_slider_set_value(setting_ui.setting_light_slider, led_value, LV_ANIM_OFF);
             __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_1, led_value);
         }
-  }
-  else{
-        __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_1,0); 
-  }
+        else{   //手动控制,控制灯变亮或变暗
+            led_value=lv_slider_get_value(setting_ui.setting_light_slider);
+            __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_1, led_value);
+            filtered_output = led_value; // 重置 PID 输出
+            
+        }
+    }
+    else{
+            __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_1,0); 
+    }
+
+
 }
 void handle_gesture_input(const MGC3130_t *dev)
 {
@@ -294,14 +310,17 @@ void process_air_wheel(lv_obj_t *focused_obj, uint32_t airWheelInfo)
     int32_t max = lv_slider_get_max_value(focused_obj);
 
     // 定义步进值（你可以调整这个系数让滑动更快/慢）
-    int step = delta / 2;  // 每 5 个 airWheel 单位变化 1（你可以调）
+    int step = delta / 3;  // 每 5 个 airWheel 单位变化 1（你可以调）
 
     value += step;
     if(value < min) value = min;
     if(value > max) value = max;
 
     if(focused_obj == setting_ui.setting_light_slider){
-        led_value = value;
+        if(!led_auto_flag){
+            led_value = value;
+        }
+        
     }
     else if(focused_obj==setting_ui.setting_volume_slider){
         volum_value = value;
@@ -312,3 +331,27 @@ void process_air_wheel(lv_obj_t *focused_obj, uint32_t airWheelInfo)
 
     prevAirWheelInfo = airWheelInfo;
 }
+
+void led_pid_update(uint8_t target, uint8_t feedback) {
+    float error = target - feedback;
+    float delta = kp * (error - prev_error)
+                + ki * error
+                + kd * (error - 2 * prev_error + prev_prev_error);
+    // 限制增量，防止亮度突变
+    if (delta > 10) delta = 10;
+    if (delta < -10) delta = -10;
+    pid_output += delta;
+    // 限制最终输出范围
+    if (pid_output > 100) pid_output = 100;
+    if (pid_output < 0) pid_output = 0;
+    // 低通滤波器平滑输出
+    filtered_output = 0.1f * pid_output + 0.9f* filtered_output;
+    if (filtered_output < 1.0f) {
+        filtered_output = 0;
+    }
+    // 更新误差历史
+    prev_prev_error = prev_error;
+    prev_error = error;
+    led_value = (uint32_t)filtered_output;
+}
+

@@ -22,10 +22,13 @@ typedef struct study_last_time_t {
 void ui_init(void);
 void led_timer_cb(lv_timer_t * timer);
 void updatetim_timer_cb(lv_timer_t * timer);
-void control_led(bool led_switch_flag, bool led_auto_flag, uint8_t light_ref, uint8_t light_feedback, bool change_flag);
+void control_led(bool led_switch_flag, bool led_auto_flag, uint8_t light_ref, uint8_t light_feedback);
 void handle_gesture_input(const MGC3130_t *dev);
 void adc_timer_cb(lv_timer_t * timer);
 void nfc_timer_cb(lv_timer_t * timer);
+void airwheel_timer_cb(lv_timer_t * timer);
 void process_air_wheel(lv_obj_t *focused_obj, uint32_t airWheelInfo);
+void led_pid_update(uint8_t target, uint8_t feedback);
+
 
 #endif // UI_H

@@ -55,18 +55,19 @@ typedef struct
 	lv_obj_t *main_large_light_off_img;
 	lv_obj_t *setting;
 	bool setting_del;
-	lv_obj_t *setting_cont_1;
+	lv_obj_t *setting_backgroud_cont;
+	lv_obj_t *setting_config_cont;
 	lv_obj_t *setting_setting_image;
-	lv_obj_t *setting_setting_label;
 	lv_obj_t *setting_light_slider;
 	lv_obj_t *setting_light_img;
 	lv_obj_t *setting_light_label;
 	lv_obj_t *setting_light_auto_switch;
-	lv_obj_t *setting_light_data;
+	lv_obj_t *setting_volume__switch;
 	lv_obj_t *setting_volume_img;
 	lv_obj_t *setting_volume_lable;
 	lv_obj_t *setting_volume_slider;
-	lv_obj_t *setting_volume_data;
+	lv_obj_t *setting_light_pid_lable;
+	lv_obj_t *setting_light_pid_switch;
 	lv_obj_t *debug;
 	bool debug_del;
 	lv_obj_t *debug_cont_1;
@@ -116,15 +117,16 @@ LV_IMG_DECLARE(_pause_alpha_25x25);
 LV_IMG_DECLARE(_temperature_alpha_80x80);
 LV_IMG_DECLARE(_buble_light_alpha_61x80);
 LV_IMG_DECLARE(_buble_dark_alpha_40x80);
-LV_IMG_DECLARE(_setting_alpha_30x30);
-LV_IMG_DECLARE(_buble_light_alpha_30x30);
-LV_IMG_DECLARE(_volume_alpha_30x30);
+LV_IMG_DECLARE(_setting_alpha_40x40);
+LV_IMG_DECLARE(_buble_light_alpha_35x35);
+LV_IMG_DECLARE(_volume_alpha_35x35);
 
 LV_FONT_DECLARE(lv_font_montserratMedium_80)
 LV_FONT_DECLARE(lv_font_montserratMedium_16)
 LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_10)
 LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_30)
 LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_40)
+LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_15)
 
 
 #ifdef __cplusplus

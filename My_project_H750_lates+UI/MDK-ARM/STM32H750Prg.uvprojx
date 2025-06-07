@@ -2424,19 +2424,14 @@
               <FilePath>..\lvgl\my\generated\images\_pause_alpha_25x25.c</FilePath>
             </File>
             <File>
-              <FileName>_setting_alpha_15x15.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\images\_setting_alpha_15x15.c</FilePath>
-            </File>
-            <File>
               <FileName>_setting_alpha_25x25.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lvgl\my\generated\images\_setting_alpha_25x25.c</FilePath>
             </File>
             <File>
-              <FileName>_setting_alpha_30x30.c</FileName>
+              <FileName>_setting_alpha_40x40.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\images\_setting_alpha_30x30.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_setting_alpha_40x40.c</FilePath>
             </File>
             <File>
               <FileName>_sitting_not_learning_alpha_30x30.c</FileName>
@@ -2514,11 +2509,6 @@
               <FilePath>..\lvgl\my\generated\images\_temperature_alpha_80x80.c</FilePath>
             </File>
             <File>
-              <FileName>_volume_alpha_30x30.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\images\_volume_alpha_30x30.c</FilePath>
-            </File>
-            <File>
               <FileName>_WIFI_alpha_13x13.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lvgl\my\generated\images\_WIFI_alpha_13x13.c</FilePath>
@@ -2549,9 +2539,9 @@
               <FilePath>..\lvgl\my\generated\images\_buble_dark_alpha_40x80.c</FilePath>
             </File>
             <File>
-              <FileName>_buble_light_alpha_30x30.c</FileName>
+              <FileName>_buble_light_alpha_35x35.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\images\_buble_light_alpha_30x30.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_buble_light_alpha_35x35.c</FilePath>
             </File>
             <File>
               <FileName>_buble_light_alpha_37x50.c</FileName>
@@ -2562,6 +2552,11 @@
               <FileName>_buble_light_alpha_61x80.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lvgl\my\generated\images\_buble_light_alpha_61x80.c</FilePath>
+            </File>
+            <File>
+              <FileName>_volume_alpha_35x35.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_volume_alpha_35x35.c</FilePath>
             </File>
             <File>
               <FileName>lv_font_montserratMedium_16.c</FileName>
@@ -2589,9 +2584,9 @@
               <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_40.c</FilePath>
             </File>
             <File>
-              <FileName>_learning_time_alpha_30x30.c</FileName>
+              <FileName>lv_font_SourceHanSerifSC_Regular_15.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\images\_learning_time_alpha_30x30.c</FilePath>
+              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_15.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4324,19 +4319,14 @@
               <FilePath>..\lvgl\my\generated\images\_pause_alpha_25x25.c</FilePath>
             </File>
             <File>
-              <FileName>_setting_alpha_15x15.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\images\_setting_alpha_15x15.c</FilePath>
-            </File>
-            <File>
               <FileName>_setting_alpha_25x25.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lvgl\my\generated\images\_setting_alpha_25x25.c</FilePath>
             </File>
             <File>
-              <FileName>_setting_alpha_30x30.c</FileName>
+              <FileName>_setting_alpha_40x40.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\images\_setting_alpha_30x30.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_setting_alpha_40x40.c</FilePath>
             </File>
             <File>
               <FileName>_sitting_not_learning_alpha_30x30.c</FileName>
@@ -4414,11 +4404,6 @@
               <FilePath>..\lvgl\my\generated\images\_temperature_alpha_80x80.c</FilePath>
             </File>
             <File>
-              <FileName>_volume_alpha_30x30.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\images\_volume_alpha_30x30.c</FilePath>
-            </File>
-            <File>
               <FileName>_WIFI_alpha_13x13.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lvgl\my\generated\images\_WIFI_alpha_13x13.c</FilePath>
@@ -4449,9 +4434,9 @@
               <FilePath>..\lvgl\my\generated\images\_buble_dark_alpha_40x80.c</FilePath>
             </File>
             <File>
-              <FileName>_buble_light_alpha_30x30.c</FileName>
+              <FileName>_buble_light_alpha_35x35.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\images\_buble_light_alpha_30x30.c</FilePath>
+              <FilePath>..\lvgl\my\generated\images\_buble_light_alpha_35x35.c</FilePath>
             </File>
             <File>
               <FileName>_buble_light_alpha_37x50.c</FileName>
@@ -4462,6 +4447,11 @@
               <FileName>_buble_light_alpha_61x80.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lvgl\my\generated\images\_buble_light_alpha_61x80.c</FilePath>
+            </File>
+            <File>
+              <FileName>_volume_alpha_35x35.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_volume_alpha_35x35.c</FilePath>
             </File>
             <File>
               <FileName>lv_font_montserratMedium_16.c</FileName>
@@ -4489,9 +4479,9 @@
               <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_40.c</FilePath>
             </File>
             <File>
-              <FileName>_learning_time_alpha_30x30.c</FileName>
+              <FileName>lv_font_SourceHanSerifSC_Regular_15.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\my\generated\images\_learning_time_alpha_30x30.c</FilePath>
+              <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_15.c</FilePath>
             </File>
           </Files>
         </Group>

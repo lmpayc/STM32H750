@@ -29,6 +29,11 @@ extern bool pause_time_flag; //暂停时间标志
 
 extern uint8_t start_flag;
 extern bool led_switch_flag; //led开关标志
+extern bool led_auto_flag;   //led自动控制标志
+extern float prev_error;
+extern float prev_prev_error;
+extern bool volume_switch_flag; //音量开关标志
+
 extern lv_group_t *group;   // 组对象
 extern lv_group_t *setting_group;   // 组对象
 extern lv_group_t *current_group; //当前组对象
@@ -126,7 +131,32 @@ void switch_event_cb(lv_event_t * e)  //开关回调
             else {
                 led_switch_flag = false;  //关
             }
+            prev_error = 0;  //重置 PID 控制器的误差
+            prev_prev_error = 0;  //重置 PID 控制器的前一误差
         }
+        else if(target == setting_ui.setting_light_pid_switch) {
+            if(lv_obj_has_state(setting_ui.setting_light_pid_switch, LV_STATE_CHECKED)) {
+                led_auto_flag = true;  //自动控制
+            }
+            else {
+                led_auto_flag = false;  //手动控制
+            }
+            prev_error = 0;  //重置 PID 控制器的误差
+            prev_prev_error = 0;  //重置 PID 控制器的前一误差
+
+        }
+        else if(target == setting_ui.setting_volume__switch) {
+            if(lv_obj_has_state(setting_ui.setting_volume__switch, LV_STATE_CHECKED)) {
+                volume_switch_flag = true;  //音量开
+            }
+            else {
+                volume_switch_flag = false;  //音量关
+            }
+        }
+
+
+
+
     }
 }
 
@@ -191,18 +221,24 @@ void custom_init(lv_ui *ui)
 
     //开关回调
     lv_obj_add_event_cb(setting_ui.setting_light_auto_switch, switch_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
+    lv_obj_add_event_cb(setting_ui.setting_light_pid_switch, switch_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
+    lv_obj_add_event_cb(setting_ui.setting_volume__switch, switch_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
 
-    group = lv_group_create();  //组对象初始化
+
+
+
+    group = lv_group_create();  //主界面组对象初始化
     lv_group_add_obj(group, main_ui.main_start);
     lv_group_add_obj(group, main_ui.main_learning_time_img);
     lv_group_add_obj(group, main_ui.main_light_on_img);
     lv_group_add_obj(group, main_ui.main_sitting_pos_rest_img);
     lv_group_add_obj(group, main_ui.main_temperature_img);
-    setting_group = lv_group_create();
-    lv_group_add_obj(setting_group, setting_ui.setting_light_auto_switch);
+    setting_group = lv_group_create();  //设置界面组对象初始化
     lv_group_add_obj(setting_group, setting_ui.setting_light_slider);
+    lv_group_add_obj(setting_group, setting_ui.setting_light_auto_switch);
+    lv_group_add_obj(setting_group, setting_ui.setting_light_pid_switch);
     lv_group_add_obj(setting_group, setting_ui.setting_volume_slider);
-
+    lv_group_add_obj(setting_group, setting_ui.setting_volume__switch);
 
 
     static lv_style_t style_focus;  //焦点样式初始化
@@ -232,6 +268,9 @@ void custom_init(lv_ui *ui)
     lv_obj_add_style(setting_ui.setting_light_auto_switch, &style_focus, LV_STATE_FOCUSED);
     lv_obj_add_style(setting_ui.setting_light_slider, &style_focus, LV_STATE_FOCUSED);
     lv_obj_add_style(setting_ui.setting_volume_slider, &style_focus, LV_STATE_FOCUSED);
+    lv_obj_add_style(setting_ui.setting_light_pid_switch, &style_focus, LV_STATE_FOCUSED);
+    lv_obj_add_style(setting_ui.setting_volume__switch, &style_focus, LV_STATE_FOCUSED);
+
 
 
     lv_group_focus_obj(main_ui.main_start); // 设置主界面焦点
