@@ -19,12 +19,16 @@ lv_obj_t * sensor_label;
 lv_obj_t * SD_label;
 lv_obj_t * uart1_label;
 lv_obj_t *label_time;
+lv_timer_t* scroll_timer = NULL;
+int scroll_velocity = 0;  // 当前速度
 
 study_last_time_t study_last_time; //学习持续时间结构体
 extern bool pause_time_flag; //暂停时间标志
 extern TimeData start_time;  // 开始时间数据结构体
 extern uint8_t start_flag;
 extern uint8_t wifi_connect_flag;
+extern bool show_sitting_pos_flag;
+
 extern lv_ui  main_ui;// 声明 界面对象
 extern lv_ui  setting_ui; //设置界面对象
 extern lv_ui  debug_ui; //调试界面对象
@@ -96,18 +100,20 @@ void ui_init(void)
     lv_label_set_long_mode(SD_label, LV_LABEL_LONG_WRAP);
     lv_obj_set_width(SD_label, 280);  // 设置最大显示宽度
     
-    lv_timer_t *led_timer = lv_timer_create(led_timer_cb, 100, NULL);   //LED控制定时器
+    lv_timer_t *led_timer = lv_timer_create(led_timer_cb, 250, NULL);   //LED控制定时器
     lv_timer_t *updatetime_timer = lv_timer_create(updatetim_timer_cb, 1000, NULL);   //更新定时器
     lv_timer_t *adc_timer = lv_timer_create(adc_timer_cb, 5000, NULL);   //ADC采样定时器
     lv_timer_t *nfc_timer = lv_timer_create(nfc_timer_cb, 500, NULL);   //nfc读取
     lv_timer_t *airwheel_timer = lv_timer_create(airwheel_timer_cb, 100, NULL);   //airwheel定时器
+    lv_timer_t *sitting_timer = lv_timer_create(sitting_timer_cb, 500, NULL);   //airwheel定时器
+
 
     // 设置初始触发偏移：延迟 200ms 和 300ms
     led_timer->last_run = lv_tick_get() + 10;
-    updatetime_timer->last_run = lv_tick_get() + 200;
-    adc_timer->last_run = lv_tick_get() + 300;
-    nfc_timer->last_run = lv_tick_get() + 100;
-
+    updatetime_timer->last_run = lv_tick_get() + 222;
+    adc_timer->last_run = lv_tick_get() + 291;
+    nfc_timer->last_run = lv_tick_get() + 117;
+    sitting_timer->last_run = lv_tick_get() + 43;
 }
 void led_timer_cb(lv_timer_t * timer){
     control_led(led_switch_flag, led_auto_flag, light_ref,light);
@@ -160,6 +166,53 @@ void updatetim_timer_cb(lv_timer_t * timer){
     lv_label_set_text(main_ui.main_learning_time_data, study_time_str);
 
 }
+// 通用显示/隐藏函数
+static void set_visible(lv_obj_t* obj, bool visible) {
+    if (visible) lv_obj_clear_flag(obj, LV_OBJ_FLAG_HIDDEN);
+    else lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
+}
+void sitting_timer_cb(lv_timer_t * timer){
+    if(start_flag){    //如果开始学习(暂停学习这里面加)
+        if(!pause_time_flag){    
+            if (show_sitting_pos_flag) {            
+                bool is_right = gensture;
+                set_visible(main_ui.main_large_sitting_right_img, is_right);
+                set_visible(main_ui.main_sitting_right_label, is_right);
+                set_visible(main_ui.main_large_sitting_wrong_img, !is_right);
+                set_visible(main_ui.main_sitting_wrong_label, !is_right);
+            }else {
+                // 都不显示
+                set_visible(main_ui.main_large_sitting_right_img, false);
+                set_visible(main_ui.main_sitting_right_label, false);
+                set_visible(main_ui.main_large_sitting_wrong_img, false);
+                set_visible(main_ui.main_sitting_wrong_label, false);
+            }
+        }
+        else{
+            if(show_sitting_pos_flag){
+                set_visible(main_ui.main_large_sitting_rest_image, show_sitting_pos_flag);
+                set_visible(main_ui.main_sitting_rest_label, show_sitting_pos_flag);
+            }else{
+                // 都不显示
+                set_visible(main_ui.main_large_sitting_rest_image, false);
+                set_visible(main_ui.main_sitting_rest_label, false);
+            }
+        }
+
+    }
+    else{  //未开始学习
+        if(show_sitting_pos_flag){
+            set_visible(main_ui.main_large_sitting_rest_image, show_sitting_pos_flag);
+            set_visible(main_ui.main_sitting_rest_label, show_sitting_pos_flag);
+        }else{
+            // 都不显示
+            set_visible(main_ui.main_large_sitting_rest_image, false);
+            set_visible(main_ui.main_sitting_rest_label, false);
+        }
+    }
+
+}
+
 void adc_timer_cb(lv_timer_t * timer){
     noise = adc_get_nosie();
     tempure = atk_ntc_get_temp();
@@ -171,7 +224,6 @@ void airwheel_timer_cb(lv_timer_t * timer){
     lv_obj_t *focused = lv_group_get_focused(current_group);
     process_air_wheel(focused, mgc3130_dev.info.airWheelInfo);  //处理airwheel
 }
-
 
 void control_led(bool led_switch_flag,bool led_auto_flag,uint8_t light_ref,uint8_t light_feedback){
     if(led_switch_flag){
@@ -191,9 +243,8 @@ void control_led(bool led_switch_flag,bool led_auto_flag,uint8_t light_ref,uint8
     else{
             __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_1,0); 
     }
-
-
 }
+
 void handle_gesture_input(const MGC3130_t *dev)
 {
     if (!dev || !group) return;
@@ -214,14 +265,27 @@ void handle_gesture_input(const MGC3130_t *dev)
             current_group = group;
             break;
         case 4:   //上
-            lv_scr_load_anim(debug_ui.debug, LV_SCR_LOAD_ANIM_MOVE_TOP, 200, 0, false);   //主界面
+            if (lv_scr_act() == setting_ui.setting) {
+                lv_coord_t current_scroll = lv_obj_get_scroll_y(setting_ui.setting_backgroud_cont);
+                if (current_scroll < 300) {  // 只有不在顶部时才能向上滚动
+                    lv_obj_scroll_by(setting_ui.setting_backgroud_cont, 0, -150, LV_ANIM_ON);
+                }           
+            } else {
+                
+                lv_scr_load_anim(debug_ui.debug, LV_SCR_LOAD_ANIM_MOVE_TOP, 200, 0, false);
+            }
             break;
-        case 5:   //下  
+        case 5:   //下 
+            if (lv_scr_act() == setting_ui.setting) {
+                lv_coord_t current_scroll = lv_obj_get_scroll_y(setting_ui.setting_backgroud_cont);
+                if(current_scroll>-5){
+                    lv_obj_scroll_by(setting_ui.setting_backgroud_cont, 0, 150, LV_ANIM_ON);
+                }    
+            }
             break;
         default:
             break;
     }
-
 
     // 中心 TAP 表示“点击”
     if (touch & TAP_CENTER)
@@ -247,12 +311,19 @@ void handle_gesture_input(const MGC3130_t *dev)
     //上TAP
     else if (touch & TAP_UP)
     {
-
+        if(lv_scr_act() == setting_ui.setting){
+          lv_group_focus_prev(setting_group); // 用于向上切换设置焦点
+        }
     }
     // 下TAP
     else if (touch & TAP_DOWN)
     {
-        hide_pop_cnt();
+        if(lv_scr_act() == main_ui.main){
+                hide_pop_cnt(); 
+        }
+        if(lv_scr_act() == setting_ui.setting){
+            lv_group_focus_next(setting_group); // 用于向下切换焦点
+        }
     }
     // 左TAP
     else if (touch & TAP_LEFT)
@@ -260,9 +331,7 @@ void handle_gesture_input(const MGC3130_t *dev)
         if(lv_scr_act() == main_ui.main){
           lv_group_focus_prev(group); // 用于向左切换焦点
         }
-        if(lv_scr_act() == setting_ui.setting){
-          lv_group_focus_prev(setting_group); // 用于向左切换焦点
-        }
+
          
     }
     // 右TAP
@@ -271,12 +340,25 @@ void handle_gesture_input(const MGC3130_t *dev)
         if(lv_scr_act() == main_ui.main){
             lv_group_focus_next(group); //用于向右切换焦点
         }
-        if(lv_scr_act() == setting_ui.setting){
-            lv_group_focus_next(setting_group); // 用于向左切换焦点
-        }
+    }
+}
 
+void scroll_inertia_cb(lv_timer_t* timer) {
+    lv_obj_t* obj = (lv_obj_t*)timer->user_data;
+
+    if (scroll_velocity == 0) {
+        lv_timer_del(scroll_timer);
+        scroll_timer = NULL;
+        return;
     }
 
+    lv_obj_scroll_by(obj, 0, scroll_velocity, LV_ANIM_ON);
+
+    // 逐步减速
+    if (scroll_velocity > 0) scroll_velocity -= 4;
+    else scroll_velocity += 4;
+
+    if (abs(scroll_velocity) < 4) scroll_velocity = 0;
 }
 
 void process_air_wheel(lv_obj_t *focused_obj, uint32_t airWheelInfo)

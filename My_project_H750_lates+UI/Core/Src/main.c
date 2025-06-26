@@ -176,14 +176,16 @@ uint8_t last_wifi_connect_flag; //上次wifi连接标志
 uint8_t start_flag = 0;   //开始学习标志
 uint8_t last_start_flag = 0;   //上次学习标志
 bool pause_time_flag = false; //暂停学习标志
+bool last_pause_time_flag = false; //记录上次暂停学习标志
 uint8_t Real_time_Data[10]= {0};  //实时数据
+uint16_t right_sitted_time = 0; //坐姿正确时长
 
 bool led_switch_flag = 0;
 bool led_auto_flag = 0;
 
 uint8_t light_ref=30;  //led参考光照值
 uint8_t voice_command[12]= {0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C}; //语音命令
-bool volume_switch_flag = 0; //音量开关标志
+bool volume_switch_flag = false; //音量开关标志
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
@@ -269,7 +271,7 @@ void sendStringData(UART_HandleTypeDef *huart, const char *str) {
   buffer[3 + len] = checksum;  // 校验位
 
   // 发送整个数据帧
-  HAL_UART_Transmit(huart, buffer, len + 4, 1000);
+  HAL_UART_Transmit(huart, buffer, len + 4, 10);
 }
 
 // 发送二进制数据(一次最多100个字节)
@@ -297,8 +299,9 @@ void sendBinaryData(UART_HandleTypeDef *huart, uint8_t *data, uint16_t len) {
 
 void start_study(TimeData start_time){
   start_flag = 1;
-
   if (last_start_flag == 0 && start_flag == 1) {
+      uint8_t tmp_data_1 = '1';
+      HAL_UART_Transmit(&huart2, &tmp_data_1, 1, 10); //给推理端发信息
       sendStringData(&huart1, (char*)"stime?"); //发送时间请求
       pause_time_flag = false; // 重置暂停时间标志  
   }
@@ -311,8 +314,9 @@ void start_study(TimeData start_time){
 }
 void stop_study(TimeData start_time){
   start_flag = 0;
-  
   if (last_start_flag == 1 && start_flag == 0) {
+    uint8_t tmp_data_0 = '0';
+    HAL_UART_Transmit(&huart2, &tmp_data_0, 1, HAL_MAX_DELAY);
     pause_time_flag = true; // 设置暂停时间标志
     Close_Study_Session_File(start_time,temp_data_index); //保存并关闭
     // 如果学习时间小于5分钟，则删除文件
@@ -321,9 +325,11 @@ void stop_study(TimeData start_time){
       lv_label_set_text_fmt(SD_label, "study time too short,delete: %s", current_filename);
     }
 
+    save_user_config((char*)username); //保存用户配置
     tim1_cnt = 0;
     temp_data_index = 0;  // 重置索引
     start_time.study_time=0;   //重置学习时长
+		right_sitted_time = 0; //重置坐姿正确时长
     memset(current_filename, 0, sizeof(current_filename)); //清空文件名
     memset(Temp_WriteBuffer, 0xFF, sizeof(Temp_WriteBuffer));
 
@@ -397,8 +403,10 @@ int main(void)
   MX_I2C2_Init();
   MX_USART3_UART_Init();
   MX_TIM12_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_PWM_Start(&htim12,TIM_CHANNEL_1); //开启PWM对应的通道
+  HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1); //开启PWM对应的通道
 
   HAL_GPIO_WritePin(ESP8266_RST_GPIO_Port, ESP8266_RST_Pin, GPIO_PIN_SET);  //重启esp8266
   HAL_Delay(200);
@@ -453,6 +461,7 @@ int main(void)
   Power_show(main_ui.main_power_bar, Power_Percent);  //电量显示 //电量显示
   tempure = atk_ntc_get_temp();
   
+  __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, 10000);
 
 
   nfc_init();  //初始化nfc
@@ -489,9 +498,9 @@ int main(void)
       MGC3130_ReceiveSensorData(&mgc3130_dev);  //接收传感器数据
       handle_gesture_input(&mgc3130_dev);  //处理手势输入转化为GUI事件
       sprintf(genstuere_buf, "gesture:%d,touch:%d,position:%d,air:%d", (mgc3130_dev.info.gestureInfo&0xFF), (mgc3130_dev.info.touchInfo& 0xFFFF), mgc3130_dev.position, mgc3130_dev.info.airWheelInfo);
-      if(mgc3130_dev.info.gestureInfo != 0 || mgc3130_dev.info.touchInfo != 0|| mgc3130_dev.info.airWheelInfo != 0|| mgc3130_dev.position!= 0){
-        lv_label_set_text(info_label, genstuere_buf);  //更新手势数据
-      }  
+      // if(mgc3130_dev.info.gestureInfo != 0 || mgc3130_dev.info.touchInfo != 0|| mgc3130_dev.info.airWheelInfo != 0|| mgc3130_dev.position!= 0){
+      //   // lv_label_set_text(info_label, genstuere_buf);  //更新手势数据
+      // }  
     
 
       if(last_wifi_connect_flag!=wifi_connect_flag){
@@ -503,7 +512,6 @@ int main(void)
 
     }
     //HAL_Delay(5);
-		 
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

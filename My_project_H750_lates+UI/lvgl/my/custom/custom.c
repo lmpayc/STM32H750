@@ -24,6 +24,7 @@
  *      TYPEDEFS
  **********************/
 uint8_t button_cnt = 0;   //开始学习标志计数器
+bool show_sitting_pos_flag = false; //显示坐姿标志
 
 extern bool pause_time_flag; //暂停时间标志
 
@@ -49,6 +50,7 @@ static void btn_event_cb(lv_event_t * e) {
     lv_obj_t * temp_btn = lv_event_get_target(e);
     if(e->code == LV_EVENT_CLICKED) {
         button_cnt++;		
+        show_sitting_pos_flag = false; //隐藏坐姿标志
         hide_pop_cnt(); //隐藏弹出窗口
         lv_obj_clear_flag(main_ui.main_pop_cnt, LV_OBJ_FLAG_HIDDEN);  
         lv_obj_clear_flag(main_ui.main_large_time_img, LV_OBJ_FLAG_HIDDEN); 
@@ -67,13 +69,19 @@ void img_event_cb(lv_event_t *e)
     lv_obj_clear_flag(main_ui.main_pop_cnt, LV_OBJ_FLAG_HIDDEN);   
 
     if(code == LV_EVENT_CLICKED) {
+        show_sitting_pos_flag = false; //隐藏坐姿标志
+
         if(target == main_ui.main_learning_time_img) {
             pause_time_flag = !pause_time_flag;  //切换暂停时间标志
             if(!start_flag||pause_time_flag){   //如果未开始学习或暂停时间
                 lv_obj_clear_flag(main_ui.main_large_pause_img,LV_OBJ_FLAG_HIDDEN); 
+                    uint8_t tmp_data_1 = '0';
+                    HAL_UART_Transmit(&huart2, &tmp_data_1, 1, 10); //给推理端发信息
             }
             else if(!pause_time_flag){  //如果正在学习
                 lv_obj_add_flag(main_ui.main_large_pause_img,LV_OBJ_FLAG_HIDDEN); 
+                uint8_t tmp_data_1 = '1';
+                HAL_UART_Transmit(&huart2, &tmp_data_1, 1, 10); //给推理端发信息
             }
             lv_obj_clear_flag(main_ui.main_large_time_img, LV_OBJ_FLAG_HIDDEN); 
             lv_obj_clear_flag(main_ui.main_learning_time_data, LV_OBJ_FLAG_HIDDEN);
@@ -85,9 +93,7 @@ void img_event_cb(lv_event_t *e)
 
         }
         else if(target == main_ui.main_sitting_pos_rest_img) {
-            lv_obj_clear_flag(main_ui.main_large_sitting_rest_image,LV_OBJ_FLAG_HIDDEN);
-            lv_obj_clear_flag(main_ui.main_sitting_rest_label,LV_OBJ_FLAG_HIDDEN); 
-
+            show_sitting_pos_flag = true; //显示坐姿标志
         }
         else if(target == main_ui.main_temperature_img) {
             lv_obj_clear_flag(main_ui.main_large_temperature_img,LV_OBJ_FLAG_HIDDEN); 
@@ -282,6 +288,16 @@ void custom_init(lv_ui *ui)
     gesture_indev = lv_indev_get_next(NULL);
     lv_indev_set_group(gesture_indev, group);  //激活主界面组
     current_group = group;  //设置当前组对象为主界面组
-    /* Add your codes here */
+
+    // lv_obj_set_size(setting_ui.setting_backgroud_cont, LV_PCT(100), LV_PCT(100));
+
+    lv_obj_set_scroll_dir(setting_ui.setting_backgroud_cont, LV_DIR_VER);  // 启用竖向滚动
+    lv_obj_set_scrollbar_mode(setting_ui.setting_backgroud_cont, LV_SCROLLBAR_MODE_ACTIVE);
+
+    // 以下两行确保惯性滑动和弹性回弹启用（在LVGL 8.3中默认启用，这里显式添加）
+    lv_obj_add_flag(setting_ui.setting_backgroud_cont, LV_OBJ_FLAG_SCROLL_ELASTIC);
+    lv_obj_add_flag(setting_ui.setting_backgroud_cont, LV_OBJ_FLAG_SCROLL_MOMENTUM);// 开启惯性滑动
+
+    // lv_obj_add_flag(setting_ui.setting_backgroud_cont, LV_OBJ_FLAG_SCROLL_ONE);
 }
 

@@ -55,6 +55,7 @@ typedef struct
 	lv_obj_t *main_large_light_off_img;
 	lv_obj_t *setting;
 	bool setting_del;
+	lv_obj_t *setting_view_port;
 	lv_obj_t *setting_backgroud_cont;
 	lv_obj_t *setting_config_cont;
 	lv_obj_t *setting_setting_image;
@@ -66,8 +67,8 @@ typedef struct
 	lv_obj_t *setting_volume_img;
 	lv_obj_t *setting_volume_lable;
 	lv_obj_t *setting_volume_slider;
-	lv_obj_t *setting_light_pid_lable;
 	lv_obj_t *setting_light_pid_switch;
+	lv_obj_t *setting_light_pid_lable;
 	lv_obj_t *debug;
 	bool debug_del;
 	lv_obj_t *debug_cont_1;

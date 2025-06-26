@@ -122,7 +122,8 @@
     "functional": "c",
     "tuple": "c",
     "type_traits": "c",
-    "utility": "c"
+    "utility": "c",
+    "events_init.h": "c"
   },
   "files.encoding": "gbk",
   "files.candidateGuessEncodings": [

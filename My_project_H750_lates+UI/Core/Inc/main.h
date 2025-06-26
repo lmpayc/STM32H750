@@ -57,7 +57,10 @@ typedef struct {
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
-
+extern uint8_t gensture;
+extern uint8_t start_flag;
+extern bool pause_time_flag;
+extern uint16_t right_sitted_time;
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/
@@ -92,6 +95,8 @@ void Error_Handler(void);
 #define Water_AO_GPIO_Port GPIOB
 #define ESP8266_RST_Pin GPIO_PIN_2
 #define ESP8266_RST_GPIO_Port GPIOB
+#define Servo_Pin GPIO_PIN_4
+#define Servo_GPIO_Port GPIOB
 #define NFC_RESET_Pin GPIO_PIN_5
 #define NFC_RESET_GPIO_Port GPIOB
 

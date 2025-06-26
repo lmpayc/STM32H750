@@ -44,6 +44,8 @@ extern uint8_t Temp_Readbuffer[REAED_BUFFER_SIZE];
 uint8_t Packed_Data[REAED_BUFFER_SIZE];
 uint16_t Packed_Len  = 0;   
 
+extern lv_obj_t * info_label;
+
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;
@@ -511,11 +513,16 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 
     if (huart->Instance == USART2) // 确保是 USART2
     {
-      HAL_UART_Transmit(&huart2, uart2_buf_recv, Size, 1000); // 将接收到的数据回传
-      HAL_UARTEx_ReceiveToIdle_IT(huart, uart2_buf_recv, sizeof(uart2_buf_recv));
+			if (Size >= 1 && start_flag && (!pause_time_flag)) 
+			{
+        gensture = uart2_buf_recv[0];
+				right_sitted_time+=gensture;
+			}
+			HAL_UARTEx_ReceiveToIdle_IT(huart, uart2_buf_recv, sizeof(uart2_buf_recv));
+      
     }
 
-    if (huart->Instance == USART3) // 确保是 USART2
+    if (huart->Instance == USART3) // 确保是 USART3
     {
       HAL_UART_Transmit(&huart3, uart3_buf_recv, Size, 1000); // 将接收到的数据回传
       HAL_UARTEx_ReceiveToIdle_IT(huart, uart3_buf_recv, sizeof(uart3_buf_recv));

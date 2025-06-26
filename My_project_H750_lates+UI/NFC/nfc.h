@@ -29,6 +29,13 @@ extern PN532 pn532;
 
 void nfc_init(void);
 void nfc_dtect(void);
+bool is_new_uid(const char* new_uid);
+void load_user_config(const char* username);
+static inline void set_default_config(void);
+void save_user_config(const char* username);
+void apply_ui_config(void);
+
+
 int is_uid_equal(uint8_t *uid1, uint8_t *uid2);
 void uid_to_str(uint8_t *uid, char *str, size_t len);
 void init_default_user(void);

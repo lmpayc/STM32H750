@@ -195,9 +195,9 @@ stm32h750prg\ui.o: ../Core/Inc/adc.h
 stm32h750prg\ui.o: ../lvgl/my/generated/gui_guider.h
 stm32h750prg\ui.o: ../lvgl/my/custom/custom.h
 stm32h750prg\ui.o: ../Core/Inc/gpio.h
-stm32h750prg\ui.o: ..\NFC\nfc.h
-stm32h750prg\ui.o: ..\NFC\pn532.h
-stm32h750prg\ui.o: ..\NFC\pn532_stm32f1.h
+stm32h750prg\ui.o: ../NFC/nfc.h
+stm32h750prg\ui.o: ../NFC/pn532.h
+stm32h750prg\ui.o: ../NFC/pn532_stm32f1.h
 stm32h750prg\ui.o: ../FatFs/ff.h
 stm32h750prg\ui.o: ../FatFs/integer.h
 stm32h750prg\ui.o: ../FatFs/ffconf.h

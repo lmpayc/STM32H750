@@ -223,6 +223,6 @@ stm32h750prg\main.o: ../lvgl/my/generated/events_init.h
 stm32h750prg\main.o: ../lvgl/my/custom/custom.h
 stm32h750prg\main.o: ../lvgl/examples/porting/lv_port_indev.h
 stm32h750prg\main.o: ../FatFs/mysd/sd.h
-stm32h750prg\main.o: ..\NFC\nfc.h
-stm32h750prg\main.o: ..\NFC\pn532.h
-stm32h750prg\main.o: ..\NFC\pn532_stm32f1.h
+stm32h750prg\main.o: ../NFC/nfc.h
+stm32h750prg\main.o: ../NFC/pn532.h
+stm32h750prg\main.o: ../NFC/pn532_stm32f1.h

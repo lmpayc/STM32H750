@@ -29,6 +29,10 @@ void nfc_timer_cb(lv_timer_t * timer);
 void airwheel_timer_cb(lv_timer_t * timer);
 void process_air_wheel(lv_obj_t *focused_obj, uint32_t airWheelInfo);
 void led_pid_update(uint8_t target, uint8_t feedback);
+void sitting_timer_cb(lv_timer_t * timer);
+static void set_visible(lv_obj_t* obj, bool visible);
+void scroll_inertia_cb(lv_timer_t* timer);
+
 
 
 #endif // UI_H

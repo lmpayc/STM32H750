@@ -195,3 +195,4 @@ stm32h750prg\nfc.o: ../Drivers/Hare/Inc/lcd_image.h
 stm32h750prg\nfc.o: ../lvgl/my/ui.h
 stm32h750prg\nfc.o: ../gensture/mgc3130.h
 stm32h750prg\nfc.o: ../Core/Inc/i2c.h
+stm32h750prg\nfc.o: ../lvgl/my/generated/gui_guider.h
