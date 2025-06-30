@@ -113,7 +113,7 @@ lv_ui  debug_ui; //调试界面对象
 lv_group_t *group;   // 组对象
 lv_group_t *setting_group;   // 组对象
 lv_indev_t *gesture_indev; // 手势输入设备
-
+volatile  uint16_t servo_pwm = SEVERO_PWM_MIN;  // 初始化 PWM 值
 
 /* USER CODE END PV */
 
@@ -183,19 +183,16 @@ uint16_t right_sitted_time = 0; //坐姿正确时长
 bool led_switch_flag = 0;
 bool led_auto_flag = 0;
 
-uint8_t light_ref=30;  //led参考光照值
-uint8_t voice_command[12]= {0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C}; //语音命令
+uint8_t set_studytime = 0; //app传来的设定学习时间
+uint8_t light_ref=30;  //led参考光照值（默认30）
+uint8_t voice_command[20]= {0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C,0x0D,0x0E,0x0F,0xEE,0xEF}; //语音命令
 bool volume_switch_flag = false; //音量开关标志
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if(htim->Instance == TIM2){   //1min周期
-      // if(start_flag&&!pause_time_flag){
-      //   start_time.study_time+=1;
-      // }
         read_power_flag = 1;
     }
-
 
     if (htim->Instance == TIM1)  //1s周期
     {
@@ -214,12 +211,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
       if(update_time_cnt==10){
           sendStringData(&huart1, (char*)"ctime?"); //每隔10s更新当前时间  
           update_time_cnt = 0;  
-          // static uint8_t tempindex = 0;
-          // HAL_UART_Transmit(&huart3, &voice_command[tempindex], 1, 1); //发送语音命令
-          // tempindex++;
-          // if(tempindex >= 12){
-          //   tempindex = 0; // 重置索引
-          // }
           return;     //更新时钟时,不更新实时数据
       }
 
@@ -248,6 +239,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         sendBinaryData(&huart1,Real_time_Data,8);
 			}
 	
+      // // 翻转 PWM 值
+      // if (servo_pwm == SEVERO_PWM_MIN){
+      //     servo_pwm = SEVERO_PWM_MAX;
+      // }else{
+      //     servo_pwm = SEVERO_PWM_MIN;
+      // }
+      // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, servo_pwm);
+
     }
 }
 
@@ -319,6 +318,12 @@ void stop_study(TimeData start_time){
     HAL_UART_Transmit(&huart2, &tmp_data_0, 1, HAL_MAX_DELAY);
     pause_time_flag = true; // 设置暂停时间标志
     Close_Study_Session_File(start_time,temp_data_index); //保存并关闭
+        // ======= 加入姿态评估播报（根据 posture_ratio） =======
+    if (volume_switch_flag && start_time.study_time > 0) {
+        float final_posture_ratio = (float)right_sitted_time / (start_time.study_time * 60.0f) * 100.0f;
+        uint8_t voice_id = (final_posture_ratio >= 85.0f) ? 12 : 13;  // VOICE_GENERAL_GOOD / BAD
+        HAL_UART_Transmit(&huart3, &voice_id, 1, 1);
+    }
     // 如果学习时间小于5分钟，则删除文件
     if (start_time.study_time < 5) {
       f_unlink(current_filename); // 删除文件
@@ -431,7 +436,7 @@ int main(void)
   setup_debug_ui(&debug_ui);
   custom_init(&main_ui);      // 初始化 自定义事件
   ui_init();
-
+  load_user_config((char*)username); //加载用户配置
 
  
   MGC3130_Init(&mgc3130_dev);  // 初始化MGC3130设备
@@ -441,9 +446,6 @@ int main(void)
   HAL_Delay(50);
   // MGC3130_EnableAirWheel(&mgc3130_dev);  // 使能AirWheel
   // HAL_Delay(50);
-
-
-
 
   char buf[64];
   char genstuere_buf[128]; 
@@ -461,10 +463,8 @@ int main(void)
   Power_show(main_ui.main_power_bar, Power_Percent);  //电量显示 //电量显示
   tempure = atk_ntc_get_temp();
   
-  __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, 10000);
-
-
   nfc_init();  //初始化nfc
+  __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, SEVERO_PWM_MIN);
 
   /* USER CODE END 2 */
 

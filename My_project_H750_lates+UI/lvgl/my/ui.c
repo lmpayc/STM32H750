@@ -11,7 +11,15 @@
 #include "custom.h"
 #include "nfc.h"
 
+// 环境阈值（可根据实际需要调整）
+#define MIN_LIGHT 30          // 最小光照
+#define MAX_TEMP  30.0f       // 最高温度
+#define MIN_TEMP  18.0f       // 最低温度
+#define MAX_NOISE 60          // 最大噪音（单位dB）
+
 extern TimeData current_time;
+extern uint8_t voice_command[20]; //语音命令
+extern bool volume_switch_flag;
 
 lv_obj_t *btn;
 lv_obj_t * info_label;
@@ -40,16 +48,20 @@ extern lv_indev_t *gesture_indev; // 手势输入设备
 extern bool led_switch_flag;  //led开关标志
 extern bool led_auto_flag;    //led自动控制标志
 extern uint8_t light_ref;  //led参考光照值
-extern uint8_t light; //光照反馈值
+extern uint8_t light; //光照实际值
 float filtered_output = 0;
 
 extern float tempure;  //温度值
 extern uint8_t noise;  //噪音值
+extern uint8_t gensture; //实时坐姿
+extern uint16_t right_sitted_time;  //坐姿正确时长
+float posture_ratio;
 
 extern MGC3130_t mgc3130_dev; 
 static uint32_t prevAirWheelInfo = 0;
 int32_t led_value;
 int32_t volum_value;
+uint8_t prev_vol_level = 0;
 // PID 参数（根据实际情况调整）
 float kp = 0.5f;
 float ki = 0.01f;
@@ -57,6 +69,7 @@ float kd = 0.1f;
 float prev_error = 0;
 float prev_prev_error = 0;
 float pid_output = 0;
+
 
 /**
  * 初始化并创建 UI
@@ -106,7 +119,7 @@ void ui_init(void)
     lv_timer_t *nfc_timer = lv_timer_create(nfc_timer_cb, 500, NULL);   //nfc读取
     lv_timer_t *airwheel_timer = lv_timer_create(airwheel_timer_cb, 100, NULL);   //airwheel定时器
     lv_timer_t *sitting_timer = lv_timer_create(sitting_timer_cb, 500, NULL);   //airwheel定时器
-
+    lv_timer_t *posture_env_timer = lv_timer_create(posture_env_eval_cb, 1000, NULL);  // 坐姿与环境评估定时器
 
     // 设置初始触发偏移：延迟 200ms 和 300ms
     led_timer->last_run = lv_tick_get() + 10;
@@ -118,6 +131,7 @@ void ui_init(void)
 void led_timer_cb(lv_timer_t * timer){
     control_led(led_switch_flag, led_auto_flag, light_ref,light);
     light =  Atk_Light_Get_Val();  //100ms获取一次光照值
+
 }
 void updatetim_timer_cb(lv_timer_t * timer){
     static int last_min = -1;
@@ -210,9 +224,7 @@ void sitting_timer_cb(lv_timer_t * timer){
             set_visible(main_ui.main_sitting_rest_label, false);
         }
     }
-
 }
-
 void adc_timer_cb(lv_timer_t * timer){
     noise = adc_get_nosie();
     tempure = atk_ntc_get_temp();
@@ -223,6 +235,83 @@ void nfc_timer_cb(lv_timer_t * timer){
 void airwheel_timer_cb(lv_timer_t * timer){
     lv_obj_t *focused = lv_group_get_focused(current_group);
     process_air_wheel(focused, mgc3130_dev.info.airWheelInfo);  //处理airwheel
+}
+void posture_env_eval_cb(lv_timer_t *timer)
+{
+    /*===================== 秒级计数器 =====================*/
+    static uint32_t sec_cnt               = 0;
+    static uint16_t light_low_cnt         = 0;   // 光照持续低计数
+    static uint16_t noise_high_cnt        = 0;   // 噪声持续高计数
+    static uint16_t light_high_cnt        = 0;
+    static uint16_t light_cd              = 0;   // 光照提示冷却计数
+    static uint16_t noise_cd              = 0;   // 噪声提示冷却计数
+    static uint16_t glare_cd              = 0; 
+
+        /*----------------- 早退：未学习或已暂停 -----------------*/
+    if (!(start_flag && !pause_time_flag)) {
+        /*复位所有计数器并提前返回 =======*/
+        sec_cnt = 0;
+        light_low_cnt =0;light_high_cnt =0;noise_high_cnt = 0;
+        light_cd = 0;glare_cd = 0;noise_cd = 0;
+        return;
+    }    
+    sec_cnt++;
+
+    /*===================== 坐姿统计 =====================*/
+    // 每分钟更新姿势正确率（+显示标签）
+    if ((sec_cnt % 60 == 0) && (start_time.study_time > 0)) {
+        posture_ratio = (float) right_sitted_time /
+                        (start_time.study_time * 60.0f) * 100.0f;
+
+        char buf[32];
+        snprintf(buf, sizeof(buf), "posture_ratio: %.2f", posture_ratio);
+        lv_label_set_text(info_label, buf);
+        //按姿势正确率决定是否播报
+        posture_voice_assessor(start_time.study_time,posture_ratio,volume_switch_flag);
+
+    }
+
+    /*===================== 光照评估 =====================*/
+    if (light < LIGHT_MIN) {
+        if (light_cd == 0 && ++light_low_cnt >= LIGHT_PERSIST_SEC) {
+            uint8_t id = VOICE_LIGHT_LOW;
+            if (volume_switch_flag)                              // 语音开关判定
+                HAL_UART_Transmit(&huart3, &id, 1, 1);
+            light_low_cnt = 0;
+            light_cd      = COOLDOWN_SEC;
+        }
+    } else {
+        light_low_cnt = 0;
+    }
+    if (light_cd)  light_cd--;
+
+    if (light > LIGHT_MAX) {
+        if (glare_cd == 0 && ++light_high_cnt >= LIGHT_PERSIST_SEC) {
+            uint8_t id = VOICE_LIGHT_GLARE;        // ID = 4
+            if (volume_switch_flag)
+                HAL_UART_Transmit(&huart3, &id, 1, 1);
+            light_high_cnt = 0;
+            glare_cd       = COOLDOWN_SEC;
+        }
+    } else {
+        light_high_cnt = 0;
+    }
+    if (glare_cd) glare_cd--;
+
+
+    /*===================== 噪声评估 =====================*/
+    if (noise > NOISE_MAX) {
+        if (noise_cd == 0 && ++noise_high_cnt >= NOISE_PERSIST_SEC) {
+            uint8_t id = VOICE_NOISE_HIGH;
+            if (volume_switch_flag)                              // 语音开关判定
+                HAL_UART_Transmit(&huart3, &id, 1, 1);
+            noise_high_cnt = 0;
+            noise_cd       = COOLDOWN_SEC;
+        }
+    } else {
+        noise_high_cnt = 0;
+    }
+    if (noise_cd)  noise_cd--;
 }
 
 void control_led(bool led_switch_flag,bool led_auto_flag,uint8_t light_ref,uint8_t light_feedback){
@@ -237,7 +326,6 @@ void control_led(bool led_switch_flag,bool led_auto_flag,uint8_t light_ref,uint8
             led_value=lv_slider_get_value(setting_ui.setting_light_slider);
             __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_1, led_value);
             filtered_output = led_value; // 重置 PID 输出
-            
         }
     }
     else{
@@ -280,7 +368,10 @@ void handle_gesture_input(const MGC3130_t *dev)
                 lv_coord_t current_scroll = lv_obj_get_scroll_y(setting_ui.setting_backgroud_cont);
                 if(current_scroll>-5){
                     lv_obj_scroll_by(setting_ui.setting_backgroud_cont, 0, 150, LV_ANIM_ON);
-                }    
+                        
+                } else {
+                    lv_obj_scroll_to_y(setting_ui.setting_backgroud_cont, 0, LV_ANIM_ON);
+                }   
             }
             break;
         default:
@@ -406,6 +497,18 @@ void process_air_wheel(lv_obj_t *focused_obj, uint32_t airWheelInfo)
     }
     else if(focused_obj==setting_ui.setting_volume_slider){
         volum_value = value;
+        uint8_t vol_level = (value * 6) / 100 + 1;   /* 整数运算，结果必在 1~7 */
+
+        if(vol_level > 7) vol_level = 7;             /* 双保险，防止四舍五入带来 8 */
+
+        if((vol_level != prev_vol_level) && volume_switch_flag) {
+            if(vol_level > prev_vol_level) {
+                HAL_UART_Transmit(&huart3, &voice_command[15], 1, 1);  // 音量增大
+            } else {
+                HAL_UART_Transmit(&huart3, &voice_command[16], 1, 1);  // 音量减小
+            }
+            prev_vol_level = vol_level;  // 更新段位记录
+        }
     }
 
     // 更新 slider
@@ -435,5 +538,53 @@ void led_pid_update(uint8_t target, uint8_t feedback) {
     prev_prev_error = prev_error;
     prev_error = error;
     led_value = (uint32_t)filtered_output;
+}
+
+void posture_voice_assessor(uint16_t study_min,
+                            float ratio,
+                            bool  vol_switch)
+{
+    /* ----------- 1. 学习不足 3 分钟 / 静音：直接退出 ----------- */
+    if (study_min < 3 || !vol_switch) return;
+
+    /* ----------- 2. 内部状态 & 等级判定 ----------- */
+    PostureLevel cur_level = (ratio >= POSTURE_GOOD_TH) ? POST_GOOD : POST_BAD;
+
+    /* 用 static 保存跨次调用状态（每分钟调用一次即可） */
+    static PostureLevel last_level        = POST_UNKNOWN;
+    static uint8_t      hold_min_cnt      = 0;   // 等级保持计数
+    static uint8_t      bad_remind_cnt    = 0;   // BAD 提醒间隔
+
+    if (cur_level == last_level) {
+        hold_min_cnt++;
+        if (cur_level == POST_BAD) bad_remind_cnt++;
+    } else {
+        last_level      = cur_level;
+        hold_min_cnt    = 1;
+        bad_remind_cnt  = (cur_level == POST_BAD) ? 1 : 0;
+    }
+
+    /* ----------- 3. 播报判定 ----------- */
+    uint8_t voice_id   = 0;
+    bool  need_voice = false;
+
+    /* a) 等级稳定 CHANGE_STABLE_MIN 分钟后播一次 */
+    if (hold_min_cnt == CHANGE_STABLE_MIN) {
+        voice_id   = (cur_level == POST_GOOD) ? VOICE_GOOD_POSTURE
+                                              : VOICE_BAD_POSTURE;
+        need_voice = true;
+    }
+
+    /* b) BAD 连续存在，每 BAD_REMIND_MIN 分钟重复提醒 */
+    if (cur_level == POST_BAD && bad_remind_cnt >= BAD_REMIND_MIN) {
+        voice_id        = VOICE_BAD_POSTURE;
+        need_voice      = true;
+        bad_remind_cnt  = 0;          // 清零重新计数
+    }
+
+    /* ----------- 4. 发送 ----------- */
+    if (need_voice) {
+        HAL_UART_Transmit(&huart3, &voice_id, 1, 1);
+    }
 }
 

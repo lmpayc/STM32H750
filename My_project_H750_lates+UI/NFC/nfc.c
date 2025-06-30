@@ -13,6 +13,7 @@ extern bool volume_switch_flag; //音量开关标志
 extern uint8_t light_ref;  //led参考光照值  
 extern int32_t led_value; 
 extern int32_t volum_value;//音量值
+extern uint8_t voice_command[20]; //语音命令
 
 extern lv_ui setting_ui; //设置界面对象
 
@@ -251,6 +252,14 @@ void load_user_config(const char* username)
     }
     else{
         apply_ui_config(); // 应用配置到 UI
+        if(strcmp(username, "LPC") != 0){
+            // 将 volum_value (0~100) 映射为 1~7
+            uint8_t vol_level = volum_value / 14 + 1;
+            if(vol_level > 7) vol_level = 7;  // 保证不超过 7
+            uint8_t cmd = 0xF0 + vol_level;   // 1->0xF1, ..., 7->0xF7
+            HAL_UART_Transmit(&huart3, &cmd, 1, 1); // 发送串口命令
+
+        }
         lv_label_set_text_fmt(SD_label, "Loaded config for %s successfully",username);
     }
 

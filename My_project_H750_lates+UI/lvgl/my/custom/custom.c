@@ -52,10 +52,9 @@ static void btn_event_cb(lv_event_t * e) {
         button_cnt++;		
         show_sitting_pos_flag = false; //Òþ²Ø×ø×Ë±êÖ¾
         hide_pop_cnt(); //Òþ²Øµ¯³ö´°¿Ú
-        lv_obj_clear_flag(main_ui.main_pop_cnt, LV_OBJ_FLAG_HIDDEN);  
-        lv_obj_clear_flag(main_ui.main_large_time_img, LV_OBJ_FLAG_HIDDEN); 
-        lv_obj_clear_flag(main_ui.main_learning_time_data, LV_OBJ_FLAG_HIDDEN);
-
+        // lv_obj_clear_flag(main_ui.main_pop_cnt, LV_OBJ_FLAG_HIDDEN);  
+        // lv_obj_clear_flag(main_ui.main_large_time_img, LV_OBJ_FLAG_HIDDEN); 
+        // lv_obj_clear_flag(main_ui.main_learning_time_data, LV_OBJ_FLAG_HIDDEN);
         LED1_Toggle;
 
     }

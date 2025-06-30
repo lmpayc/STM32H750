@@ -24,6 +24,7 @@
 #include "lvgl.h"
 #include "ui.h"
 #include "sd.h"
+#include "gui_guider.h"
 
 extern uint8_t uart1_buf_recv[BUFFER_SIZE];
 extern UartQueue uart1_queue;
@@ -44,6 +45,10 @@ extern uint8_t Temp_Readbuffer[REAED_BUFFER_SIZE];
 uint8_t Packed_Data[REAED_BUFFER_SIZE];
 uint16_t Packed_Len  = 0;   
 
+
+extern uint8_t light_ref;  //led参考光照值
+extern lv_ui  setting_ui; //设置界面对象
+extern uint8_t set_studytime; //app传来的设定学习时间
 extern lv_obj_t * info_label;
 
 /* USER CODE END 0 */
@@ -524,7 +529,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 
     if (huart->Instance == USART3) // 确保是 USART3
     {
-      HAL_UART_Transmit(&huart3, uart3_buf_recv, Size, 1000); // 将接收到的数据回传
+      //HAL_UART_Transmit(&huart3, uart3_buf_recv, Size, 10); // 将接收到的数据回传
       HAL_UARTEx_ReceiveToIdle_IT(huart, uart3_buf_recv, sizeof(uart3_buf_recv));
     }
 }
@@ -567,7 +572,6 @@ void UART_Process_Data(void)
         }
 
         else if (strncmp((char*)temp_buffer, "WIFI:", 5) == 0) {
-              lv_label_set_text_fmt(uart1_label, "%s", temp_buffer);
               // 处理WIFI消息
               char *wifi_data = (char*)temp_buffer + 5;
               if(strncmp(wifi_data, "count", 5) == 0){   //统计指令匹配
@@ -580,10 +584,21 @@ void UART_Process_Data(void)
 
                 timer1_pause = 1; //恢复定时器
               }
-        }
-
-
-
+              // 处理 WIFI:light:<value> 指令
+              else if (strncmp(wifi_data, "light:", 6) == 0) {
+                  int value = atoi(wifi_data + 6);  // 提取数值部分
+                  if (value >= 0 && value <= 100) { // 可加合法性判断
+                      light_ref = value;
+                      lv_slider_set_value(setting_ui.setting_light_slider, light_ref, LV_ANIM_OFF);
+                  }
+              }
+        
+              else if (strncmp(wifi_data, "study:", 6) == 0) {
+                int value = atoi(wifi_data + 6);          // 取 <value>
+                set_studytime = value;                // 更新目标学习时长（分钟）
+                lv_label_set_text_fmt(uart1_label, "study-set: %d", set_studytime);
+              }
+        }      
         else {
             // MQTT消息
             lv_label_set_text_fmt(uart1_label, "uart1: %s", temp_buffer);
