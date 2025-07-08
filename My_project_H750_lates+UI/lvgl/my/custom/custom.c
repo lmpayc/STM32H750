@@ -34,6 +34,16 @@ extern bool led_auto_flag;   //led自动控制标志
 extern float prev_error;
 extern float prev_prev_error;
 extern bool volume_switch_flag; //音量开关标志
+extern bool servo_switch_flag; //舵机开关标志
+extern bool servo_auto_flag; //舵机自动控制标志
+extern uint32_t servo_pid_start_tick;  //舵机 PID 控制起始时间戳
+extern uint16_t servo_ref; //舵机参考值
+extern float servo_filtered_feedback;
+extern float servo_filtered_output;     // 滤波后的PWM值    
+extern uint16_t servo_pwm; //舵机PWM值
+extern float servo_pid_error_prev;
+extern float servo_pid_error_prev_prev; //舵机PID前一个误差值
+
 
 extern lv_group_t *group;   // 组对象
 extern lv_group_t *setting_group;   // 组对象
@@ -52,11 +62,14 @@ static void btn_event_cb(lv_event_t * e) {
         button_cnt++;		
         show_sitting_pos_flag = false; //隐藏坐姿标志
         hide_pop_cnt(); //隐藏弹出窗口
-        // lv_obj_clear_flag(main_ui.main_pop_cnt, LV_OBJ_FLAG_HIDDEN);  
-        // lv_obj_clear_flag(main_ui.main_large_time_img, LV_OBJ_FLAG_HIDDEN); 
-        // lv_obj_clear_flag(main_ui.main_learning_time_data, LV_OBJ_FLAG_HIDDEN);
-        LED1_Toggle;
-
+        if(!start_flag){
+            lv_obj_clear_flag(main_ui.main_pop_cnt, LV_OBJ_FLAG_HIDDEN);  
+            lv_obj_clear_flag(main_ui.main_large_time_img, LV_OBJ_FLAG_HIDDEN); 
+            lv_obj_clear_flag(main_ui.main_learning_time_data, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_clear_flag(main_ui.main_learning_time_setting, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_clear_flag(main_ui.main_learning_time_setting_data, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_clear_flag(main_ui.main_learning_time_unit, LV_OBJ_FLAG_HIDDEN);
+        }
     }
 }
 
@@ -84,7 +97,9 @@ void img_event_cb(lv_event_t *e)
             }
             lv_obj_clear_flag(main_ui.main_large_time_img, LV_OBJ_FLAG_HIDDEN); 
             lv_obj_clear_flag(main_ui.main_learning_time_data, LV_OBJ_FLAG_HIDDEN);
-
+            lv_obj_clear_flag(main_ui.main_learning_time_setting, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_clear_flag(main_ui.main_learning_time_setting_data, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_clear_flag(main_ui.main_learning_time_unit, LV_OBJ_FLAG_HIDDEN);
         }
         else if(target == main_ui.main_light_on_img) {
             lv_obj_clear_flag(main_ui.main_large_light_on_img, LV_OBJ_FLAG_HIDDEN); 
@@ -93,6 +108,10 @@ void img_event_cb(lv_event_t *e)
         }
         else if(target == main_ui.main_sitting_pos_rest_img) {
             show_sitting_pos_flag = true; //显示坐姿标志
+            // if(!start_flag){ //如果未开始学习
+            //     lv_obj_clear_flag(main_ui.main_large_sitting_rest_image,LV_OBJ_FLAG_HIDDEN);
+            //     lv_obj_clear_flag(main_ui.main_sitting_rest_label, LV_OBJ_FLAG_HIDDEN); 
+            // }
         }
         else if(target == main_ui.main_temperature_img) {
             lv_obj_clear_flag(main_ui.main_large_temperature_img,LV_OBJ_FLAG_HIDDEN); 
@@ -102,12 +121,38 @@ void img_event_cb(lv_event_t *e)
     }
 }
 
+void setting_event_cb(lv_event_t *e){
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t *target = lv_event_get_target(e);
+    if(code == LV_EVENT_CLICKED) {
+        if(target == setting_ui.setting_auto_adjust_view){
+            if(!servo_switch_flag){ //如果舵机开关为关
+                    // uint8_t tmp_data = '3';  //推理端发送坐标
+                    // HAL_UART_Transmit(&huart2, &tmp_data, 1, 10); //给推理端发信息
+                    // servo_auto_flag = true; //舵机自动控制标志
+                    // servo_filtered_feedback = servo_ref;
+                    // servo_filtered_output = servo_pwm; 
+                    // servo_pid_error_prev = 0.0f; // 重置 PID 控制器的误差   
+                    // servo_pid_error_prev_prev = 0.0f; // 重置 PID 控制器的前一误差
+                    // servo_pid_start_tick = lv_tick_get();  // 记录PID开始时间    
+                }
+        }
+    }    
+}
+
+
+
 void hide_pop_cnt(void){ //隐藏弹出窗口
+        show_sitting_pos_flag = false; //隐藏坐姿标志
         lv_obj_add_flag(main_ui.main_pop_cnt,LV_OBJ_FLAG_HIDDEN);
         //学习时间
         lv_obj_add_flag(main_ui.main_large_pause_img,LV_OBJ_FLAG_HIDDEN); 
         lv_obj_add_flag(main_ui.main_large_time_img, LV_OBJ_FLAG_HIDDEN); 
         lv_obj_add_flag(main_ui.main_learning_time_data, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(main_ui.main_learning_time_setting, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(main_ui.main_learning_time_setting_data, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(main_ui.main_learning_time_unit, LV_OBJ_FLAG_HIDDEN);
+            
         //灯光
         lv_obj_add_flag(main_ui.main_large_light_off_img,LV_OBJ_FLAG_HIDDEN); 
         lv_obj_add_flag(main_ui.main_large_light_on_img, LV_OBJ_FLAG_HIDDEN); 
@@ -159,7 +204,14 @@ void switch_event_cb(lv_event_t * e)  //开关回调
             }
         }
 
-
+        else if(target == setting_ui.setting_view_lock_switch) {
+            if(lv_obj_has_state(setting_ui.setting_view_lock_switch, LV_STATE_CHECKED)) {
+                servo_switch_flag = true;  //舵机开
+            }
+            else {
+                servo_switch_flag = false;  //舵机关
+            }
+        }
 
 
     }
@@ -224,10 +276,14 @@ void custom_init(lv_ui *ui)
     lv_obj_add_flag(main_ui.main_temperature_img, LV_OBJ_FLAG_CLICKABLE);
     lv_obj_add_event_cb(main_ui.main_temperature_img, img_event_cb, LV_EVENT_CLICKED, NULL);
 
+    lv_obj_add_event_cb(setting_ui.setting_auto_adjust_view, setting_event_cb, LV_EVENT_CLICKED, NULL);
+
+
     //开关回调
     lv_obj_add_event_cb(setting_ui.setting_light_auto_switch, switch_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
     lv_obj_add_event_cb(setting_ui.setting_light_pid_switch, switch_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
     lv_obj_add_event_cb(setting_ui.setting_volume__switch, switch_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
+    lv_obj_add_event_cb(setting_ui.setting_view_lock_switch, switch_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
 
 
 
@@ -244,6 +300,10 @@ void custom_init(lv_ui *ui)
     lv_group_add_obj(setting_group, setting_ui.setting_light_pid_switch);
     lv_group_add_obj(setting_group, setting_ui.setting_volume_slider);
     lv_group_add_obj(setting_group, setting_ui.setting_volume__switch);
+    lv_group_add_obj(setting_group, setting_ui.setting_view_lock_switch);  
+    lv_group_add_obj(setting_group, setting_ui.setting_up_arrow);
+    lv_group_add_obj(setting_group, setting_ui.setting_down_arrow);
+    lv_group_add_obj(setting_group, setting_ui.setting_auto_adjust_view);  
 
 
     static lv_style_t style_focus;  //焦点样式初始化
@@ -275,8 +335,10 @@ void custom_init(lv_ui *ui)
     lv_obj_add_style(setting_ui.setting_volume_slider, &style_focus, LV_STATE_FOCUSED);
     lv_obj_add_style(setting_ui.setting_light_pid_switch, &style_focus, LV_STATE_FOCUSED);
     lv_obj_add_style(setting_ui.setting_volume__switch, &style_focus, LV_STATE_FOCUSED);
-
-
+    lv_obj_add_style(setting_ui.setting_up_arrow, &style_focus, LV_STATE_FOCUSED);
+    lv_obj_add_style(setting_ui.setting_down_arrow, &style_focus, LV_STATE_FOCUSED);
+    lv_obj_add_style(setting_ui.setting_auto_adjust_view, &style_focus, LV_STATE_FOCUSED);
+    lv_obj_add_style(setting_ui.setting_view_lock_switch, &style_focus, LV_STATE_FOCUSED);
 
     lv_group_focus_obj(main_ui.main_start); // 设置主界面焦点
     lv_group_focus_obj(setting_ui.setting_light_auto_switch); // 设置设置界面焦点

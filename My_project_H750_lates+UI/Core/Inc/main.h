@@ -43,6 +43,7 @@ extern "C" {
 #define  REAED_BUFFER_SIZE 5120
 #define  SEVERO_PWM_MIN 250
 #define  SEVERO_PWM_MAX 1250  
+#define  SEVERO_PWM_MID 750
 
 typedef struct {
   uint8_t year;

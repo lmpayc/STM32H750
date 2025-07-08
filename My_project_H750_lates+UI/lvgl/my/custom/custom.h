@@ -22,6 +22,7 @@ void setup_debug_ui(lv_ui *ui);
 void Power_show(lv_obj_t * bar_1, uint8_t power);  //电量显示
 void Wifi_show(lv_ui *ui, uint8_t wifi_connect_flag);  //wifi显示    
 void img_event_cb(lv_event_t *e);
+void setting_event_cb(lv_event_t *e);
 void btn_event_cb(lv_event_t * e);
 void switch_event_cb(lv_event_t * e);  //开关回调
 void hide_pop_cnt(void);

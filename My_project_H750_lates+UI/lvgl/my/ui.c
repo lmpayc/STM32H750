@@ -11,8 +11,9 @@
 #include "custom.h"
 #include "nfc.h"
 
+
 // 环境阈值（可根据实际需要调整）
-#define MIN_LIGHT 30          // 最小光照
+#define MIN_LIGHT 10          // 最小光照
 #define MAX_TEMP  30.0f       // 最高温度
 #define MIN_TEMP  18.0f       // 最低温度
 #define MAX_NOISE 60          // 最大噪音（单位dB）
@@ -62,7 +63,7 @@ static uint32_t prevAirWheelInfo = 0;
 int32_t led_value;
 int32_t volum_value;
 uint8_t prev_vol_level = 0;
-// PID 参数（根据实际情况调整）
+//LED PID 参数（根据实际情况调整）
 float kp = 0.5f;
 float ki = 0.01f;
 float kd = 0.1f;
@@ -70,6 +71,21 @@ float prev_error = 0;
 float prev_prev_error = 0;
 float pid_output = 0;
 
+bool servo_switch_flag = false; //舵机开关标志
+bool servo_auto_flag = false; //舵机自动控制标志
+extern uint16_t servo_ref; //舵机参考值
+extern uint16_t servo_feedback; //舵机反馈值
+uint32_t servo_pid_start_tick = 0;  //舵机 PID 控制起始时间戳
+float servo_filtered_output  = 0;     // 滤波后的PWM值
+float servo_filtered_feedback = 0;
+extern uint16_t servo_pwm;
+float servo_pid_error_prev       = 0.0f;
+float servo_pid_error_prev_prev  = 0.0f;
+
+
+static bool     hold_active     = false;
+static uint32_t hold_start_tick = 0;
+static uint32_t last_step_tick   = 0;      /* 上一次步进的时间戳 */
 
 /**
  * 初始化并创建 UI
@@ -120,13 +136,15 @@ void ui_init(void)
     lv_timer_t *airwheel_timer = lv_timer_create(airwheel_timer_cb, 100, NULL);   //airwheel定时器
     lv_timer_t *sitting_timer = lv_timer_create(sitting_timer_cb, 500, NULL);   //airwheel定时器
     lv_timer_t *posture_env_timer = lv_timer_create(posture_env_eval_cb, 1000, NULL);  // 坐姿与环境评估定时器
+    // lv_timer_t *auto_servo_timer = lv_timer_create(servo_pid_timer_cb, 100, NULL);  // 每 100ms 更新一次
 
     // 设置初始触发偏移：延迟 200ms 和 300ms
     led_timer->last_run = lv_tick_get() + 10;
     updatetime_timer->last_run = lv_tick_get() + 222;
-    adc_timer->last_run = lv_tick_get() + 291;
-    nfc_timer->last_run = lv_tick_get() + 117;
+    adc_timer->last_run = lv_tick_get() + 111;
+    nfc_timer->last_run = lv_tick_get() + 171;
     sitting_timer->last_run = lv_tick_get() + 43;
+    posture_env_timer->last_run = lv_tick_get() + 77;
 }
 void led_timer_cb(lv_timer_t * timer){
     control_led(led_switch_flag, led_auto_flag, light_ref,light);
@@ -246,6 +264,7 @@ void posture_env_eval_cb(lv_timer_t *timer)
     static uint16_t light_cd              = 0;   // 光照提示冷却计数
     static uint16_t noise_cd              = 0;   // 噪声提示冷却计数
     static uint16_t glare_cd              = 0; 
+    static uint16_t yawn_cd             = 0; 
 
         /*----------------- 早退：未学习或已暂停 -----------------*/
     if (!(start_flag && !pause_time_flag)) {
@@ -256,6 +275,17 @@ void posture_env_eval_cb(lv_timer_t *timer)
         return;
     }    
     sec_cnt++;
+    
+    //打哈欠检测
+    if (gensture == 2) {                  // 2 = 打哈欠
+        if (yawn_cd == 0) {               // 只有冷却结束才播报
+            uint8_t id = VOICE_YAWN;
+            if (volume_switch_flag)
+                HAL_UART_Transmit(&huart3, &id, 1, 1);
+            yawn_cd = YAWN_COOLDOWN_SEC;  // 重新进入冷却期
+        }
+    }
+    if (yawn_cd) yawn_cd--;               // 每秒递减冷却
 
     /*===================== 坐姿统计 =====================*/
     // 每分钟更新姿势正确率（+显示标签）
@@ -339,6 +369,7 @@ void handle_gesture_input(const MGC3130_t *dev)
 
     uint8_t gesture = dev->info.gestureInfo & 0xFF;
     uint16_t touch = dev->info.touchInfo& 0xFFFF;
+    uint8_t position = dev->position & 0xFF; // 表示是否hold
     // 处理上下左右手势
     switch (gesture)
     {
@@ -355,9 +386,13 @@ void handle_gesture_input(const MGC3130_t *dev)
         case 4:   //上
             if (lv_scr_act() == setting_ui.setting) {
                 lv_coord_t current_scroll = lv_obj_get_scroll_y(setting_ui.setting_backgroud_cont);
-                if (current_scroll < 300) {  // 只有不在顶部时才能向上滚动
+                if (current_scroll < 320) {  // 只有不在顶部时才能向上滚动
                     lv_obj_scroll_by(setting_ui.setting_backgroud_cont, 0, -150, LV_ANIM_ON);
-                }           
+                }   
+                else{
+                    lv_obj_scroll_to_y(setting_ui.setting_backgroud_cont, 320, LV_ANIM_ON); // 滚动到顶部
+                }
+                
             } else {
                 
                 lv_scr_load_anim(debug_ui.debug, LV_SCR_LOAD_ANIM_MOVE_TOP, 200, 0, false);
@@ -410,7 +445,7 @@ void handle_gesture_input(const MGC3130_t *dev)
     else if (touch & TAP_DOWN)
     {
         if(lv_scr_act() == main_ui.main){
-                hide_pop_cnt(); 
+            hide_pop_cnt(); 
         }
         if(lv_scr_act() == setting_ui.setting){
             lv_group_focus_next(setting_group); // 用于向下切换焦点
@@ -432,7 +467,80 @@ void handle_gesture_input(const MGC3130_t *dev)
             lv_group_focus_next(group); //用于向右切换焦点
         }
     }
+
+    // 处理 Hold 状态：长按箭头按钮
+    lv_obj_t *focused = lv_group_get_focused(current_group);
+    if(!touch&&!gesture&&servo_switch_flag){
+            process_hold_arrow_and_drive_servo(position, focused);
+    }
+
+
 }
+
+void process_hold_arrow_and_drive_servo(uint8_t position, lv_obj_t *focused)
+{
+    /*========= 进入 Hold（手指悬停） =========*/
+    if(position)
+    {
+        bool is_up_arrow   = (focused == setting_ui.setting_up_arrow);
+        bool is_down_arrow = (focused == setting_ui.setting_down_arrow);
+
+        /* 仅当焦点在上下箭头时才处理 */
+        if(is_up_arrow || is_down_arrow)
+        {
+            /* 第一次进入 Hold：初始化计时 */
+            if(!hold_active) {
+                hold_active     = true;
+                hold_start_tick = lv_tick_get();
+                last_step_tick  = hold_start_tick;   // 先清零上一次步进
+            }
+
+            uint32_t now = lv_tick_get();
+
+            /* 已超过0.3s 的“启动延迟” */
+            if(lv_tick_elaps(hold_start_tick) >= 500)
+            {
+                /* 每隔 50 ms 连发一次 */
+                if(lv_tick_elaps(last_step_tick) >= 25) {
+                    servo_step(is_up_arrow ? +1 : -1);
+                    last_step_tick = now;
+                }
+            }
+        }
+        /* 焦点已经离开箭头 → 立即取消 Hold 状态 */
+        else {
+            hold_active = false;
+        }
+    }
+    /*========= 松手 / 退出 Hold =========*/
+    else {
+        hold_active = false;
+    }
+}
+
+void servo_step(int dir)
+{
+    const uint16_t step_size = 6;  // 每次步进的增量（你可以根据需求调整）
+
+    if (dir > 0) {
+        // 向上：增加 PWM 值
+        if (servo_pwm + step_size <= SEVERO_PWM_MAX)
+            servo_pwm += step_size;
+        else
+            servo_pwm = SEVERO_PWM_MAX;
+    } else if (dir < 0) {
+        // 向下：减小 PWM 值
+        if (servo_pwm >= SEVERO_PWM_MIN + step_size)
+            servo_pwm -= step_size;
+        else
+            servo_pwm = SEVERO_PWM_MIN;
+    }
+
+    // 更新 PWM 输出，具体取决于你的使用场景
+    // 例如通过 __HAL_TIM_SET_COMPARE 更新占空比：
+    __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, servo_pwm);
+}
+
 
 void scroll_inertia_cb(lv_timer_t* timer) {
     lv_obj_t* obj = (lv_obj_t*)timer->user_data;
@@ -587,4 +695,67 @@ void posture_voice_assessor(uint16_t study_min,
         HAL_UART_Transmit(&huart3, &voice_id, 1, 1);
     }
 }
+
+// void servo_pid_timer_cb(lv_timer_t* timer) {
+//     if (!servo_auto_flag) return;  // 未启用自动控制
+
+//     uint32_t now = lv_tick_get();
+
+//     // 如果超过 3 秒，停止自动控制
+//     if (lv_tick_elaps(servo_pid_start_tick) > 3000) {
+//         servo_auto_flag = false;
+//         uint8_t tmp_data = '4';  //推理端发送结束自动控制
+//         HAL_UART_Transmit(&huart2, &tmp_data, 1, 10); //给推理端发信息
+//         return;
+//     }
+
+//     servo_pid_update(servo_ref, servo_feedback);  // 每次迭代 PID 调整
+// }
+
+// void servo_pid_update(uint8_t target, uint8_t feedback) {
+//     // PID参数（可视情况改为可调）
+//     static float kp = 0.1f;
+//     static float ki = 0.03f;
+//     static float kd = 0.02f;
+
+//     // 状态变量（保留局部）
+//     static float servo_pid_output = 0;     // 累计控制量
+
+//     // 输入端滤波器
+//     const float alpha_in  = 0.9f;
+//     const float alpha_out = 0.9f;
+
+//     // ===== 输入滤波 =====
+//     servo_filtered_feedback = alpha_in * servo_filtered_feedback + (1.0f - alpha_in) * feedback;
+
+//     // ===== PID误差与增量计算 =====
+//     float error = (float)target - servo_filtered_feedback;
+//     float delta = kp * (error - servo_pid_error_prev)
+//                 + ki * error
+//                 + kd * (error - 2 * servo_pid_error_prev + servo_pid_error_prev_prev);
+
+//     // 限制增量大小
+//     if (delta > 4) delta = 4;
+//     if (delta < -4) delta = -4;
+
+//     // ===== 累计PID控制输出 =====
+//     servo_pid_output += delta;
+
+//     // 限制输出范围
+//     if (servo_pid_output > SEVERO_PWM_MAX) servo_pid_output = SEVERO_PWM_MAX;
+//     if (servo_pid_output < SEVERO_PWM_MIN) servo_pid_output = SEVERO_PWM_MIN;
+
+//     // ===== 输出端滤波 =====
+//     servo_filtered_output = alpha_out * servo_filtered_output + (1.0f - alpha_out) * servo_pid_output;
+
+//     // ===== 写回PWM =====
+//     servo_pwm = (uint16_t)servo_filtered_output;
+//     __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, servo_pwm);
+
+//     // ===== 更新误差历史（全局） =====
+//     servo_pid_error_prev_prev = servo_pid_error_prev;
+//     servo_pid_error_prev      = error;
+// }
+
+
 

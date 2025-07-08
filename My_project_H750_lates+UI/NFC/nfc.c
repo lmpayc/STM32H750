@@ -1,6 +1,8 @@
 #include "nfc.h"
 #include "ui.h"
 #include "gui_guider.h"
+#include "main.h"
+#include "tim.h"
 
 #define CFG_MAX_SIZE   1024    /* 足够大即可，可按需调大 */
 
@@ -14,6 +16,7 @@ extern uint8_t light_ref;  //led参考光照值
 extern int32_t led_value; 
 extern int32_t volum_value;//音量值
 extern uint8_t voice_command[20]; //语音命令
+extern uint16_t servo_pwm;
 
 extern lv_ui setting_ui; //设置界面对象
 
@@ -178,14 +181,15 @@ static inline void set_default_config(void)
     led_value          = 0;
     volum_value        = 0;
     light_ref          = 0;
+    servo_pwm          = SEVERO_PWM_MID;
 }
 
 /**
  * 文件每行格式:
- * <username>,<led_auto_flag>,<led_switch_flag>,
- * <volume_switch_flag>,<led_value>,<volum_value>,<light_ref>
+ * <username>,<led_auto_flag>,<led_switch_flag>,servo_pwm
+ * <volume_switch_flag>,<led_value>,<volum_value>,<light_ref>,<servo_pwm>
  *
- * 例: 001,1,0,1,350,60,420
+ * 例: 001,1,0,1,350,60,420,750
  */
 void load_user_config(const char* username)
 {
@@ -219,12 +223,13 @@ void load_user_config(const char* username)
     while (f_gets(line, sizeof(line), &file)) {
         char     cfg_username[32];
         uint8_t  cfg_led_auto, cfg_led_sw, cfg_vol_sw, cfg_volum;
-        uint16_t cfg_led_val,  cfg_light_ref;
+        uint16_t cfg_led_val,  cfg_light_ref,cfg_servo_pwm;
 
-        if (sscanf(line, "%[^,],%hhu,%hhu,%hhu,%hu,%hhu,%hu",
+        if (sscanf(line, "%[^,],%hhu,%hhu,%hhu,%hu,%hhu,%hu,%hu",
                    cfg_username,
                    &cfg_led_auto, &cfg_led_sw, &cfg_vol_sw,
-                   &cfg_led_val,  &cfg_volum,  &cfg_light_ref) == 7)
+                   &cfg_led_val,  &cfg_volum,  &cfg_light_ref,
+                   &cfg_servo_pwm) == 8)
         {
             if (strcmp(cfg_username, username) == 0) {
                 /* 找到 —— 赋值 */
@@ -234,6 +239,7 @@ void load_user_config(const char* username)
                 led_value          = cfg_led_val;
                 volum_value        = cfg_volum;
                 light_ref          = cfg_light_ref;
+                servo_pwm          = cfg_servo_pwm;
                 found = true;
                 break;
             }
@@ -243,7 +249,7 @@ void load_user_config(const char* username)
     /* -------- 3. 未找到记录, 追加默认行 -------- */
     if (!found) {
         f_lseek(&file, f_size(&file));     // 跳到文件尾
-        snprintf(line, sizeof(line), "%s,0,0,0,0,0,0\r\n", username);
+        snprintf(line, sizeof(line), "%s,0,0,0,0,0,0,%u\r\n", username, SEVERO_PWM_MID);
         UINT bw;
         f_write(&file, line, strlen(line), &bw);
         f_sync(&file);                     // 刷新到 SD 卡
@@ -295,6 +301,7 @@ void apply_ui_config(void)
     /* 5. 其它控件 (可选)
        // lv_label_set_text_fmt(label_light_ref, "%u lx", setting_ui.light_ref);
     */
+    __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, servo_pwm);
 }
 
 void save_user_config(const char* username)
@@ -320,14 +327,15 @@ void save_user_config(const char* username)
 
     /* ---------- 2. 生成当前配置行 ---------- */
     char new_line[128];
-    snprintf(new_line, sizeof(new_line), "%s,%u,%u,%u,%u,%u,%u\r\n",
+    snprintf(new_line, sizeof(new_line), "%s,%u,%u,%u,%u,%u,%u,%u\r\n",
              username,
              led_auto_flag,
              led_switch_flag,
              volume_switch_flag,
              led_value,
              volum_value,
-             light_ref);
+             light_ref,
+             servo_pwm);
 
     /* ---------- 3. 在缓冲中查找并更新该用户名 ---------- */
     char* p   = buf;

@@ -48,9 +48,10 @@ uint16_t Packed_Len  = 0;
 
 extern uint8_t light_ref;  //led参考光照值
 extern lv_ui  setting_ui; //设置界面对象
+extern lv_ui main_ui; //主界面对象
 extern uint8_t set_studytime; //app传来的设定学习时间
 extern lv_obj_t * info_label;
-
+extern uint16_t servo_feedback; //舵机参考值
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;
@@ -519,10 +520,19 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
     if (huart->Instance == USART2) // 确保是 USART2
     {
 			if (Size >= 1 && start_flag && (!pause_time_flag)) 
-			{
-        gensture = uart2_buf_recv[0];
-				right_sitted_time+=gensture;
+			{ 
+        if(uart2_buf_recv[0]<100){
+          gensture = uart2_buf_recv[0];
+          right_sitted_time+=(gensture==1);
+        }
 			}
+
+      if(uart2_buf_recv[0]>100){
+          servo_feedback=uart2_buf_recv[0]-100;
+          lv_label_set_text_fmt(info_label, "servo_feedback: %d", servo_feedback);
+      }
+
+
 			HAL_UARTEx_ReceiveToIdle_IT(huart, uart2_buf_recv, sizeof(uart2_buf_recv));
       
     }
@@ -596,7 +606,7 @@ void UART_Process_Data(void)
               else if (strncmp(wifi_data, "study:", 6) == 0) {
                 int value = atoi(wifi_data + 6);          // 取 <value>
                 set_studytime = value;                // 更新目标学习时长（分钟）
-                lv_label_set_text_fmt(uart1_label, "study-set: %d", set_studytime);
+                lv_label_set_text_fmt(main_ui.main_learning_time_setting_data, "%d", set_studytime);              
               }
         }      
         else {

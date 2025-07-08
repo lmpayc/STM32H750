@@ -113,7 +113,7 @@ lv_ui  debug_ui; //调试界面对象
 lv_group_t *group;   // 组对象
 lv_group_t *setting_group;   // 组对象
 lv_indev_t *gesture_indev; // 手势输入设备
-volatile  uint16_t servo_pwm = SEVERO_PWM_MIN;  // 初始化 PWM 值
+uint16_t servo_pwm=SEVERO_PWM_MID;
 
 /* USER CODE END PV */
 
@@ -187,7 +187,8 @@ uint8_t set_studytime = 0; //app传来的设定学习时间
 uint8_t light_ref=30;  //led参考光照值（默认30）
 uint8_t voice_command[20]= {0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C,0x0D,0x0E,0x0F,0xEE,0xEF}; //语音命令
 bool volume_switch_flag = false; //音量开关标志
-
+uint16_t servo_feedback=20;
+uint16_t servo_ref=10; //舵机参考值
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if(htim->Instance == TIM2){   //1min周期
@@ -315,14 +316,17 @@ void stop_study(TimeData start_time){
   start_flag = 0;
   if (last_start_flag == 1 && start_flag == 0) {
     uint8_t tmp_data_0 = '0';
-    HAL_UART_Transmit(&huart2, &tmp_data_0, 1, HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, &tmp_data_0, 1, 100);
     pause_time_flag = true; // 设置暂停时间标志
     Close_Study_Session_File(start_time,temp_data_index); //保存并关闭
         // ======= 加入姿态评估播报（根据 posture_ratio） =======
-    if (volume_switch_flag && start_time.study_time > 0) {
-        float final_posture_ratio = (float)right_sitted_time / (start_time.study_time * 60.0f) * 100.0f;
+    if (volume_switch_flag ) {
+        float final_posture_ratio = 0.0f;
+        if(start_time.study_time > 0){
+          final_posture_ratio = (float)right_sitted_time / (start_time.study_time * 60.0f) * 100.0f;
+        }
         uint8_t voice_id = (final_posture_ratio >= 85.0f) ? 12 : 13;  // VOICE_GENERAL_GOOD / BAD
-        HAL_UART_Transmit(&huart3, &voice_id, 1, 1);
+        HAL_UART_Transmit(&huart3, &voice_id, 1, 100);
     }
     // 如果学习时间小于5分钟，则删除文件
     if (start_time.study_time < 5) {
@@ -464,7 +468,6 @@ int main(void)
   tempure = atk_ntc_get_temp();
   
   nfc_init();  //初始化nfc
-  __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, SEVERO_PWM_MIN);
 
   /* USER CODE END 2 */
 

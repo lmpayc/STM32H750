@@ -46,6 +46,9 @@ typedef struct
 	lv_obj_t *main_sitting_rest_label;
 	lv_obj_t *main_large_sitting_rest_image;
 	lv_obj_t *main_learning_time_data;
+	lv_obj_t *main_learning_time_unit;
+	lv_obj_t *main_learning_time_setting;
+	lv_obj_t *main_learning_time_setting_data;
 	lv_obj_t *main_large_time_img;
 	lv_obj_t *main_large_pause_img;
 	lv_obj_t *main_temperature_data;
@@ -58,6 +61,12 @@ typedef struct
 	lv_obj_t *setting_view_port;
 	lv_obj_t *setting_backgroud_cont;
 	lv_obj_t *setting_config_cont;
+	lv_obj_t *setting_view_lock_switch;
+	lv_obj_t *setting_auto_adjust_label;
+	lv_obj_t *setting_down_arrow;
+	lv_obj_t *setting_up_arrow;
+	lv_obj_t *setting_auto_adjust_view;
+	lv_obj_t *setting_camer_view_hand;
 	lv_obj_t *setting_setting_image;
 	lv_obj_t *setting_light_slider;
 	lv_obj_t *setting_light_img;
@@ -118,6 +127,9 @@ LV_IMG_DECLARE(_pause_alpha_25x25);
 LV_IMG_DECLARE(_temperature_alpha_80x80);
 LV_IMG_DECLARE(_buble_light_alpha_61x80);
 LV_IMG_DECLARE(_buble_dark_alpha_40x80);
+LV_IMG_DECLARE(_down_alpha_25x25);
+LV_IMG_DECLARE(_up_alpha_25x25);
+LV_IMG_DECLARE(_auto_adjust_alpha_25x25);
 LV_IMG_DECLARE(_setting_alpha_40x40);
 LV_IMG_DECLARE(_buble_light_alpha_35x35);
 LV_IMG_DECLARE(_volume_alpha_35x35);
@@ -126,8 +138,8 @@ LV_FONT_DECLARE(lv_font_montserratMedium_80)
 LV_FONT_DECLARE(lv_font_montserratMedium_16)
 LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_10)
 LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_30)
-LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_40)
 LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_15)
+LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_40)
 
 
 #ifdef __cplusplus

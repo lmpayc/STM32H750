@@ -477,7 +477,7 @@ void setup_scr_main(lv_ui *ui)
     ui->main_learning_time_data = lv_label_create(ui->main);
     lv_label_set_text(ui->main_learning_time_data, "00:00:00");
     lv_label_set_long_mode(ui->main_learning_time_data, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->main_learning_time_data, 120, 73);
+    lv_obj_set_pos(ui->main_learning_time_data, 126, 98);
     lv_obj_set_size(ui->main_learning_time_data, 126, 32);
     lv_obj_add_flag(ui->main_learning_time_data, LV_OBJ_FLAG_HIDDEN);
 
@@ -496,6 +496,78 @@ void setup_scr_main(lv_ui *ui)
     lv_obj_set_style_pad_bottom(ui->main_learning_time_data, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_pad_left(ui->main_learning_time_data, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_width(ui->main_learning_time_data, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+    //Write codes main_learning_time_unit
+    ui->main_learning_time_unit = lv_label_create(ui->main);
+    lv_label_set_text(ui->main_learning_time_unit, "分钟");
+    lv_label_set_long_mode(ui->main_learning_time_unit, LV_LABEL_LONG_WRAP);
+    lv_obj_set_pos(ui->main_learning_time_unit, 195, 66);
+    lv_obj_set_size(ui->main_learning_time_unit, 32, 17);
+    lv_obj_add_flag(ui->main_learning_time_unit, LV_OBJ_FLAG_HIDDEN);
+
+    //Write style for main_learning_time_unit, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+    lv_obj_set_style_border_width(ui->main_learning_time_unit, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui->main_learning_time_unit, 32, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui->main_learning_time_unit, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->main_learning_time_unit, &lv_font_SourceHanSerifSC_Regular_15, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui->main_learning_time_unit, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_letter_space(ui->main_learning_time_unit, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_line_space(ui->main_learning_time_unit, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui->main_learning_time_unit, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui->main_learning_time_unit, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_top(ui->main_learning_time_unit, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_right(ui->main_learning_time_unit, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_bottom(ui->main_learning_time_unit, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_left(ui->main_learning_time_unit, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_width(ui->main_learning_time_unit, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+    //Write codes main_learning_time_setting
+    ui->main_learning_time_setting = lv_label_create(ui->main);
+    lv_label_set_text(ui->main_learning_time_setting, "设定时间");
+    lv_label_set_long_mode(ui->main_learning_time_setting, LV_LABEL_LONG_WRAP);
+    lv_obj_set_pos(ui->main_learning_time_setting, 144, 40);
+    lv_obj_set_size(ui->main_learning_time_setting, 91, 17);
+    lv_obj_add_flag(ui->main_learning_time_setting, LV_OBJ_FLAG_HIDDEN);
+
+    //Write style for main_learning_time_setting, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+    lv_obj_set_style_border_width(ui->main_learning_time_setting, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui->main_learning_time_setting, 32, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui->main_learning_time_setting, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->main_learning_time_setting, &lv_font_SourceHanSerifSC_Regular_15, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui->main_learning_time_setting, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_letter_space(ui->main_learning_time_setting, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_line_space(ui->main_learning_time_setting, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui->main_learning_time_setting, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui->main_learning_time_setting, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_top(ui->main_learning_time_setting, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_right(ui->main_learning_time_setting, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_bottom(ui->main_learning_time_setting, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_left(ui->main_learning_time_setting, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_width(ui->main_learning_time_setting, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+    //Write codes main_learning_time_setting_data
+    ui->main_learning_time_setting_data = lv_label_create(ui->main);
+    lv_label_set_text(ui->main_learning_time_setting_data, "0");
+    lv_label_set_long_mode(ui->main_learning_time_setting_data, LV_LABEL_LONG_WRAP);
+    lv_obj_set_pos(ui->main_learning_time_setting_data, 152, 66);
+    lv_obj_set_size(ui->main_learning_time_setting_data, 36, 17);
+    lv_obj_add_flag(ui->main_learning_time_setting_data, LV_OBJ_FLAG_HIDDEN);
+
+    //Write style for main_learning_time_setting_data, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+    lv_obj_set_style_border_width(ui->main_learning_time_setting_data, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui->main_learning_time_setting_data, 32, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui->main_learning_time_setting_data, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->main_learning_time_setting_data, &lv_font_SourceHanSerifSC_Regular_15, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui->main_learning_time_setting_data, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_letter_space(ui->main_learning_time_setting_data, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_line_space(ui->main_learning_time_setting_data, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui->main_learning_time_setting_data, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui->main_learning_time_setting_data, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_top(ui->main_learning_time_setting_data, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_right(ui->main_learning_time_setting_data, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_bottom(ui->main_learning_time_setting_data, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_left(ui->main_learning_time_setting_data, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_width(ui->main_learning_time_setting_data, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
     //Write codes main_large_time_img
     ui->main_large_time_img = lv_img_create(ui->main);

@@ -6,6 +6,8 @@
 #include "lvgl.h"
 #include "mgc3130.h"
 
+
+
 /*=========================================================
  *  语音 ID（示例）——对照你截图里 1~14 的 ID
  *=========================================================*/
@@ -31,18 +33,21 @@ enum {
  *=========================================================*/
 #define LIGHT_MIN            10      // 环境光照过低阈值
 #define LIGHT_MAX            50     // 环境光照过高阈值
-#define NOISE_MAX            40      // 噪声过高阈值 (dB)
+#define NOISE_MAX            35      // 噪声过高阈值 (dB)
 
-#define LIGHT_PERSIST_SEC    20      // 光照需连续 20 s 才提示
-#define NOISE_PERSIST_SEC    10      // 噪声需连续 10 s 过高才提示
-#define COOLDOWN_SEC         60      // 同类提示冷却期 60 s
+#define LIGHT_PERSIST_SEC    10      // 光照需连续 20 s 才提示
+#define NOISE_PERSIST_SEC    5      // 噪声需连续 10 s 过高才提示
+#define COOLDOWN_SEC         30      // 同类提示冷却期 60 s
 
 #define POSTURE_CHECK_SEC    30      // 每 30 s 给一次坐姿提示
 #define CORRECT_POSTURE_ID    1      // 正确坐姿的实时姿态编号
 
+#define YAWN_COOLDOWN_SEC   30        // 冷却 10 s
+#define VOICE_YAWN          9         // 打哈欠语音 ID（如需改请统一宏）
+
 #define POSTURE_GOOD_TH      80.0f     // GOOD ≥80%
 #define CHANGE_STABLE_MIN    2         // 等级切换需连 2 分钟
-#define BAD_REMIND_MIN       5        // BAD 每 5 分钟再提醒
+#define BAD_REMIND_MIN       1        // BAD 每 5 分钟再提醒
 
 typedef enum { POST_UNKNOWN = 0, POST_GOOD, POST_BAD } PostureLevel;
 
@@ -74,5 +79,9 @@ static void set_visible(lv_obj_t* obj, bool visible);
 void scroll_inertia_cb(lv_timer_t* timer);
 void posture_env_eval_cb(lv_timer_t *timer);
 void posture_voice_assessor(uint16_t study_min,float ratio,bool vol_switch);
+void process_hold_arrow_and_drive_servo(uint8_t position, lv_obj_t *focused);
+void servo_step(int dir);
+void servo_pid_timer_cb(lv_timer_t* timer);
+void servo_pid_update(uint8_t target, uint8_t feedback);
 
 #endif // UI_H

@@ -2559,6 +2559,21 @@
               <FilePath>..\lvgl\my\generated\images\_volume_alpha_35x35.c</FilePath>
             </File>
             <File>
+              <FileName>_auto_adjust_alpha_25x25.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_auto_adjust_alpha_25x25.c</FilePath>
+            </File>
+            <File>
+              <FileName>_up_alpha_25x25.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_up_alpha_25x25.c</FilePath>
+            </File>
+            <File>
+              <FileName>_down_alpha_25x25.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_down_alpha_25x25.c</FilePath>
+            </File>
+            <File>
               <FileName>lv_font_montserratMedium_16.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_montserratMedium_16.c</FilePath>
@@ -4452,6 +4467,21 @@
               <FileName>_volume_alpha_35x35.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lvgl\my\generated\images\_volume_alpha_35x35.c</FilePath>
+            </File>
+            <File>
+              <FileName>_auto_adjust_alpha_25x25.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_auto_adjust_alpha_25x25.c</FilePath>
+            </File>
+            <File>
+              <FileName>_up_alpha_25x25.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_up_alpha_25x25.c</FilePath>
+            </File>
+            <File>
+              <FileName>_down_alpha_25x25.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_down_alpha_25x25.c</FilePath>
             </File>
             <File>
               <FileName>lv_font_montserratMedium_16.c</FileName>

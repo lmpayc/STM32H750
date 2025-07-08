@@ -152,7 +152,7 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>488</LineNumber>
+          <LineNumber>477</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -168,7 +168,7 @@
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>481</LineNumber>
+          <LineNumber>488</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -184,7 +184,7 @@
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>473</LineNumber>
+          <LineNumber>481</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -200,7 +200,7 @@
         <Bp>
           <Number>3</Number>
           <Type>0</Type>
-          <LineNumber>483</LineNumber>
+          <LineNumber>473</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -216,7 +216,7 @@
         <Bp>
           <Number>4</Number>
           <Type>0</Type>
-          <LineNumber>468</LineNumber>
+          <LineNumber>483</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -232,7 +232,7 @@
         <Bp>
           <Number>5</Number>
           <Type>0</Type>
-          <LineNumber>476</LineNumber>
+          <LineNumber>468</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -248,7 +248,7 @@
         <Bp>
           <Number>6</Number>
           <Type>0</Type>
-          <LineNumber>484</LineNumber>
+          <LineNumber>476</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -257,14 +257,14 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>startup_stm32h750xx.s</Filename>
+          <Filename>../Core/Src/main.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
         <Bp>
           <Number>7</Number>
           <Type>0</Type>
-          <LineNumber>612</LineNumber>
+          <LineNumber>484</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -280,7 +280,7 @@
         <Bp>
           <Number>8</Number>
           <Type>0</Type>
-          <LineNumber>467</LineNumber>
+          <LineNumber>612</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -289,14 +289,14 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>../Core/Src/main.c</Filename>
+          <Filename>startup_stm32h750xx.s</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
         <Bp>
           <Number>9</Number>
           <Type>0</Type>
-          <LineNumber>472</LineNumber>
+          <LineNumber>467</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -312,7 +312,7 @@
         <Bp>
           <Number>10</Number>
           <Type>0</Type>
-          <LineNumber>475</LineNumber>
+          <LineNumber>472</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -328,7 +328,7 @@
         <Bp>
           <Number>11</Number>
           <Type>0</Type>
-          <LineNumber>480</LineNumber>
+          <LineNumber>475</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -344,7 +344,7 @@
         <Bp>
           <Number>12</Number>
           <Type>0</Type>
-          <LineNumber>482</LineNumber>
+          <LineNumber>480</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -359,6 +359,22 @@
         </Bp>
         <Bp>
           <Number>13</Number>
+          <Type>0</Type>
+          <LineNumber>482</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>../Core/Src/main.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>14</Number>
           <Type>0</Type>
           <LineNumber>487</LineNumber>
           <EnabledFlag>1</EnabledFlag>
@@ -1432,7 +1448,7 @@
 
   <Group>
     <GroupName>NFC</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -4055,6 +4071,42 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
+      <PathWithFileName>..\lvgl\my\generated\images\_auto_adjust_alpha_25x25.c</PathWithFileName>
+      <FilenameWithoutPath>_auto_adjust_alpha_25x25.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>13</GroupNumber>
+      <FileNumber>282</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\lvgl\my\generated\images\_up_alpha_25x25.c</PathWithFileName>
+      <FilenameWithoutPath>_up_alpha_25x25.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>13</GroupNumber>
+      <FileNumber>283</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\lvgl\my\generated\images\_down_alpha_25x25.c</PathWithFileName>
+      <FilenameWithoutPath>_down_alpha_25x25.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>13</GroupNumber>
+      <FileNumber>284</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
       <PathWithFileName>..\lvgl\my\generated\guider_fonts\lv_font_montserratMedium_16.c</PathWithFileName>
       <FilenameWithoutPath>lv_font_montserratMedium_16.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -4062,7 +4114,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>282</FileNumber>
+      <FileNumber>285</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -4074,7 +4126,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>283</FileNumber>
+      <FileNumber>286</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -4086,7 +4138,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>284</FileNumber>
+      <FileNumber>287</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -4098,7 +4150,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>285</FileNumber>
+      <FileNumber>288</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -4110,7 +4162,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>286</FileNumber>
+      <FileNumber>289</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -4130,7 +4182,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>14</GroupNumber>
-      <FileNumber>287</FileNumber>
+      <FileNumber>290</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -4150,7 +4202,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>288</FileNumber>
+      <FileNumber>291</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
