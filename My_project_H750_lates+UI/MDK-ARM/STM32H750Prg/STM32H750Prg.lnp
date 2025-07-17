@@ -282,6 +282,7 @@
 "stm32h750prg\_auto_adjust_alpha_25x25.o"
 "stm32h750prg\_up_alpha_25x25.o"
 "stm32h750prg\_down_alpha_25x25.o"
+"stm32h750prg\_start_red_alpha_45x45.o"
 "stm32h750prg\lv_font_montserratmedium_16.o"
 "stm32h750prg\lv_font_montserratmedium_80.o"
 "stm32h750prg\lv_font_sourcehanserifsc_regular_10.o"

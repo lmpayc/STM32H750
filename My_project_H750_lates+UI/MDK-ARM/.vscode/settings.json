@@ -123,7 +123,8 @@
     "tuple": "c",
     "type_traits": "c",
     "utility": "c",
-    "events_init.h": "c"
+    "events_init.h": "c",
+    "ff_gen_drv.h": "c"
   },
   "files.encoding": "gbk",
   "files.candidateGuessEncodings": [

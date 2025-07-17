@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    network_cifar10.c
   * @author  AST Embedded Analytics Research Platform
-  * @date    2025-07-06T23:54:39+0800
+  * @date    2025-07-16T23:42:54+0800
   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
   ******************************************************************************
   * @attention
@@ -35,14 +35,14 @@
 #define AI_NET_OBJ_INSTANCE g_network_cifar10
  
 #undef AI_NETWORK_CIFAR10_MODEL_SIGNATURE
-#define AI_NETWORK_CIFAR10_MODEL_SIGNATURE     "0x09a1467be9b805f255defa273c99c1e5"
+#define AI_NETWORK_CIFAR10_MODEL_SIGNATURE     "0x46a2185906b5d50df566713c2ecfb5af"
 
 #ifndef AI_TOOLS_REVISION_ID
 #define AI_TOOLS_REVISION_ID     ""
 #endif
 
 #undef AI_TOOLS_DATE_TIME
-#define AI_TOOLS_DATE_TIME   "2025-07-06T23:54:39+0800"
+#define AI_TOOLS_DATE_TIME   "2025-07-16T23:42:54+0800"
 
 #undef AI_TOOLS_COMPILE_TIME
 #define AI_TOOLS_COMPILE_TIME    __DATE__ " " __TIME__
@@ -5126,7 +5126,7 @@ AI_NETWORK_OBJ_DECLARE(
     248544, NULL, NULL),
   AI_TENSOR_LIST_IO_OBJ_INIT(AI_FLAG_NONE, AI_NETWORK_CIFAR10_IN_NUM, &input_1_output),
   AI_TENSOR_LIST_IO_OBJ_INIT(AI_FLAG_NONE, AI_NETWORK_CIFAR10_OUT_NUM, &dense_output),
-  &conv2d_layer, 0x06ee203d, NULL)
+  &conv2d_layer, 0xaed8b49f, NULL)
 
 #else
 
@@ -5146,7 +5146,7 @@ AI_NETWORK_OBJ_DECLARE(
   ),
   AI_TENSOR_LIST_IO_OBJ_INIT(AI_FLAG_NONE, AI_NETWORK_CIFAR10_IN_NUM, &input_1_output),
   AI_TENSOR_LIST_IO_OBJ_INIT(AI_FLAG_NONE, AI_NETWORK_CIFAR10_OUT_NUM, &dense_output),
-  &conv2d_layer, 0x06ee203d, NULL)
+  &conv2d_layer, 0xaed8b49f, NULL)
 
 #endif	/*(AI_TOOLS_API_VERSION < AI_TOOLS_API_VERSION_1_5)*/
 
@@ -5817,7 +5817,7 @@ ai_bool ai_network_cifar10_get_info(
       .params            = AI_STRUCT_INIT,
       .activations       = AI_STRUCT_INIT,
       .n_nodes           = 0,
-      .signature         = 0x06ee203d,
+      .signature         = 0xaed8b49f,
     };
 
     if (!ai_platform_api_get_network_report(network, &r)) return false;
@@ -5865,7 +5865,7 @@ ai_bool ai_network_cifar10_get_report(
       .map_weights       = AI_STRUCT_INIT,
       .map_activations   = AI_STRUCT_INIT,
       .n_nodes           = 0,
-      .signature         = 0x06ee203d,
+      .signature         = 0xaed8b49f,
     };
 
     if (!ai_platform_api_get_network_report(network, &r)) return false;

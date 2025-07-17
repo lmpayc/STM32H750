@@ -22,6 +22,8 @@ extern lv_ui setting_ui; //设置界面对象
 
 User myusers[MAX_USERS];  // 存储所有用户的数组
 uint8_t count_user; // 当前用户数量
+extern uint8_t userid; //当前用户ID
+
 char current_uid_str[50] = "";  // 当前活跃 UID 字符串
 
 uint8_t NFC_Readbuffer[512]; // 临时读取缓冲区
@@ -43,24 +45,29 @@ void nfc_dtect(void) {
     uid_len = PN532_ReadPassiveTarget(&pn532, uid, PN532_MIFARE_ISO14443A, 40);
     if (uid_len != PN532_STATUS_ERROR) {
 		uid_to_str(uid, nfcbuff, sizeof(nfcbuff));
-        // lv_label_set_text(SD_label, nfcbuff);
         char *login_username = find_username_by_uid(uid);
         if (login_username != NULL) {
             // 登录成功
 
-            if (is_new_uid(nfcbuff)) {
-                strcpy(current_uid_str, nfcbuff);
-                for (int i = 0; i < 3; i++) {
-                    username[i] = login_username ? (uint8_t)login_username[i] : 0;
-                }
-                load_user_config(login_username);
+        if (is_new_uid(nfcbuff)) {
+            strcpy(current_uid_str, nfcbuff);
+            for (int i = 0; i < 3; i++) {
+                username[i] = login_username ? (uint8_t)login_username[i] : 0;
             }
+            userid = username[2]- '0';
+            //lv_label_set_text_fmt(info_label, "userid %d",userid);
+            load_user_config(login_username);
+        }
         } else {
             // 注册新用户
             char temp_username[20];
             snprintf(temp_username, 4, "%03u",count_user);
             
             register_new_user(uid, temp_username); // 这里可以改为动态输入用户名
+            for (int i = 0; i < 3; i++) {
+                username[i] = temp_username ? (uint8_t)temp_username[i] : 0;
+            }
+            userid = username[2]- '0';
             lv_label_set_text_fmt(info_label, "New User Detected %s", temp_username);
             load_users_from_file(); // 重新加载用户列表
         }

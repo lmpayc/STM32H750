@@ -164,6 +164,7 @@ uint8_t read_power_flag = 0;
 uint8_t Power_Percent = 0; //电量百分比 
 
 uint8_t username[3] = { 'L', 'P', 'C' };    //当前用户名
+uint8_t userid; //当前用户ID
 uint8_t Temp_WriteBuffer[512];  // 临时SD卡写入缓冲区
 uint16_t temp_data_index;
 uint8_t Temp_Readbuffer[REAED_BUFFER_SIZE];   //临时SD卡读取缓冲区
@@ -179,6 +180,7 @@ bool pause_time_flag = false; //暂停学习标志
 bool last_pause_time_flag = false; //记录上次暂停学习标志
 uint8_t Real_time_Data[10]= {0};  //实时数据
 uint16_t right_sitted_time = 0; //坐姿正确时长
+extern float posture_ratio;
 
 bool led_switch_flag = 0;
 bool led_auto_flag = 0;
@@ -189,6 +191,7 @@ uint8_t voice_command[20]= {0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x
 bool volume_switch_flag = false; //音量开关标志
 uint16_t servo_feedback=20;
 uint16_t servo_ref=10; //舵机参考值
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if(htim->Instance == TIM2){   //1min周期
@@ -202,9 +205,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
       Real_time_Data[2] = (uint8_t) ((tempure-Real_time_Data[1])*100);
       Real_time_Data[3] = (uint8_t)(Power);
       Real_time_Data[4] = (uint8_t)((Power-Real_time_Data[3])*100);
-      Real_time_Data[5] = gensture; //坐姿
+      Real_time_Data[5] = (gensture==1); //坐姿
       Real_time_Data[6] = start_time.study_time; //本次学习时间
-      Real_time_Data[7] = noise; //噪音
+      Real_time_Data[7] = userid; 
 
       //时钟更新,电源adc采样
       static uint8_t update_time_cnt =0; 
@@ -221,7 +224,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
           Temp_WriteBuffer[temp_data_index]= light;
           Temp_WriteBuffer[temp_data_index+1]= (uint8_t)tempure;
           Temp_WriteBuffer[temp_data_index+2]= (uint8_t) ((tempure-Temp_WriteBuffer[temp_data_index+1])*100);
-          Temp_WriteBuffer[temp_data_index+3]= gensture; //坐姿
+          Temp_WriteBuffer[temp_data_index+3]= (gensture==1); //坐姿
           Temp_WriteBuffer[temp_data_index+4]= noise; //噪音
 
           temp_data_index += 5;  // 更新数据索引
@@ -240,7 +243,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         sendBinaryData(&huart1,Real_time_Data,8);
 			}
 	
-      // // 翻转 PWM 值
+      //翻转 PWM 值
       // if (servo_pwm == SEVERO_PWM_MIN){
       //     servo_pwm = SEVERO_PWM_MAX;
       // }else{
@@ -321,15 +324,11 @@ void stop_study(TimeData start_time){
     Close_Study_Session_File(start_time,temp_data_index); //保存并关闭
         // ======= 加入姿态评估播报（根据 posture_ratio） =======
     if (volume_switch_flag ) {
-        float final_posture_ratio = 0.0f;
-        if(start_time.study_time > 0){
-          final_posture_ratio = (float)right_sitted_time / (start_time.study_time * 60.0f) * 100.0f;
-        }
-        uint8_t voice_id = (final_posture_ratio >= 85.0f) ? 12 : 13;  // VOICE_GENERAL_GOOD / BAD
+        uint8_t voice_id = (posture_ratio >= 70.0f) ? 12 : 13;  // VOICE_GENERAL_GOOD / BAD
         HAL_UART_Transmit(&huart3, &voice_id, 1, 100);
     }
-    // 如果学习时间小于5分钟，则删除文件
-    if (start_time.study_time < 5) {
+    // 如果学习时间小于3分钟，则删除文件
+    if (start_time.study_time < 3) {
       f_unlink(current_filename); // 删除文件
       lv_label_set_text_fmt(SD_label, "study time too short,delete: %s", current_filename);
     }

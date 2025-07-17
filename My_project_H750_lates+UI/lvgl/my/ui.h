@@ -35,19 +35,19 @@ enum {
 #define LIGHT_MAX            50     // 环境光照过高阈值
 #define NOISE_MAX            35      // 噪声过高阈值 (dB)
 
-#define LIGHT_PERSIST_SEC    10      // 光照需连续 20 s 才提示
-#define NOISE_PERSIST_SEC    5      // 噪声需连续 10 s 过高才提示
-#define COOLDOWN_SEC         30      // 同类提示冷却期 60 s
+#define LIGHT_PERSIST_SEC    6      // 光照需连续 6 s 才提示
+#define NOISE_PERSIST_SEC    10      // 噪声需连续 10 s 过高才提示
+#define COOLDOWN_SEC         20      // 同类提示冷却期 60 s
 
 #define POSTURE_CHECK_SEC    30      // 每 30 s 给一次坐姿提示
 #define CORRECT_POSTURE_ID    1      // 正确坐姿的实时姿态编号
 
-#define YAWN_COOLDOWN_SEC   30        // 冷却 10 s
+#define YAWN_COOLDOWN_SEC   10        // 冷却 10 s
 #define VOICE_YAWN          9         // 打哈欠语音 ID（如需改请统一宏）
 
-#define POSTURE_GOOD_TH      80.0f     // GOOD ≥80%
-#define CHANGE_STABLE_MIN    2         // 等级切换需连 2 分钟
-#define BAD_REMIND_MIN       1        // BAD 每 5 分钟再提醒
+#define POSTURE_GOOD_TH      60.0f     // GOOD ≥80%
+#define CHANGE_STABLE_MIN    1         // 等级切换需连 1 分钟
+#define BAD_REMIND_MIN       1        // BAD 每 1 分钟再提醒
 
 typedef enum { POST_UNKNOWN = 0, POST_GOOD, POST_BAD } PostureLevel;
 

@@ -38,6 +38,7 @@ typedef struct
 	lv_obj_t *main_light_on_img;
 	lv_obj_t *main_setting;
 	lv_obj_t *main_date;
+	lv_obj_t *main_start_red;
 	lv_obj_t *main_start;
 	lv_obj_t *main_sitting_wrong_label;
 	lv_obj_t *main_large_sitting_wrong_img;
@@ -118,6 +119,7 @@ LV_IMG_DECLARE(_temperature_alpha_45x45);
 LV_IMG_DECLARE(_buble_dark_alpha_25x50);
 LV_IMG_DECLARE(_buble_light_alpha_37x50);
 LV_IMG_DECLARE(_setting_alpha_25x25);
+LV_IMG_DECLARE(_start_red_alpha_45x45);
 LV_IMG_DECLARE(_start_alpha_45x45);
 LV_IMG_DECLARE(_sitting_wrong_alpha_60x60);
 LV_IMG_DECLARE(_sitting_right_alpha_60x60);

@@ -338,6 +338,22 @@ void setup_scr_main(lv_ui *ui)
     lv_obj_set_style_pad_left(ui->main_date, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_width(ui->main_date, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
+    //Write codes main_start_red
+    ui->main_start_red = lv_img_create(ui->main);
+    lv_obj_add_flag(ui->main_start_red, LV_OBJ_FLAG_CLICKABLE);
+    lv_img_set_src(ui->main_start_red, &_start_red_alpha_45x45);
+    lv_img_set_pivot(ui->main_start_red, 50,50);
+    lv_img_set_angle(ui->main_start_red, 0);
+    lv_obj_set_pos(ui->main_start_red, 118, 175);
+    lv_obj_set_size(ui->main_start_red, 45, 45);
+    lv_obj_add_flag(ui->main_start_red, LV_OBJ_FLAG_HIDDEN);
+
+    //Write style for main_start_red, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+    lv_obj_set_style_img_recolor_opa(ui->main_start_red, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_img_opa(ui->main_start_red, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui->main_start_red, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_clip_corner(ui->main_start_red, true, LV_PART_MAIN|LV_STATE_DEFAULT);
+
     //Write codes main_start
     ui->main_start = lv_img_create(ui->main);
     lv_obj_add_flag(ui->main_start, LV_OBJ_FLAG_CLICKABLE);

@@ -64,8 +64,8 @@ int32_t led_value;
 int32_t volum_value;
 uint8_t prev_vol_level = 0;
 //LED PID 参数（根据实际情况调整）
-float kp = 0.5f;
-float ki = 0.01f;
+float kp = 0.8f;
+float ki = 0.1f;
 float kd = 0.1f;
 float prev_error = 0;
 float prev_prev_error = 0;
@@ -288,14 +288,14 @@ void posture_env_eval_cb(lv_timer_t *timer)
     if (yawn_cd) yawn_cd--;               // 每秒递减冷却
 
     /*===================== 坐姿统计 =====================*/
-    // 每分钟更新姿势正确率（+显示标签）
-    if ((sec_cnt % 60 == 0) && (start_time.study_time > 0)) {
-        posture_ratio = (float) right_sitted_time /
-                        (start_time.study_time * 60.0f) * 100.0f;
-
-        char buf[32];
-        snprintf(buf, sizeof(buf), "posture_ratio: %.2f", posture_ratio);
-        lv_label_set_text(info_label, buf);
+    // 每秒更新姿势正确率
+    posture_ratio = (float) right_sitted_time /
+                (start_time.study_time * 60.0f + study_last_time.study_time_second ) * 100.0f;
+    char buf[32];
+    snprintf(buf, sizeof(buf), "posture_ratio: %.2f", posture_ratio);
+    lv_label_set_text(info_label, buf);
+    //每分钟进行播报显示
+    if (sec_cnt % 60 == 0 ) {
         //按姿势正确率决定是否播报
         posture_voice_assessor(start_time.study_time,posture_ratio,volume_switch_flag);
 
@@ -429,8 +429,17 @@ void handle_gesture_input(const MGC3130_t *dev)
                 // 触发绑定的 VALUE_CHANGED 事件回调
                 lv_event_send(focused, LV_EVENT_VALUE_CHANGED, NULL);
             } else {
-                lv_event_send(focused, LV_EVENT_CLICKED, NULL);
+                if (focused != main_ui.main_start && focused != main_ui.main_start_red){
+                    lv_event_send(focused, LV_EVENT_CLICKED, NULL);
+                }      
             }
+        }
+    }
+
+    else if(touch &DOUBLE_TAP_CENTER){
+        lv_obj_t *focused = lv_group_get_focused(current_group);
+        if (focused == main_ui.main_start || focused == main_ui.main_start_red) {
+            lv_event_send(focused, LV_EVENT_CLICKED, NULL);
         }
     }
 
@@ -631,8 +640,8 @@ void led_pid_update(uint8_t target, uint8_t feedback) {
                 + ki * error
                 + kd * (error - 2 * prev_error + prev_prev_error);
     // 限制增量，防止亮度突变
-    if (delta > 10) delta = 10;
-    if (delta < -10) delta = -10;
+    if (delta > 15) delta = 15;
+    if (delta < -15) delta = -15;
     pid_output += delta;
     // 限制最终输出范围
     if (pid_output > 100) pid_output = 100;
@@ -692,7 +701,10 @@ void posture_voice_assessor(uint16_t study_min,
 
     /* ----------- 4. 发送 ----------- */
     if (need_voice) {
-        HAL_UART_Transmit(&huart3, &voice_id, 1, 1);
+        if ((voice_id == VOICE_GOOD_POSTURE && gensture == POST_GOOD) ||
+            (voice_id == VOICE_BAD_POSTURE  && gensture == 0)) {
+             HAL_UART_Transmit(&huart3, &voice_id, 1, 1);
+        }
     }
 }
 

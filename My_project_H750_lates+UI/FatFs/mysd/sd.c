@@ -11,7 +11,7 @@ extern uint8_t file_open_flag;
 extern char current_filename[100];
 extern lv_obj_t *SD_label;
 extern uint8_t Temp_Readbuffer[REAED_BUFFER_SIZE];
-
+extern uint8_t username[3];
 
 // 初始化SD卡和文件系统
 void SD_Init(void)
@@ -160,7 +160,9 @@ uint32_t Read_Latest_Session_Data(uint8_t* buffer, uint32_t buffer_size)
     uint32_t latest_time = 0;
     uint32_t bytes_read = 0;
     FIL temp_file;
-    
+    char current_username[4] = {0};
+    memcpy(current_username, username, 3);
+
     // 打开目录
     res = f_opendir(&dir, "/");
     if (res != FR_OK) {
@@ -177,13 +179,18 @@ uint32_t Read_Latest_Session_Data(uint8_t* buffer, uint32_t buffer_size)
         if (!(fno.fattrib & AM_DIR)) {
             char *ext = strrchr(fno.fname, '.');
             if (ext && strcmp(ext, ".txt") == 0) {
+                if (strncmp(fno.fname, current_username, 3) != 0) {
+                    continue; // 文件不是当前用户名，跳过
+
+                }
+
                 // 从文件名中提取时间戳信息
                 uint32_t year, month, day, hour, minute;
-                char username[20];
-                
+
                 // 使用sscanf解析文件名格式 "username_YYYYMMDD_HHMM.txt"
-                if(sscanf(fno.fname, "%[^_]_%4u%2u%2u_%2u%2u.txt", 
-                         username, &year, &month, &day, &hour, &minute) == 6) {
+                if(sscanf(fno.fname, "%*[^_]_%4u%2u%2u_%2u%2u.txt", 
+                        &year, &month, &day, &hour, &minute) == 5) {
+                            
                     // 计算时间戳（简化计算，仅用于比较）
                     uint32_t timestamp = year*100000000 + month*1000000 + day*10000 + hour*100 + minute;
                     

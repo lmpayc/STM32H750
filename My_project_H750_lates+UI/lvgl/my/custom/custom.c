@@ -69,7 +69,17 @@ static void btn_event_cb(lv_event_t * e) {
             lv_obj_clear_flag(main_ui.main_learning_time_setting, LV_OBJ_FLAG_HIDDEN);
             lv_obj_clear_flag(main_ui.main_learning_time_setting_data, LV_OBJ_FLAG_HIDDEN);
             lv_obj_clear_flag(main_ui.main_learning_time_unit, LV_OBJ_FLAG_HIDDEN);
+            
+            lv_obj_clear_flag(main_ui.main_start_red, LV_OBJ_FLAG_HIDDEN);//开始学习变红
+            lv_obj_add_flag(main_ui.main_start, LV_OBJ_FLAG_HIDDEN);
         }
+        else{
+            lv_obj_add_flag(main_ui.main_start_red, LV_OBJ_FLAG_HIDDEN);  
+            lv_obj_clear_flag(main_ui.main_start, LV_OBJ_FLAG_HIDDEN);
+            lv_group_focus_obj(main_ui.main_start); // 设置主界面焦点
+        }
+
+
     }
 }
 
@@ -262,6 +272,8 @@ void custom_init(lv_ui *ui)
 {
     //按钮回调
     lv_obj_add_event_cb(main_ui.main_start, btn_event_cb, LV_EVENT_ALL, NULL);    //绑定回调函数
+    lv_obj_add_event_cb(main_ui.main_start_red, btn_event_cb, LV_EVENT_ALL, NULL);    //绑定回调函数
+
 
     // 设置图片可点击并添加事件回调函数
     lv_obj_add_flag(main_ui.main_learning_time_img, LV_OBJ_FLAG_CLICKABLE);
@@ -290,10 +302,12 @@ void custom_init(lv_ui *ui)
 
     group = lv_group_create();  //主界面组对象初始化
     lv_group_add_obj(group, main_ui.main_start);
+    lv_group_add_obj(group, main_ui.main_start_red);
     lv_group_add_obj(group, main_ui.main_learning_time_img);
     lv_group_add_obj(group, main_ui.main_light_on_img);
     lv_group_add_obj(group, main_ui.main_sitting_pos_rest_img);
     lv_group_add_obj(group, main_ui.main_temperature_img);
+
     setting_group = lv_group_create();  //设置界面组对象初始化
     lv_group_add_obj(setting_group, setting_ui.setting_light_slider);
     lv_group_add_obj(setting_group, setting_ui.setting_light_auto_switch);
@@ -324,6 +338,7 @@ void custom_init(lv_ui *ui)
 
     //主界面组对象样式
     lv_obj_add_style(main_ui.main_start, &style_focus, LV_STATE_FOCUSED);
+    lv_obj_add_style(main_ui.main_start_red, &style_focus, LV_STATE_FOCUSED);
     lv_obj_add_style(main_ui.main_learning_time_img, &style_focus, LV_STATE_FOCUSED);
     lv_obj_add_style(main_ui.main_light_on_img, &style_focus, LV_STATE_FOCUSED);
     lv_obj_add_style(main_ui.main_sitting_pos_rest_img, &style_focus, LV_STATE_FOCUSED);

@@ -2574,6 +2574,11 @@
               <FilePath>..\lvgl\my\generated\images\_down_alpha_25x25.c</FilePath>
             </File>
             <File>
+              <FileName>_start_red_alpha_45x45.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_start_red_alpha_45x45.c</FilePath>
+            </File>
+            <File>
               <FileName>lv_font_montserratMedium_16.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lvgl\my\generated\guider_fonts\lv_font_montserratMedium_16.c</FilePath>
@@ -4482,6 +4487,11 @@
               <FileName>_down_alpha_25x25.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lvgl\my\generated\images\_down_alpha_25x25.c</FilePath>
+            </File>
+            <File>
+              <FileName>_start_red_alpha_45x45.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\my\generated\images\_start_red_alpha_45x45.c</FilePath>
             </File>
             <File>
               <FileName>lv_font_montserratMedium_16.c</FileName>
